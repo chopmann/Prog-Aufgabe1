@@ -15,13 +15,22 @@ public class World {
 	private int height = 0;
 	private int[][] plantContainer;
 
+	private int widthJungle = 0;
+	private int heightJungle = 0;
+	private int jungleLimitX1 = 0;
+	private int jungleLimitX2 = 0;
+	private int jungleLimitY1 = 0;
+	private int jungleLimitY2 = 0;
+
 	/**
 	 * @param width
 	 * @param height
 	 */
-	public World(int width, int height) {
+	public World(int width, int height, int widthJungle, int heightJungle) {
 		this.width = width;
 		this.height = height;
+		this.widthJungle = widthJungle;
+		this.heightJungle = heightJungle;
 		this.plantContainer = new int[width][height];
 	}
 	
@@ -37,7 +46,7 @@ public class World {
 			}
 		}
 	}
-	
+	//Plant Stuff
 	/**
 	 * Add a Plant at the Coordinates
 	 * @param x
@@ -88,6 +97,48 @@ public class World {
 		return plantContainer;
 	}
 	
+	//Jungle Stuff
+	
+	/**
+	 * Welcome to the Jungle we have funny Games.
+	 */
+	public void setJungleLimits() {
+		jungleLimitX1 = (width - widthJungle) / 2;
+		jungleLimitX2 = (width + widthJungle) / 2;
+		jungleLimitY1 = (height - heightJungle) /2;
+		jungleLimitY2 = (height + heightJungle) /2;
+	}
+	
+	
+	/**
+	 * @return the jungleLimitX1
+	 */
+	public int getJungleLimitX1() {
+		return jungleLimitX1;
+	}
+
+	/**
+	 * @return the jungleLimitX2
+	 */
+	public int getJungleLimitX2() {
+		return jungleLimitX2;
+	}
+
+	/**
+	 * @return the jungleLimitY1
+	 */
+	public int getJungleLimitY1() {
+		return jungleLimitY1;
+	}
+
+	/**
+	 * @return the jungleLimitY2
+	 */
+	public int getJungleLimitY2() {
+		return jungleLimitY2;
+	}
+
+	//Helper Stuff
 	/**
 	 * http://stackoverflow.com/questions/363681/generating-random-numbers-in-a-range-with-java
 	 * Returns a psuedo-random number between min and max, inclusive.
