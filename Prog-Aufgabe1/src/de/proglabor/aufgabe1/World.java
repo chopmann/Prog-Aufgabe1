@@ -21,6 +21,8 @@ public class World {
 	private int jungleLimitX2 = 0;
 	private int jungleLimitY1 = 0;
 	private int jungleLimitY2 = 0;
+	
+	private Animal[][] animalContainer;
 
 	/**
 	 * @param width
@@ -32,6 +34,7 @@ public class World {
 		this.widthJungle = widthJungle;
 		this.heightJungle = heightJungle;
 		this.plantContainer = new int[width][height];
+		this.animalContainer = new Animal[width][height];
 	}
 	
 	/**
@@ -95,6 +98,23 @@ public class World {
 	 */
 	public int[][] getPlantContainer() {
 		return plantContainer;
+	}
+	
+	//Animal Stuff
+	/**
+	 * Add an Animal at a Random Location inside the World
+	 * @param x
+	 * @param y
+	 */
+	public void addAnimal(int x, int y) {
+		animalContainer[x][y] = new Animal(x, y);
+	}
+	
+	/**
+	 * @return the animalContainer
+	 */
+	public Animal[][] getAnimalContainer() {
+		return animalContainer;
 	}
 	
 	//Jungle Stuff

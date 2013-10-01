@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import de.proglabor.aufgabe1.Animal;
 import de.proglabor.aufgabe1.World;
 
 @RunWith(Parameterized.class)
@@ -70,5 +71,13 @@ public class WorldTest {
 		dieWelt.addPlant(20, 15);
 		assertEquals(5, dieWelt.totalPlants());
 	}
-
+	
+	@Test
+	public void testAddAnimal() {
+		dieWelt.addAnimal(15, 20);
+		Animal[][] container = dieWelt.getAnimalContainer();
+		assertNull(container[0][0]);
+		assertNotNull(container[15][20]);
+	}
+	
 }
