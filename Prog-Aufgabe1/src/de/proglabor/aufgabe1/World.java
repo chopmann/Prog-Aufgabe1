@@ -101,6 +101,9 @@ public class World {
 	}
 	
 	//Animal Stuff
+	public void initAnimalContainer(){
+		animalContainer = new Animal[width][height];
+	}
 	/**
 	 * Add an Animal at a Random Location inside the World
 	 * @param x
@@ -108,6 +111,17 @@ public class World {
 	 */
 	public void addAnimal(int x, int y) {
 		animalContainer[x][y] = new Animal(x, y);
+	}
+	public int totalAnimals() {
+		int total = 0;
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				if(animalContainer[i][j] != null) {
+					total++;
+				}
+			}
+		}
+		return total;
 	}
 	
 	/**

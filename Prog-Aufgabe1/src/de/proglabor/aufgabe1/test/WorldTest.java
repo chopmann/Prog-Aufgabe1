@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -37,6 +38,11 @@ public class WorldTest {
 		return Arrays.asList(new Object[][] { { 40, 30, 10, 10, 15, 10 },
 				{ 40, 27, 10, 10, 15, 8 }, { 40, 30, 11, 10, 14, 10 },
 				{ 40, 30, 10, 11, 15, 9 }, { 40, 30, 11, 11, 14, 9 } });
+	}
+	@Before
+	public void resetWorld() {
+		dieWelt.initPlantContainer();
+		dieWelt.initAnimalContainer();
 	}
 
 	@Test
@@ -79,5 +85,23 @@ public class WorldTest {
 		assertNull(container[0][0]);
 		assertNotNull(container[15][20]);
 	}
+	@Test
+	public void testAddAnimalsSpread() {
+		dieWelt.addAnimal(15, 20);
+		dieWelt.addAnimal(16, 21);
+		dieWelt.addAnimal(14, 19);
+		dieWelt.addAnimal(17, 22);
+		dieWelt.addAnimal(13, 18);
+		assertEquals("Total Animals",5, dieWelt.totalAnimals());
+	}
 	
+	@Test
+	public void testAddAnimalSpot() {
+		dieWelt.addAnimal(15, 20);
+		dieWelt.addAnimal(15, 20);
+		dieWelt.addAnimal(15, 20);
+		dieWelt.addAnimal(15, 20);
+		dieWelt.addAnimal(15, 20);
+		assertEquals("Total Animals",5, dieWelt.totalAnimals());
+	}
 }
