@@ -70,11 +70,11 @@ public class WorldTest {
 	@Test
 	public void testTotalPlants() {
 		// Add 5 Plants
-		dieWelt.addPlant(15, 20);
-		dieWelt.addPlant(15, 20);
-		dieWelt.addPlant(15, 20);
-		dieWelt.addPlant(20, 15);
-		dieWelt.addPlant(20, 15);
+		dieWelt.randomAddPlant();
+		dieWelt.randomAddPlant();
+		dieWelt.randomAddPlant();
+		dieWelt.randomAddPlant();
+		dieWelt.randomAddPlant();
 		assertEquals(5, dieWelt.totalPlants());
 	}
 	
@@ -88,11 +88,11 @@ public class WorldTest {
 	}
 	@Test
 	public void testAddAnimalsSpread() {
-		dieWelt.addAnimal(15, 20);
-		dieWelt.addAnimal(16, 21);
-		dieWelt.addAnimal(14, 19);
-		dieWelt.addAnimal(17, 22);
-		dieWelt.addAnimal(13, 18);
+		dieWelt.randomAddAnimal();
+		dieWelt.randomAddAnimal();
+		dieWelt.randomAddAnimal();
+		dieWelt.randomAddAnimal();
+		dieWelt.randomAddAnimal();
 		assertEquals("Total Animals",5, dieWelt.totalAnimals());
 	}
 	

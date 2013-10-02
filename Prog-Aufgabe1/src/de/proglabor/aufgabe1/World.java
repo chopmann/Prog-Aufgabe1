@@ -124,6 +124,14 @@ public class World {
 		}
 
 	}
+	
+	public void randomAddAnimal() {
+		Random rand = new Random();
+		int x = randInt(0, width - 1, rand);
+		int y = randInt(0, height - 1, rand);
+		addAnimal(x, y);
+
+	}
 
 	public int totalAnimals() {
 		int total = 0;
