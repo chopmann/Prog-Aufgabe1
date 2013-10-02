@@ -2,7 +2,7 @@
  * 
  */
 package de.proglabor.aufgabe1;
-
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -21,8 +21,8 @@ public class World {
 	private int jungleLimitX2 = 0;
 	private int jungleLimitY1 = 0;
 	private int jungleLimitY2 = 0;
-	
-	private Animal[][] animalContainer;
+
+	private ArrayList<Animal>[][] animalContainer;
 
 	/**
 	 * @param width
@@ -34,52 +34,55 @@ public class World {
 		this.widthJungle = widthJungle;
 		this.heightJungle = heightJungle;
 		this.plantContainer = new int[width][height];
-		this.animalContainer = new Animal[width][height];
+		this.animalContainer = new ArrayList[width][height];
 	}
-	
+
 	/**
 	 * Set every Coordinate in the World to 0 "Plants"
 	 */
 	public void initPlantContainer() {
 		if (plantContainer != null) {
-			for(int i = 0; i<width; i++) {
+			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < height; j++) {
 					plantContainer[i][j] = 0;
 				}
 			}
 		}
 	}
-	//Plant Stuff
+
+	// Plant Stuff
 	/**
 	 * Add a Plant at the Coordinates
+	 * 
 	 * @param x
 	 * @param y
 	 */
 	public void addPlant(int x, int y) {
 		plantContainer[x][y]++;
 	}
-	
+
 	/**
 	 * Add a Plant at a Random Location inside the World
 	 */
 	public void randomAddPlant() {
 		Random rand = new Random();
-		int x = randInt(0, width-1, rand);
-		int y = randInt(0, height-1, rand);
+		int x = randInt(0, width - 1, rand);
+		int y = randInt(0, height - 1, rand);
 		addPlant(x, y);
 
 	}
-	
-	
+
 	/**
-	 * @param x Coordinate
-	 * @param y Coordinate
+	 * @param x
+	 *            Coordinate
+	 * @param y
+	 *            Coordinate
 	 * @return Plant count at a Given Coordinate
 	 */
 	public int countPlants(int x, int y) {
 		return plantContainer[x][y];
 	}
-	
+
 	/**
 	 * @return The Total Plant Count
 	 */
@@ -99,51 +102,61 @@ public class World {
 	public int[][] getPlantContainer() {
 		return plantContainer;
 	}
-	
-	//Animal Stuff
-	public void initAnimalContainer(){
-		animalContainer = new Animal[width][height];
+
+	// Animal Stuff
+	public void initAnimalContainer() {
+		animalContainer = new ArrayList[width][height];
 	}
+
 	/**
 	 * Add an Animal at a Random Location inside the World
+	 * 
 	 * @param x
 	 * @param y
 	 */
+
 	public void addAnimal(int x, int y) {
-		animalContainer[x][y] = new Animal(x, y);
+		if (animalContainer[x][y] != null) {
+			animalContainer[x][y].add(new Animal(x, y));
+		} else {
+			animalContainer[x][y] = new ArrayList<Animal>();
+			animalContainer[x][y].add(new Animal(x, y));
+		}
+
 	}
+
 	public int totalAnimals() {
 		int total = 0;
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				if(animalContainer[i][j] != null) {
-					total++;
+				if (animalContainer[i][j] != null) {
+					total += animalContainer[i][j].size();
 				}
 			}
 		}
 		return total;
 	}
-	
+
 	/**
 	 * @return the animalContainer
 	 */
-	public Animal[][] getAnimalContainer() {
+
+	public ArrayList<Animal>[][] getAnimalContainer() {
 		return animalContainer;
 	}
-	
-	//Jungle Stuff
-	
+
+	// Jungle Stuff
+
 	/**
 	 * Welcome to the Jungle we have funny Games.
 	 */
 	public void setJungleLimits() {
 		jungleLimitX1 = (width - widthJungle) / 2;
 		jungleLimitX2 = (width + widthJungle) / 2;
-		jungleLimitY1 = (height - heightJungle) /2;
-		jungleLimitY2 = (height + heightJungle) /2;
+		jungleLimitY1 = (height - heightJungle) / 2;
+		jungleLimitY2 = (height + heightJungle) / 2;
 	}
-	
-	
+
 	/**
 	 * @return the jungleLimitX1
 	 */
@@ -172,24 +185,26 @@ public class World {
 		return jungleLimitY2;
 	}
 
-	//Helper Stuff
+	// Helper Stuff
 	/**
-	 * http://stackoverflow.com/questions/363681/generating-random-numbers-in-a-range-with-java
-	 * Returns a psuedo-random number between min and max, inclusive.
-	 * The difference between min and max can be at most
+	 * http://stackoverflow.com/questions/363681/generating-random-numbers-in-a-
+	 * range-with-java Returns a psuedo-random number between min and max,
+	 * inclusive. The difference between min and max can be at most
 	 * <code>Integer.MAX_VALUE - 1</code>.
-	 *
-	 * @param min Minimim value
-	 * @param max Maximim value.  Must be greater than min.
+	 * 
+	 * @param min
+	 *            Minimim value
+	 * @param max
+	 *            Maximim value. Must be greater than min.
 	 * @return Integer between min and max, inclusive.
 	 * @see java.util.Random#nextInt(int)
 	 */
 	public static int randInt(int min, int max, Random rand) {
 
-	    // nextInt is normally exclusive of the top value,
-	    // so add 1 to make it inclusive
-	    int randomNum = rand.nextInt((max - min) + 1) + min;
-	    return randomNum;
+		// nextInt is normally exclusive of the top value,
+		// so add 1 to make it inclusive
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+		return randomNum;
 	}
 
 }

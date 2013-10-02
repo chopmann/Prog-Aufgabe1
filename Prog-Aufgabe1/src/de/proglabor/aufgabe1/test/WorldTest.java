@@ -2,9 +2,9 @@ package de.proglabor.aufgabe1.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -81,9 +81,10 @@ public class WorldTest {
 	@Test
 	public void testAddAnimal() {
 		dieWelt.addAnimal(15, 20);
-		Animal[][] container = dieWelt.getAnimalContainer();
+		ArrayList<Animal>[][] container = dieWelt.getAnimalContainer();
 		assertNull(container[0][0]);
 		assertNotNull(container[15][20]);
+		assertEquals(1, container[15][20].size());
 	}
 	@Test
 	public void testAddAnimalsSpread() {
