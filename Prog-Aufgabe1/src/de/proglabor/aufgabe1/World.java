@@ -15,6 +15,7 @@ public class World {
 	private int width = 0;
 	private int height = 0;
 	private int[][] plantContainer;
+	private int plantEnergy = 0;
 
 	private int widthJungle = 0;
 	private int heightJungle = 0;
@@ -77,6 +78,22 @@ public class World {
 	 */
 	public void addPlant(int x, int y) {
 		plantContainer[x][y]++;
+	}
+
+	/**
+	 * Removes a Plant at the Given X,Y Coordinates.
+	 * @param x Coordinate
+	 * @param y Coordinate
+	 * @return The Energy of the Plant removed or if no plant was found 0.
+	 */
+	public int removePlant(int x, int y) {
+		if (plantContainer[x][y] <= 0) {
+			plantContainer[x][y] = 0;
+			return 0;
+		} else {
+			plantContainer[x][y]--;
+			return plantEnergy;
+		}
 	}
 
 	/**
@@ -159,7 +176,8 @@ public class World {
 	}
 
 	/**
-	 * @param reproductionEnergy the reproductionEnergy to set
+	 * @param reproductionEnergy
+	 *            the reproductionEnergy to set
 	 */
 	public void setReproductionEnergy(int reproductionEnergy) {
 		this.reproductionEnergy = reproductionEnergy;
@@ -224,8 +242,5 @@ public class World {
 	public int getJungleLimitY2() {
 		return jungleLimitY2;
 	}
-
-	// Helper Stuff
-
 
 }

@@ -39,6 +39,9 @@ public class Animal {
 		return genes;
 	}
 	
+	public void eat(int plantEnergy) {
+		energy += plantEnergy;
+	}
 	public void setDir(int dir ) {
 		this.dir = dir;
 	}
