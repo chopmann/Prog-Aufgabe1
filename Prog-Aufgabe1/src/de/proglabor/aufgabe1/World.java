@@ -2,6 +2,7 @@
  * 
  */
 package de.proglabor.aufgabe1;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,6 +24,8 @@ public class World {
 	private int jungleLimitY2 = 0;
 
 	private ArrayList<Animal>[][] animalContainer;
+	private int initialEnergy = 0;
+	private int reproductionEnergy = 0;
 
 	/**
 	 * @param width
@@ -35,6 +38,21 @@ public class World {
 		this.heightJungle = heightJungle;
 		this.plantContainer = new int[width][height];
 		this.animalContainer = new ArrayList[width][height];
+	}
+
+	/**
+	 * @return the initialEnergy
+	 */
+	public int getInitialEnergy() {
+		return initialEnergy;
+	}
+
+	/**
+	 * @param initialEnergy
+	 *            the initialEnergy to set
+	 */
+	public void setInitialEnergy(int initialEnergy) {
+		this.initialEnergy = initialEnergy;
 	}
 
 	/**
@@ -66,8 +84,8 @@ public class World {
 	 */
 	public void randomAddPlant() {
 		Random rand = new Random();
-		int x = randInt(0, width - 1, rand);
-		int y = randInt(0, height - 1, rand);
+		int x = Helper.randInt(0, width - 1, rand);
+		int y = Helper.randInt(0, height - 1, rand);
 		addPlant(x, y);
 
 	}
@@ -117,20 +135,34 @@ public class World {
 
 	public void addAnimal(int x, int y) {
 		if (animalContainer[x][y] != null) {
-			animalContainer[x][y].add(new Animal(x, y));
+			animalContainer[x][y].add(new Animal(initialEnergy, x, y));
 		} else {
 			animalContainer[x][y] = new ArrayList<Animal>();
-			animalContainer[x][y].add(new Animal(x, y));
+			animalContainer[x][y].add(new Animal(initialEnergy, x, y));
 		}
 
 	}
-	
+
 	public void randomAddAnimal() {
 		Random rand = new Random();
-		int x = randInt(0, width - 1, rand);
-		int y = randInt(0, height - 1, rand);
+		int x = Helper.randInt(0, width - 1, rand);
+		int y = Helper.randInt(0, height - 1, rand);
 		addAnimal(x, y);
 
+	}
+
+	/**
+	 * @return the reproductionEnergy
+	 */
+	public int getReproductionEnergy() {
+		return reproductionEnergy;
+	}
+
+	/**
+	 * @param reproductionEnergy the reproductionEnergy to set
+	 */
+	public void setReproductionEnergy(int reproductionEnergy) {
+		this.reproductionEnergy = reproductionEnergy;
 	}
 
 	public int totalAnimals() {
@@ -194,25 +226,6 @@ public class World {
 	}
 
 	// Helper Stuff
-	/**
-	 * http://stackoverflow.com/questions/363681/generating-random-numbers-in-a-
-	 * range-with-java Returns a psuedo-random number between min and max,
-	 * inclusive. The difference between min and max can be at most
-	 * <code>Integer.MAX_VALUE - 1</code>.
-	 * 
-	 * @param min
-	 *            Minimim value
-	 * @param max
-	 *            Maximim value. Must be greater than min.
-	 * @return Integer between min and max, inclusive.
-	 * @see java.util.Random#nextInt(int)
-	 */
-	public static int randInt(int min, int max, Random rand) {
 
-		// nextInt is normally exclusive of the top value,
-		// so add 1 to make it inclusive
-		int randomNum = rand.nextInt((max - min) + 1) + min;
-		return randomNum;
-	}
 
 }
