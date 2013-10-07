@@ -11,13 +11,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import de.proglabor.aufgabe1.Animal;
-import de.proglabor.aufgabe1.World;
+import de.proglabor.aufgabe1.Tier;
+import de.proglabor.aufgabe1.Welt;
 
 @RunWith(Parameterized.class)
 public class WorldTest {
 
-	World dieWelt;
+	Welt dieWelt;
 	int widthJungle;
 	int heightJungle;
 	int expectedX1;
@@ -30,7 +30,7 @@ public class WorldTest {
 		this.heightJungle = heightJungle;
 		this.expectedX1 = expectedX1;
 		this.expectedY1 = expectedY1;
-		dieWelt = new World(width, height, widthJungle, heightJungle);
+		dieWelt = new Welt(width, height, widthJungle, heightJungle);
 	}
 
 	@Parameters
@@ -81,7 +81,7 @@ public class WorldTest {
 	@Test
 	public void testAddAnimal() {
 		dieWelt.addAnimal(15, 20);
-		ArrayList<Animal>[][] container = dieWelt.getAnimalContainer();
+		ArrayList<Tier>[][] container = dieWelt.getAnimalContainer();
 		assertNull(container[0][0]);
 		assertNotNull(container[15][20]);
 		assertEquals(1, container[15][20].size());

@@ -10,7 +10,7 @@ import java.util.Random;
  * @author sirmonkey
  * 
  */
-public class World {
+public class Welt {
 
 	private int width = 0;
 	private int height = 0;
@@ -24,7 +24,7 @@ public class World {
 	private int jungleLimitY1 = 0;
 	private int jungleLimitY2 = 0;
 
-	private ArrayList<Animal>[][] animalContainer;
+	private ArrayList<Tier>[][] animalContainer;
 	private int initialEnergy = 0;
 	private int reproductionEnergy = 0;
 
@@ -32,7 +32,7 @@ public class World {
 	 * @param width
 	 * @param height
 	 */
-	public World(int width, int height, int widthJungle, int heightJungle) {
+	public Welt(int width, int height, int widthJungle, int heightJungle) {
 		this.width = width;
 		this.height = height;
 		this.widthJungle = widthJungle;
@@ -152,10 +152,10 @@ public class World {
 
 	public void addAnimal(int x, int y) {
 		if (animalContainer[x][y] != null) {
-			animalContainer[x][y].add(new Animal(initialEnergy, x, y));
+			animalContainer[x][y].add(new Tier(initialEnergy, x, y));
 		} else {
-			animalContainer[x][y] = new ArrayList<Animal>();
-			animalContainer[x][y].add(new Animal(initialEnergy, x, y));
+			animalContainer[x][y] = new ArrayList<Tier>();
+			animalContainer[x][y].add(new Tier(initialEnergy, x, y));
 		}
 
 	}
@@ -199,7 +199,7 @@ public class World {
 	 * @return the animalContainer
 	 */
 
-	public ArrayList<Animal>[][] getAnimalContainer() {
+	public ArrayList<Tier>[][] getAnimalContainer() {
 		return animalContainer;
 	}
 
