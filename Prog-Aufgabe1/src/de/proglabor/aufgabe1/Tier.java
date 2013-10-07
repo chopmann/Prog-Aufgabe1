@@ -12,6 +12,7 @@ public class Tier implements TierInterface{
 	int energy;
 	int dir;
 	int[] genes;
+	int sumGenes;
 
 	public Tier(int energy, int posX, int posY) {
 		this.posX = posX;
@@ -26,10 +27,12 @@ public class Tier implements TierInterface{
 		for (int i = 0; i < genes.length; i++) {
 			genes[i] = Helper.randInt(1, 10, rand);
 		}
+		sumGenes();
 	}
 
 	public void setGenes(int[] genes) {
 		this.genes = genes;
+		sumGenes();
 	}
 	@Override
 	public int[] getGenes() {
@@ -75,6 +78,7 @@ public class Tier implements TierInterface{
 		} else {
 			genes[gene] = mutatedGene;
 		}
+		sumGenes();
 	}
 
 	
@@ -102,10 +106,45 @@ public class Tier implements TierInterface{
 		return posY;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.proglabor.aufgabe1.TierInterface#turn(int)
+	 */
 	@Override
 	public void turn(int randomDirection) {
-		// TODO Auto-generated method stub
+		dir = randomDirection;
+	}
+	
+	/**
+	 * Change the Direction of the Animal(Weighted Random)
+	 */
+	public void turn() {
+		Random rand = new Random();
+		int value = Helper.randInt(0, sumGenes, rand );
+		int lowerBound = 0;
+		int upperBound = genes[0];
 		
+		if (lowerBound <= value && value <= upperBound) {
+			turn(0);
+		} else {
+			for (int i = 1; i < genes.length; i++) {
+				lowerBound = upperBound;
+				upperBound+= genes[i];
+				if( lowerBound < value && value <= upperBound) {
+					turn(i);
+				}
+			}
+		}
+	}
+
+	/**
+	 * @return
+	 */
+	private int sumGenes() {
+		int sumGenes = 0;
+		for (int i = 0; i < genes.length; i++) {
+			sumGenes += genes[i];
+		}
+		return sumGenes;
 	}
 
 	@Override
