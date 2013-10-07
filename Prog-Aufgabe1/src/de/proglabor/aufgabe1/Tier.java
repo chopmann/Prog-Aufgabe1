@@ -6,7 +6,7 @@ import java.util.Random;
  * @author sirmonkey
  * 
  */
-public class Tier {
+public class Tier implements TierInterface{
 	int posX;
 	int posY;
 	int energy;
@@ -31,23 +31,29 @@ public class Tier {
 	public void setGenes(int[] genes) {
 		this.genes = genes;
 	}
-
+	@Override
 	public int[] getGenes() {
 		return genes;
 	}
-
+	@Override
 	public void eat(int plantEnergy) {
 		energy += plantEnergy;
 	}
 
-	public void setDir(int dir) {
-		this.dir = dir;
+	/**
+	 * @param randomGene
+	 * @param randomMutation
+	 * @return a new Born Animal with mutated Genes
+	 */
+	@Override
+	public Tier reproduce(int randomGene, int randomMutation) {
+		Tier newBorn = new Tier(this.energy / 2, this.posX, this.posY);
+		int[] newBornGenes = this.genes.clone();
+		newBorn.setGenes(newBornGenes);
+		newBorn.mutate(randomGene, randomMutation);
+		return newBorn;
 	}
-
-	public int getDir() {
-		return dir;
-	}
-
+	
 	/**
 	 * @return a new Born Animal with Random mutated Genes
 	 */
@@ -56,19 +62,6 @@ public class Tier {
 		int randomGene = Helper.randInt(0, 7, rand);
 		int randomMutation = Helper.randInt(-1, 1, rand);
 		return reproduce(randomGene, randomMutation);
-	}
-
-	/**
-	 * @param randomGene
-	 * @param randomMutation
-	 * @return a new Born Animal with mutated Genes
-	 */
-	public Tier reproduce(int randomGene, int randomMutation) {
-		Tier newBorn = new Tier(this.energy / 2, this.posX, this.posY);
-		int[] newBornGenes = this.genes.clone();
-		newBorn.setGenes(newBornGenes);
-		newBorn.mutate(randomGene, randomMutation);
-		return newBorn;
 	}
 
 	/**
@@ -82,6 +75,43 @@ public class Tier {
 		} else {
 			genes[gene] = mutatedGene;
 		}
+	}
+
+	
+	public void setDir(int dir) {
+		this.dir = dir;
+	}
+	
+	@Override
+	public int getDir() {
+		return dir;
+	}
+	
+	@Override
+	public int getEnergy() {
+		return energy;
+	}
+
+	@Override
+	public int getX() {
+		return posX;
+	}
+
+	@Override
+	public int getY() {
+		return posY;
+	}
+
+	@Override
+	public void turn(int randomDirection) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void move(int height, int width) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
