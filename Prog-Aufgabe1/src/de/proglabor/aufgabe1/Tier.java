@@ -139,7 +139,7 @@ public class Tier implements TierInterface{
 	/**
 	 * @return
 	 */
-	private int sumGenes() {
+	public int sumGenes() {
 		int sumGenes = 0;
 		for (int i = 0; i < genes.length; i++) {
 			sumGenes += genes[i];
@@ -148,9 +148,10 @@ public class Tier implements TierInterface{
 	}
 
 	@Override
-	public void move(int height, int width) {
+	public void move(int width , int  height) {
 		// TODO Auto-generated method stub
-		
+		posX = Helper.mirror(width, Welt.getWidth());
+		posY = Helper.mirror(height, Welt.getHeight());
 	}
 
 }

@@ -27,6 +27,17 @@ public class AnimalTest {
 		assertEquals(dollyGenes[0], dolly3.getGenes()[0]);
 		assertEquals(dollyGenes[7]-1, dolly4.getGenes()[7]);
 	}
+	@Test
+	public void testMove() {
 	
+		dolly.move(39, 29);
+		assertEquals(39, dolly.getX());
+		assertEquals(29, dolly.getY());
+		
+		//Test Mirror
+		dolly.move(40,30);
+		assertEquals(0, dolly.getX());
+		assertEquals(0, dolly.getY());
+	}
 
 }

@@ -12,8 +12,8 @@ import java.util.Random;
  */
 public class Welt {
 
-	private int width = 0;
-	private int height = 0;
+	private static int width = 0;
+	private static int height = 0;
 	private int[][] plantContainer;
 	private int plantEnergy = 0;
 
@@ -215,6 +215,14 @@ public class Welt {
 		jungleLimitY2 = (height + heightJungle) / 2;
 	}
 
+	public static int getWidth() {
+		return width;
+	}
+
+	public static int getHeight() {
+		return height;
+	}
+	
 	/**
 	 * @return the jungleLimitX1
 	 */
