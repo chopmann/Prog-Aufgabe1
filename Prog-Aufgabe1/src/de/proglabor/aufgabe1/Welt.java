@@ -106,6 +106,13 @@ public class Welt {
 		addPlant(x, y);
 
 	}
+	public void randomAddPlantJungle() {
+		Random rand = new Random();
+		int x = Helper.randInt(jungleLimitX1, jungleLimitX2-1, rand);
+		int y = Helper.randInt(jungleLimitY1, jungleLimitY2-1, rand);
+		addPlant(x, y);
+
+	}
 
 	/**
 	 * @param x
@@ -182,14 +189,28 @@ public class Welt {
 	public void setReproductionEnergy(int reproductionEnergy) {
 		this.reproductionEnergy = reproductionEnergy;
 	}
+	public void reproduction(Tier tier) {
+		if (tier.energy >= reproductionEnergy) {
+			Tier baby = tier.reproduce();
+			int x = baby.getX();
+			int y = baby.getY();
+			animalContainer[x][y].add(baby);
+		}
+	}
 
+	public int countAnimals(int x, int y) {
+		if (animalContainer[x][y] != null) {
+			return animalContainer[x][y].size();
+		} else {
+			return 0;
+		}
+			
+	}
 	public int totalAnimals() {
 		int total = 0;
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				if (animalContainer[i][j] != null) {
-					total += animalContainer[i][j].size();
-				}
+				total += countAnimals(i, j);
 			}
 		}
 		return total;

@@ -19,6 +19,7 @@ public class Tier implements TierInterface{
 		this.posY = posY;
 		this.energy = energy;
 		this.dir = 0;
+		initGenes();
 	}
 
 	public void initGenes() {
@@ -180,6 +181,10 @@ public class Tier implements TierInterface{
 			move(posX - 1, posY);
 			break;
 		}
+	}
+	
+	public void energyDecay(int energy) {
+		this.energy -= energy;
 	}
 
 }
