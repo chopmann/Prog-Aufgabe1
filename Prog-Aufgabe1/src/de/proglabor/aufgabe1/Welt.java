@@ -5,6 +5,7 @@ package de.proglabor.aufgabe1;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author sirmonkey
@@ -24,7 +25,7 @@ public class Welt {
 	private int jungleLimitY1 = 0;
 	private int jungleLimitY2 = 0;
 
-	private ArrayList<Tier>[][] animalContainer;
+	private CopyOnWriteArrayList<Tier>[][] animalContainer;
 	private int initialEnergy = 0;
 	private int reproductionEnergy = 0;
 
@@ -38,7 +39,7 @@ public class Welt {
 		this.widthJungle = widthJungle;
 		this.heightJungle = heightJungle;
 		this.plantContainer = new int[width][height];
-		this.animalContainer = new ArrayList[width][height];
+		this.animalContainer = new CopyOnWriteArrayList[width][height];
 	}
 
 	/**
@@ -147,7 +148,7 @@ public class Welt {
 
 	// Animal Stuff
 	public void initAnimalContainer() {
-		animalContainer = new ArrayList[width][height];
+		animalContainer = new CopyOnWriteArrayList[width][height];
 	}
 
 	/**
@@ -161,7 +162,7 @@ public class Welt {
 		if (animalContainer[x][y] != null) {
 			animalContainer[x][y].add(new Tier(initialEnergy, x, y));
 		} else {
-			animalContainer[x][y] = new ArrayList<Tier>();
+			animalContainer[x][y] = new CopyOnWriteArrayList<Tier>();
 			animalContainer[x][y].add(new Tier(initialEnergy, x, y));
 		}
 
@@ -220,7 +221,7 @@ public class Welt {
 	 * @return the animalContainer
 	 */
 
-	public ArrayList<Tier>[][] getAnimalContainer() {
+	public CopyOnWriteArrayList<Tier>[][] getAnimalContainer() {
 		return animalContainer;
 	}
 

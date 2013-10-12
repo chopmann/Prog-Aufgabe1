@@ -1,6 +1,7 @@
 package de.proglabor.aufgabe1;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SimArray implements SimArrayInterface {
 
@@ -31,7 +32,7 @@ public class SimArray implements SimArrayInterface {
 		for (int i = 0; i < dieWelt.getWidth(); i++) {
 			for (int j = 0; j < dieWelt.getHeight(); j++) {
 				if (dieWelt.countAnimals(i, j) > 0) {
-					ArrayList<Tier> tmp = dieWelt.getAnimalContainer()[i][j];
+					CopyOnWriteArrayList<Tier> tmp = dieWelt.getAnimalContainer()[i][j];
 					for (Tier tier : tmp) {
 						dieWelt.reproduction(tier);
 					}
