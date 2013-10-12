@@ -153,5 +153,33 @@ public class Tier implements TierInterface{
 		posX = Helper.mirror(width, Welt.getWidth());
 		posY = Helper.mirror(height, Welt.getHeight());
 	}
+	
+	public void move() {
+		switch (dir) {
+		case 0:
+			move(posX - 1, posY + 1);
+			break;
+		case 1:
+			move(posX, posY + 1);
+			break;
+		case 2:
+			move(posX + 1, posY + 1);
+			break;
+		case 3:
+			move(posX + 1, posY);
+			break;
+		case 4:
+			move(posX - 1, posY + 1);
+		case 5:
+			move(posX, posY - 1);
+			break;
+		case 6:
+			move(posX - 1, posY - 1);
+			break;
+		case 7:
+			move(posX - 1, posY);
+			break;
+		}
+	}
 
 }
