@@ -6,14 +6,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.proglabor.aufgabe1.Tier;
+import de.proglabor.aufgabe1.Welt;
 
 public class AnimalTest {
 	Tier dolly = new Tier(10, 1, 1);
 	int[] dollyGenes = {0, 1, 2, 3, 4, 5, 6, 7};
+	Welt dieWelt;
 	
 	@Before
 	public void setUp() {
 		dolly.setGenes(dollyGenes);
+		dieWelt = new Welt(40, 30, 10, 10);
+		
 	}
 
 	@Test

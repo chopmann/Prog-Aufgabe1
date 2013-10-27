@@ -3,7 +3,6 @@
  */
 package de.proglabor.aufgabe1;
 
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -28,6 +27,9 @@ public class Welt {
 	private CopyOnWriteArrayList<Tier>[][] animalContainer;
 	private int initialEnergy = 0;
 	private int reproductionEnergy = 0;
+	
+	public static int bornCount = 0;
+	public static int deadCount = 0;
 
 	/**
 	 * @param width
@@ -55,6 +57,13 @@ public class Welt {
 	 */
 	public void setInitialEnergy(int initialEnergy) {
 		this.initialEnergy = initialEnergy;
+	}
+
+	/**
+	 * @param plantEnergy the plantEnergy to set
+	 */
+	public void setPlantEnergy(int plantEnergy) {
+		this.plantEnergy = plantEnergy;
 	}
 
 	/**
@@ -175,6 +184,18 @@ public class Welt {
 		addAnimal(x, y);
 
 	}
+	public void moveAnimal(CopyOnWriteArrayList<Tier> animalList, Tier milka) {
+		animalList.remove(milka);
+		int newX = milka.getX();
+		int newY = milka.getY();
+		if (animalContainer[newX][newY] != null) {
+			animalContainer[newX][newY].add(milka);
+		} else {
+			animalContainer[newX][newY] = new CopyOnWriteArrayList<Tier>();
+			animalContainer[newX][newY].add(milka);
+		}
+		
+	}
 
 	/**
 	 * @return the reproductionEnergy
@@ -190,13 +211,34 @@ public class Welt {
 	public void setReproductionEnergy(int reproductionEnergy) {
 		this.reproductionEnergy = reproductionEnergy;
 	}
-	public void reproduction(Tier tier) {
+	public void animalAction(Tier tier) {
+		//eat
+		if (countPlants(tier.getX(), tier.getY()) >= 1) {
+			tier.eat(plantEnergy);
+			removePlant(tier.getX(), tier.posY);
+		}
+		tier.turn();
+		//reproduce
 		if (tier.energy >= reproductionEnergy) {
 			Tier baby = tier.reproduce();
 			int x = baby.getX();
 			int y = baby.getY();
 			animalContainer[x][y].add(baby);
+			bornCount++;
 		}
+		//Move
+		int x = tier.getX();
+		int y = tier.getY();
+		tier.move();
+		tier.energyDecay(4);
+		if (tier.getEnergy() == 0) {
+			animalContainer[x][y].remove(tier);
+			deadCount++;
+		} else {
+			moveAnimal(animalContainer[x][y], tier);
+		}
+		
+		
 	}
 
 	public int countAnimals(int x, int y) {
