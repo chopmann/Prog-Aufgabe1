@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.proglabor.aufgabe1;
 
 import java.util.Random;

@@ -1,11 +1,10 @@
 package de.proglabor.aufgabe1;
 
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SimArray implements SimArrayInterface {
 
-	public static Welt dieWelt;
+	public  Welt dieWelt;
 
 	
 	public SimArray() {
@@ -16,8 +15,6 @@ public class SimArray implements SimArrayInterface {
 		dieWelt.setJungleLimits();
 		dieWelt.initAnimalContainer();
 		dieWelt.initPlantContainer();
-		dieWelt.randomAddPlant();
-		dieWelt.randomAddPlantJungle();
 		dieWelt.addAnimal((Welt.getWidth()) / 2, (Welt.getHeight()) / 2);
 	}
 	
@@ -31,8 +28,6 @@ public class SimArray implements SimArrayInterface {
 		dieWelt.setJungleLimits();
 		dieWelt.initAnimalContainer();
 		dieWelt.initPlantContainer();
-		dieWelt.randomAddPlant();
-		dieWelt.randomAddPlantJungle();
 		dieWelt.addAnimal((Welt.getWidth()) / 2, (Welt.getHeight()) / 2);
 	}
 
