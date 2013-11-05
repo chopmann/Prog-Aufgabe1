@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.junit.Before;
@@ -13,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import de.proglabor.aufgabe2.Pflanze;
 import de.proglabor.aufgabe2.Tier;
 import de.proglabor.aufgabe2.Welt;
 
@@ -43,7 +45,6 @@ public class WorldTest {
 	}
 	@Before
 	public void resetWorld() {
-		dieWelt.initPlantContainer();
 		dieWelt.initAnimalContainer();
 	}
 
@@ -63,10 +64,20 @@ public class WorldTest {
 		dieWelt.addPlant(15, 20);
 		dieWelt.addPlant(20, 15);
 		dieWelt.addPlant(20, 15);
-		int[][] container = dieWelt.getPlantContainer();
-		assertEquals(0, container[0][0]);
-		assertEquals(1, container[15][20]);
-		assertEquals(2, container[20][15]);
+		assertEquals(0, dieWelt.countPlants(0, 0));
+		assertEquals(1, dieWelt.countPlants(15, 20));
+		assertEquals(2, dieWelt.countPlants(20, 15));
+	}
+	@Test
+	public void testRemovePlant() {
+		dieWelt.addPlant(15, 20);
+		dieWelt.addPlant(20, 15);
+		dieWelt.addPlant(20, 15);
+		dieWelt.addPlant(20, 15);
+		dieWelt.removePlant(20, 15);
+		assertEquals(0, dieWelt.countPlants(0, 0));
+		assertEquals(1, dieWelt.countPlants(15, 20));
+		assertEquals(2, dieWelt.countPlants(20, 15));
 	}
 
 	@Test

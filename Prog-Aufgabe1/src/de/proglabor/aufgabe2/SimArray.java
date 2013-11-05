@@ -14,7 +14,6 @@ public class SimArray implements SimArrayInterface {
 		dieWelt.setPlantEnergy(80);
 		dieWelt.setJungleLimits();
 		dieWelt.initAnimalContainer();
-		dieWelt.initPlantContainer();
 		dieWelt.addAnimal((Welt.getWidth()) / 2, (Welt.getHeight()) / 2);
 	}
 	
@@ -27,7 +26,6 @@ public class SimArray implements SimArrayInterface {
 		dieWelt.setPlantEnergy(80);
 		dieWelt.setJungleLimits();
 		dieWelt.initAnimalContainer();
-		dieWelt.initPlantContainer();
 		dieWelt.addAnimal((Welt.getWidth()) / 2, (Welt.getHeight()) / 2);
 	}
 
@@ -69,6 +67,7 @@ public class SimArray implements SimArrayInterface {
 	}
 	
 	public void consoleOut() {
+		//TODO
 		StringBuilder sb = new StringBuilder(25);
 		for (int i = 0; i < dieWelt.getHeight(); i++) {
 			boolean insideJungleX = dieWelt.getJungleLimitY1() <= i && i < dieWelt.getJungleLimitY2();

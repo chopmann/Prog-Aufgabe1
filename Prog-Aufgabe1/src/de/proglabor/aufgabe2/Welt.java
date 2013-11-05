@@ -1,6 +1,8 @@
 package de.proglabor.aufgabe2;
 
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -11,7 +13,7 @@ public class Welt {
 
 	private static int width = 0;
 	private static int height = 0;
-	private int[][] plantContainer;
+	private TreeMap<Pflanze, Integer> plantContainer;
 	private int plantEnergy = 0;
 
 	private int widthJungle = 0;
@@ -37,7 +39,7 @@ public class Welt {
 		this.height = height;
 		this.widthJungle = widthJungle;
 		this.heightJungle = heightJungle;
-		this.plantContainer = new int[width][height];
+		this.plantContainer = new TreeMap<Pflanze, Integer>();
 		this.animalContainer = new CopyOnWriteArrayList[width][height];
 	}
 
@@ -63,19 +65,6 @@ public class Welt {
 		this.plantEnergy = plantEnergy;
 	}
 
-	/**
-	 * Set every Coordinate in the World to 0 "Plants"
-	 */
-	public void initPlantContainer() {
-		if (plantContainer != null) {
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					plantContainer[i][j] = 0;
-				}
-			}
-		}
-	}
-
 	// Plant Stuff
 	/**
 	 * Add a Plant at the Coordinates
@@ -84,7 +73,13 @@ public class Welt {
 	 * @param y
 	 */
 	public void addPlant(int x, int y) {
-		plantContainer[x][y]++;
+		Pflanze key = new Pflanze(x, y);
+		Integer value = plantContainer.get(key);
+		if (plantContainer.get(key) == null) {
+			value = 0;
+		}
+		value++;
+		plantContainer.put(key, value);
 	}
 
 	/**
@@ -93,13 +88,13 @@ public class Welt {
 	 * @param y Coordinate
 	 * @return The Energy of the Plant removed or if no plant was found 0.
 	 */
-	public int removePlant(int x, int y) {
-		if (plantContainer[x][y] <= 0) {
-			plantContainer[x][y] = 0;
-			return 0;
-		} else {
-			plantContainer[x][y]--;
-			return plantEnergy;
+	public void removePlant(int x, int y) {
+		int count = countPlants(x, y);
+		if (count > 0) {
+			Pflanze key = new Pflanze(x, y);
+			count--;
+			plantContainer.put(key, count);
+			System.out.println("Remove Plant!");
 		}
 	}
 
@@ -129,7 +124,13 @@ public class Welt {
 	 * @return Plant count at a Given Coordinate
 	 */
 	public int countPlants(int x, int y) {
-		return plantContainer[x][y];
+		Pflanze key = new Pflanze(x, y);
+		Integer value = plantContainer.get(key);
+		if (plantContainer.get(key) == null) {
+			return  0;
+		} else {
+			return	value;
+		}
 	}
 
 	/**
@@ -137,10 +138,9 @@ public class Welt {
 	 */
 	public int totalPlants() {
 		int total = 0;
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				total += countPlants(i, j);
-			}
+		for (Map.Entry<Pflanze, Integer> entry : plantContainer.entrySet()) {
+			Integer value = entry.getValue();
+			total += value;
 		}
 		return total;
 	}
@@ -148,7 +148,7 @@ public class Welt {
 	/**
 	 * @return the plantContainer
 	 */
-	public int[][] getPlantContainer() {
+	public TreeMap<Pflanze, Integer> getPlantContainer() {
 		return plantContainer;
 	}
 

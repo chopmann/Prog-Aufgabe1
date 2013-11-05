@@ -14,7 +14,7 @@ public class SimArrayTest {
 		System.out.println("Day Z");
 		sim.consoleOut();
 		
-		for (int i = 1; i <= 10000; i++) {
+		for (int i = 1; i <= 5; i++) {
 //			System.out.println("Day" + i);
 			sim.day();
 			
