@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe1.test;
+package de.proglabor.aufgabe2.test;
 
 import static org.junit.Assert.*;
 
@@ -13,8 +13,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import de.proglabor.aufgabe1.Tier;
-import de.proglabor.aufgabe1.Welt;
+import de.proglabor.aufgabe2.Tier;
+import de.proglabor.aufgabe2.Welt;
 
 @RunWith(Parameterized.class)
 public class WorldTest {

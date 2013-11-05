@@ -1,11 +1,11 @@
-package de.proglabor.aufgabe1.test;
+package de.proglabor.aufgabe2.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.proglabor.aufgabe1.SimArray;
-import de.proglabor.aufgabe1.SimArrayInterface;
+import de.proglabor.aufgabe2.SimArray;
+import de.proglabor.aufgabe2.SimArrayInterface;
 
 public class PublicAufgabe1 {
 

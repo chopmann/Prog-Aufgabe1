@@ -1,12 +1,12 @@
-package de.proglabor.aufgabe1.test;
+package de.proglabor.aufgabe2.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.proglabor.aufgabe1.Tier;
-import de.proglabor.aufgabe1.Welt;
+import de.proglabor.aufgabe2.Tier;
+import de.proglabor.aufgabe2.Welt;
 
 public class AnimalTest {
 	Tier dolly = new Tier(10, 1, 1);

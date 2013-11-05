@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe1;
+package de.proglabor.aufgabe2;
 
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;

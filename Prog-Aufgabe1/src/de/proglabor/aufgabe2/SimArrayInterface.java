@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe1;
+package de.proglabor.aufgabe2;
 
 public interface SimArrayInterface {
 
