@@ -22,8 +22,12 @@ public class Tier implements TierInterface{
 		initGenes();
 	}
 
-	public Tier(int i, int j, int animalStartEnergy, int k, int[] genes2) {
-		// TODO Auto-generated constructor stub
+	public Tier(int posX, int posY, int animalStartEnergy, int dir, int[] genes) {
+		this.posX = posX;
+		this.posY = posY;
+		this.energy = animalStartEnergy;
+		this.dir = dir;
+		this.genes = genes;
 	}
 
 	public void initGenes() {

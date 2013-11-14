@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -93,11 +94,12 @@ public class WorldTest {
 	
 	@Test
 	public void testAddAnimal() {
-		dieWelt.addAnimal(15, 20);
-		CopyOnWriteArrayList<Tier>[][] container = dieWelt.getAnimalContainer();
-		assertNull(container[0][0]);
-		assertNotNull(container[15][20]);
-		assertEquals(1, container[15][20].size());
+		Tier tier = new Tier(100, 15, 20);
+		dieWelt.addAnimal(tier);
+		LinkedList<Tier> container = dieWelt.getAnimalContainer();
+		assertEquals(0 , dieWelt.countAnimals(0, 0));
+		assertNotNull(dieWelt.countAnimals(15, 20));
+		assertEquals(1, container.size());
 	}
 	@Test
 	public void testAddAnimalsSpread() {
@@ -111,11 +113,12 @@ public class WorldTest {
 	
 	@Test
 	public void testAddAnimalSpot() {
-		dieWelt.addAnimal(15, 20);
-		dieWelt.addAnimal(15, 20);
-		dieWelt.addAnimal(15, 20);
-		dieWelt.addAnimal(15, 20);
-		dieWelt.addAnimal(15, 20);
+		Tier tier = new Tier(100, 15, 20);
+		dieWelt.addAnimal(tier);
+		dieWelt.addAnimal(tier);
+		dieWelt.addAnimal(tier);
+		dieWelt.addAnimal(tier);
+		dieWelt.addAnimal(tier);
 		assertEquals("Total Animals",5, dieWelt.totalAnimals());
 	}
 }

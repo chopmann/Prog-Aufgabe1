@@ -1,5 +1,6 @@
 package de.proglabor.aufgabe2;
 
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -23,7 +24,7 @@ public class Welt {
 	private int jungleLimitY1 = 0;
 	private int jungleLimitY2 = 0;
 
-	private CopyOnWriteArrayList<Tier>[][] animalContainer;
+	private LinkedList<Tier> animalContainer;
 	private int initialEnergy = 0;
 	private int reproductionEnergy = 0;
 	
@@ -40,7 +41,7 @@ public class Welt {
 		this.widthJungle = widthJungle;
 		this.heightJungle = heightJungle;
 		this.plantContainer = new TreeMap<Pflanze, Integer>();
-		this.animalContainer = new CopyOnWriteArrayList[width][height];
+		this.animalContainer = new LinkedList<Tier>();
 	}
 
 	/**
@@ -153,10 +154,6 @@ public class Welt {
 	}
 
 	// Animal Stuff
-	public void initAnimalContainer() {
-		animalContainer = new CopyOnWriteArrayList[width][height];
-	}
-
 	/**
 	 * Add an Animal at a Random Location inside the World
 	 * 
@@ -164,33 +161,22 @@ public class Welt {
 	 * @param y
 	 */
 
-	public void addAnimal(int x, int y) {
-		if (animalContainer[x][y] != null) {
-			animalContainer[x][y].add(new Tier(initialEnergy, x, y));
-		} else {
-			animalContainer[x][y] = new CopyOnWriteArrayList<Tier>();
-			animalContainer[x][y].add(new Tier(initialEnergy, x, y));
-		}
-
+	public void addAnimal(Tier tier) {
+		animalContainer.add(tier);
 	}
 
 	public void randomAddAnimal() {
 		Random rand = new Random();
 		int x = Helper.randInt(0, width - 1, rand);
 		int y = Helper.randInt(0, height - 1, rand);
-		addAnimal(x, y);
+		Tier tier = new Tier(initialEnergy, x, y);
+		addAnimal(tier);
 
 	}
-	public void moveAnimal(CopyOnWriteArrayList<Tier> animalList, Tier milka) {
-		animalList.remove(milka);
-		int newX = milka.getX();
-		int newY = milka.getY();
-		if (animalContainer[newX][newY] != null) {
-			animalContainer[newX][newY].add(milka);
-		} else {
-			animalContainer[newX][newY] = new CopyOnWriteArrayList<Tier>();
-			animalContainer[newX][newY].add(milka);
-		}
+	public void moveAnimal(Tier milka) {
+		
+		int whereIsTheCow = animalContainer.indexOf(milka);
+		animalContainer.get(whereIsTheCow).move();
 		
 	}
 
@@ -220,7 +206,7 @@ public class Welt {
 			Tier baby = tier.reproduce();
 			int x = baby.getX();
 			int y = baby.getY();
-			animalContainer[x][y].add(baby);
+			animalContainer.add(baby);
 			bornCount++;
 		}
 		//Move
@@ -229,38 +215,33 @@ public class Welt {
 		tier.move();
 		tier.energyDecay(4);
 		if (tier.getEnergy() == 0) {
-			animalContainer[x][y].remove(tier);
+			animalContainer.remove(tier);
 			deadCount++;
 		} else {
-			moveAnimal(animalContainer[x][y], tier);
+			moveAnimal(tier);
 		}
 		
 		
 	}
 
-	public int countAnimals(int x, int y) {
-		if (animalContainer[x][y] != null) {
-			return animalContainer[x][y].size();
-		} else {
-			return 0;
-		}
-			
-	}
-	public int totalAnimals() {
-		int total = 0;
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				total += countAnimals(i, j);
+	public int countAnimals(int x, int y) {	
+		int counter = 0;
+		for (Tier tier : animalContainer) {
+			if ( tier.getX() == x && tier.getY() == y) {
+				counter++;
 			}
 		}
-		return total;
+		return counter;
+	}
+	public int totalAnimals() {
+		return animalContainer.size();
 	}
 
 	/**
 	 * @return the animalContainer
 	 */
 
-	public CopyOnWriteArrayList<Tier>[][] getAnimalContainer() {
+	public LinkedList<Tier> getAnimalContainer() {
 		return animalContainer;
 	}
 
@@ -310,6 +291,11 @@ public class Welt {
 	 */
 	public int getJungleLimitY2() {
 		return jungleLimitY2;
+	}
+
+	public void initAnimalContainer() {
+		this.animalContainer = new LinkedList<Tier>();
+		
 	}
 
 }

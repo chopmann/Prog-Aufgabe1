@@ -14,7 +14,7 @@ public class SimArray implements SimArrayInterface {
 		dieWelt.setPlantEnergy(80);
 		dieWelt.setJungleLimits();
 		dieWelt.initAnimalContainer();
-		dieWelt.addAnimal((Welt.getWidth()) / 2, (Welt.getHeight()) / 2);
+//		dieWelt.addAnimal((Welt.getWidth()) / 2, (Welt.getHeight()) / 2);
 	}
 	
 	public SimArray(int width, int height, int widthJungle, int heightJungle, int initialEnergy, int reproductionEnergy) {
@@ -26,7 +26,7 @@ public class SimArray implements SimArrayInterface {
 		dieWelt.setPlantEnergy(80);
 		dieWelt.setJungleLimits();
 		dieWelt.initAnimalContainer();
-		dieWelt.addAnimal((Welt.getWidth()) / 2, (Welt.getHeight()) / 2);
+//		dieWelt.addAnimal((Welt.getWidth()) / 2, (Welt.getHeight()) / 2);
 	}
 
 	@Override
@@ -36,18 +36,18 @@ public class SimArray implements SimArrayInterface {
 
 	}
 	public void day() {
-		dieWelt.randomAddPlant();
-		dieWelt.randomAddPlantJungle();
-		for (int i = 0; i < dieWelt.getWidth(); i++) {
-			for (int j = 0; j < dieWelt.getHeight(); j++) {
-				if (dieWelt.countAnimals(i, j) > 0) {
-					CopyOnWriteArrayList<Tier> tmp = dieWelt.getAnimalContainer()[i][j];
-					for (Tier tier : tmp) {
-						dieWelt.animalAction(tier);						
-					}
-				}
-			}
-		}
+//		dieWelt.randomAddPlant();
+//		dieWelt.randomAddPlantJungle();
+//		for (int i = 0; i < dieWelt.getWidth(); i++) {
+//			for (int j = 0; j < dieWelt.getHeight(); j++) {
+//				if (dieWelt.countAnimals(i, j) > 0) {
+//					CopyOnWriteArrayList<Tier> tmp = dieWelt.getAnimalContainer()[i][j];
+//					for (Tier tier : tmp) {
+//						dieWelt.animalAction(tier);						
+//					}
+//				}
+//			}
+//		}
 	}
 
 	@Override
