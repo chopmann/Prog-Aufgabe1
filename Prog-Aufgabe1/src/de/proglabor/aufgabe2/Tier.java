@@ -22,6 +22,10 @@ public class Tier implements TierInterface{
 		initGenes();
 	}
 
+	public Tier(int i, int j, int animalStartEnergy, int k, int[] genes2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void initGenes() {
 		genes = new int[8];
 		Random rand = new Random();
