@@ -39,4 +39,9 @@ public final class Helper {
 			return position;
 		}
 	}
+	
+	public static int cleaner(int eingabe, int n) {
+		int result = Math.abs(eingabe) % n;
+		return result;
+	}
 }

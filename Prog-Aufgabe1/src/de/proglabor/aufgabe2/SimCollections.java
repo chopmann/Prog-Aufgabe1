@@ -33,7 +33,7 @@ public class SimCollections implements SimCollectionsInterface {
 
 	@Override
 	public void setPflanze(Pflanze pflanze) {
-		// TODO Auto-generated method stub
+		dieWelt.addPlant(pflanze);
 		
 	}
 
@@ -43,7 +43,7 @@ public class SimCollections implements SimCollectionsInterface {
 	
 	@Override
 	public void day() {
-		// TODO Auto-generated method stub
+		// TODO Simulation!
 		
 	}
 

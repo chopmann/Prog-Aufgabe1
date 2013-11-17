@@ -67,6 +67,17 @@ public class Welt {
 	}
 
 	// Plant Stuff
+	
+	public void addPlant(Pflanze pflanze) {
+		Pflanze key = pflanze;
+		Integer value = plantContainer.get(key);
+		if (plantContainer.get(key) == null) {
+			value = 0;
+		}
+		value++;
+		plantContainer.put(key, value);
+	}
+
 	/**
 	 * Add a Plant at the Coordinates
 	 * 
@@ -75,12 +86,7 @@ public class Welt {
 	 */
 	public void addPlant(int x, int y) {
 		Pflanze key = new Pflanze(x, y);
-		Integer value = plantContainer.get(key);
-		if (plantContainer.get(key) == null) {
-			value = 0;
-		}
-		value++;
-		plantContainer.put(key, value);
+		addPlant(key);
 	}
 
 	/**

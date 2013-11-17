@@ -63,6 +63,7 @@ public class Tier implements TierInterface{
 		int[] newBornGenes = this.genes.clone();
 		newBorn.setGenes(newBornGenes);
 		newBorn.mutate(randomGene, randomMutation);
+		this.energy = (this.energy % 2) + ( this.energy / 2 );
 		return newBorn;
 	}
 	
@@ -120,7 +121,7 @@ public class Tier implements TierInterface{
 	 */
 	@Override
 	public void turn(int randomDirection) {
-		dir = randomDirection;
+		dir = Helper.cleaner(randomDirection, 8);
 	}
 	
 	/**
