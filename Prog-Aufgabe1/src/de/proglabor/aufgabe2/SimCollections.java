@@ -21,7 +21,7 @@ public class SimCollections implements SimCollectionsInterface {
 		this(30, 40, 10, 10, 80, 1000, 200);
 		
 		//Monkey-Patch 
-		Tier weronika = new Tier(1000, 40-1, 30-1);
+		Tier weronika = new Tier(1000, (40) / 2, (30) / 2);
 		dieWelt.addAnimal(weronika);
 	}
 
@@ -43,7 +43,12 @@ public class SimCollections implements SimCollectionsInterface {
 	
 	@Override
 	public void day() {
-		// TODO Simulation!
+		dieWelt.randomAddPlant();
+//		dieWelt.randomAddPlantJungle();
+		LinkedList<Tier> tmp = (LinkedList<Tier>) dieWelt.getAnimalContainer().clone();
+		for (Tier tier : tmp) {
+			dieWelt.animalAction(tier);
+		}
 		
 	}
 

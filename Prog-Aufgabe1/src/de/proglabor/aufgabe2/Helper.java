@@ -41,7 +41,11 @@ public final class Helper {
 	}
 	
 	public static int cleaner(int eingabe, int n) {
-		int result = Math.abs(eingabe) % n;
+		
+		int result = eingabe;
+		if ( eingabe < 0 ||  eingabe > n) {
+			result = Math.abs(eingabe) % n;
+		}
 		return result;
 	}
 }

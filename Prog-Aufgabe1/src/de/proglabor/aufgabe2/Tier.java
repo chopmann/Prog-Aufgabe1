@@ -82,9 +82,26 @@ public class Tier implements TierInterface{
 	 * @param mutation
 	 */
 	public void mutate(int gene, int mutation) {
+		gene = Helper.cleaner(gene, 8);
+		switch (Helper.cleaner(mutation, 2)) {
+		
+		case 0:
+			mutation = -1;
+			break;
+		case 1: 
+			mutation = 0;
+			break;
+		case 2:
+			mutation = 1;
+			break;
+		default:
+			mutation = 0;
+			break;
+		}
+		
 		int mutatedGene = genes[gene] + mutation;
 		if (mutatedGene <= 0) {
-			genes[gene] = 0;
+			genes[gene] = 1;
 		} else {
 			genes[gene] = mutatedGene;
 		}
