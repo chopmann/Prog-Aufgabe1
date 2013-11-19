@@ -41,7 +41,7 @@ public final class Helper {
 			// Wenn links der Rand erreicht ist, springe nach ganz rechts
 			int tmp = length  + position;
 			return tmp;
-		} else if (position >= length) {
+		} else if (position > length) {
 			// Wenn rechts der Rand erreicht ist, springe nach ganz links
 			int tmp = position  - length;
 			return tmp;
