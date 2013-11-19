@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+
 
 /**
  * @author sirmonkey
@@ -67,6 +67,17 @@ public class Welt {
 	}
 
 	// Plant Stuff
+	
+	public void addPlant(Pflanze pflanze) {
+		Pflanze key = pflanze;
+		Integer value = plantContainer.get(key);
+		if (plantContainer.get(key) == null) {
+			value = 0;
+		}
+		value++;
+		plantContainer.put(key, value);
+	}
+
 	/**
 	 * Add a Plant at the Coordinates
 	 * 
@@ -75,12 +86,7 @@ public class Welt {
 	 */
 	public void addPlant(int x, int y) {
 		Pflanze key = new Pflanze(x, y);
-		Integer value = plantContainer.get(key);
-		if (plantContainer.get(key) == null) {
-			value = 0;
-		}
-		value++;
-		plantContainer.put(key, value);
+		addPlant(key);
 	}
 
 	/**

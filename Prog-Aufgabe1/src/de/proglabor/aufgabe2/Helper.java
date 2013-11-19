@@ -25,18 +25,26 @@ public final class Helper {
 	}
 	
 	public static int mirror(int position, int length) {
-
 		if (position < 0) {
 			// Wenn links der Rand erreicht ist, springe nach ganz rechts
-			int tmp = length + position;
+			int tmp = length  + position;
 			return tmp;
 		} else if (position >= length) {
 			// Wenn rechts der Rand erreicht ist, springe nach ganz links
-			int tmp = position - length;
+			int tmp = position  - length;
 			return tmp;
 		} else {
 			// Unveraenderte Position
 			return position;
 		}
+	}
+	
+	public static int cleaner(int eingabe, int n) {
+		
+		int result = eingabe;
+		if ( eingabe < 0 ||  eingabe > n) {
+			result = Math.abs(eingabe) % n;
+		}
+		return result;
 	}
 }

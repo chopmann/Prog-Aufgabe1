@@ -43,7 +43,6 @@ public class PublicAufgabe2 {
 				result++;
 			}
 		}
-		System.out.println("Result from getAnimalCountInSim: " + result);
 		return result;
 	}
 	
@@ -54,7 +53,6 @@ public class PublicAufgabe2 {
 				result += this.getAnimalCount(x, y);
 			}
 		}
-		System.out.println("Result from getAnimalCount: " + result);
 		return result;
 	}
 	

@@ -63,6 +63,7 @@ public class Tier implements TierInterface{
 		int[] newBornGenes = this.genes.clone();
 		newBorn.setGenes(newBornGenes);
 		newBorn.mutate(randomGene, randomMutation);
+		this.energy = (this.energy % 2) + ( this.energy / 2 );
 		return newBorn;
 	}
 	
@@ -81,9 +82,26 @@ public class Tier implements TierInterface{
 	 * @param mutation
 	 */
 	public void mutate(int gene, int mutation) {
+		gene = Helper.cleaner(gene, 8);
+		switch (Helper.cleaner(mutation, 2)) {
+		
+		case 0:
+			mutation = -1;
+			break;
+		case 1: 
+			mutation = 0;
+			break;
+		case 2:
+			mutation = 1;
+			break;
+		default:
+			mutation = 0;
+			break;
+		}
+		
 		int mutatedGene = genes[gene] + mutation;
 		if (mutatedGene <= 0) {
-			genes[gene] = 0;
+			genes[gene] = 1;
 		} else {
 			genes[gene] = mutatedGene;
 		}
@@ -120,7 +138,7 @@ public class Tier implements TierInterface{
 	 */
 	@Override
 	public void turn(int randomDirection) {
-		dir = randomDirection;
+		dir = Helper.cleaner(randomDirection, 8);
 	}
 	
 	/**
@@ -157,7 +175,7 @@ public class Tier implements TierInterface{
 	}
 
 	@Override
-	public void move(int width , int  height) {
+	public void move(int height , int  width) {
 		posX = Helper.mirror(width, Welt.getWidth());
 		posY = Helper.mirror(height, Welt.getHeight());
 	}
@@ -177,7 +195,9 @@ public class Tier implements TierInterface{
 			move(posX + 1, posY);
 			break;
 		case 4:
+			System.out.println("Woot!");
 			move(posX - 1, posY + 1);
+			break;
 		case 5:
 			move(posX, posY - 1);
 			break;
