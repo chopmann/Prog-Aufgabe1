@@ -30,7 +30,9 @@ public class SimCollections implements SimCollectionsInterface {
 		this(MAXIMUM_WORLD_X, MAXIMUM_WORLD_Y, JUNGLE_WIDTH, JUNGLE_HEIGHT, PLANT_ENERGY, INITIAL_ENERGY, REPRODUCTION_ENERGY);
 		
 		//Monkey-Patch 
+
 		Tier weronika = new Tier(INITIAL_ENERGY, MAXIMUM_WORLD_X  / 2, MAXIMUM_WORLD_Y / 2);
+
 		dieWelt.addAnimal(weronika);
 	}
 
@@ -52,13 +54,14 @@ public class SimCollections implements SimCollectionsInterface {
 	
 	@Override
 	public void day() {
-        dieWelt.randomAddPlant();
-//      dieWelt.randomAddPlantJungle();
-      LinkedList<Tier> tmp = (LinkedList<Tier>) dieWelt.getAnimalContainer().clone();
-      for (Tier tier : tmp) {
-              dieWelt.animalAction(tier);
-      }
-		
+
+		dieWelt.randomAddPlant();
+//		dieWelt.randomAddPlantJungle();
+		LinkedList<Tier> tmp = (LinkedList<Tier>) dieWelt.getAnimalContainer().clone();
+		for (Tier tier : tmp) {
+			dieWelt.animalAction(tier);
+		}
+	
 	}
 
 }
