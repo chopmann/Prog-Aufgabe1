@@ -1,6 +1,7 @@
 package de.proglabor.aufgabe2;
 
 import java.util.LinkedList;
+import java.util.TreeMap;
 
 /**
  * @author id261708
@@ -18,6 +19,16 @@ public class SimCollections implements SimCollectionsInterface {
 
 	Welt dieWelt;
 
+	/**
+	 * Konstruktor
+	 * @param width Weltbreite
+	 * @param height Welthöhe
+	 * @param widthJungle Jungelbreite
+	 * @param heightJungle Jungelhöhe
+	 * @param plantEnergy Pflanzenenergie
+	 * @param initialEnergy Anfangsenergie der Tiere
+	 * @param reproductionEnergy Grenze der Überschreitung, damit sich die Tiere vermehren 
+	 */
 	public SimCollections(int width, int height, int widthJungle,
 			int heightJungle, int plantEnergy, int initialEnergy,
 			int reproductionEnergy) {
@@ -27,6 +38,9 @@ public class SimCollections implements SimCollectionsInterface {
 		dieWelt.setReproductionEnergy(reproductionEnergy);
 	}
 
+	/**
+	 * Konstruktor
+	 */
 	public SimCollections() {
 		this(MAXIMUM_WORLD_X, MAXIMUM_WORLD_Y, JUNGLE_WIDTH, JUNGLE_HEIGHT,
 				PLANT_ENERGY, INITIAL_ENERGY, REPRODUCTION_ENERGY);
@@ -39,22 +53,36 @@ public class SimCollections implements SimCollectionsInterface {
 		dieWelt.addAnimal(weronika);
 	}
 
+	/* (non-Javadoc)
+	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#setTier(de.proglabor.aufgabe2.Tier)
+	 */
 	@Override
 	public void setTier(Tier tier) {
 		dieWelt.addAnimal(tier);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#setPflanze(de.proglabor.aufgabe2.Pflanze)
+	 */
 	@Override
 	public void setPflanze(Pflanze pflanze) {
 		dieWelt.addPlant(pflanze);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#getTiere()
+	 */
+	@Override
 	public LinkedList<Tier> getTiere() {
 		return dieWelt.getAnimalContainer();
 	}
 
+	/* (non-Javadoc)
+	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#day()
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void day() {
 
@@ -66,6 +94,14 @@ public class SimCollections implements SimCollectionsInterface {
 			dieWelt.animalAction(tier);
 		}
 
+	}
+
+	/* (non-Javadoc)
+	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#getPflanzen()
+	 */
+	@Override
+	public TreeMap<Pflanze, Integer> getPflanzen() {
+		return dieWelt.getPlantContainer();
 	}
 
 }

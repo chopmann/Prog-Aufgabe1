@@ -2,20 +2,15 @@ package de.proglabor.aufgabe2.test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.TreeMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import de.proglabor.aufgabe2.Pflanze;
 import de.proglabor.aufgabe2.Tier;
 import de.proglabor.aufgabe2.Welt;
 

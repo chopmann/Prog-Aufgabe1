@@ -7,7 +7,7 @@ import java.util.Random;
  * 
  */
 public class Tier implements TierInterface {
-	final static int MAXX_GENE = 10;
+	static final int MAXX_GENE = 10;
 	int posX;
 	int posY;
 	int energy;
@@ -16,6 +16,12 @@ public class Tier implements TierInterface {
 	int sumGenes;
 	
 
+	/**
+	 * Konstruktor
+	 * @param energy Anfangsenergie des Tieres
+	 * @param posX x-Koordinate
+	 * @param posY y-Koorinate
+	 */
 	public Tier(int energy, int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
@@ -24,6 +30,14 @@ public class Tier implements TierInterface {
 		initGenes();
 	}
 
+	/**
+	 * Konstruktor
+	 * @param posX 
+	 * @param posY 
+	 * @param animalStartEnergy Anfangsenergie des Tieres
+	 * @param dir Blickrichtung
+	 * @param genes Gene 
+	 */
 	public Tier(int posX, int posY, int animalStartEnergy, int dir, int[] genes) {
 		this.posX = posX;
 		this.posY = posY;
@@ -32,6 +46,10 @@ public class Tier implements TierInterface {
 		this.genes = genes;
 	}
 
+	/**
+	 * setzt die Anfangsgene mit Random Werten
+	 * 
+	 */
 	public void initGenes() {
 		genes = new int[8];
 		Random rand = new Random();
@@ -41,6 +59,10 @@ public class Tier implements TierInterface {
 		sumGenes();
 	}
 
+	/**
+	 * setzt Gene
+	 * @param genes Gene
+	 */
 	public void setGenes(int[] genes) {
 		this.genes = genes;
 		sumGenes();
@@ -55,8 +77,9 @@ public class Tier implements TierInterface {
 	}
 
 	/**
-	 * @param randomGene
-	 * @param randomMutation
+	 * Vermehrung der Tiere
+	 * @param randomGene 
+	 * @param randomMutation 
 	 * @return a new Born Animal with mutated Genes
 	 */
 	@Override
@@ -80,8 +103,9 @@ public class Tier implements TierInterface {
 	}
 
 	/**
-	 * @param gene
-	 * @param mutation
+	 * verändert ein Gen des Tiers 
+	 * @param gene Position des Gens
+	 * @param mutation Art der Veränderung
 	 */
 	public void mutate(int gene, int mutation) {
 		gene = Helper.cleaner(gene, 8);
@@ -111,6 +135,10 @@ public class Tier implements TierInterface {
 	}
 
 	
+	/**
+	 * setzt die Blickrichtung des Tieres
+	 * @param dir Blickrichtung
+	 */
 	public void setDir(int dir) {
 		this.dir = dir;
 	}
@@ -166,7 +194,9 @@ public class Tier implements TierInterface {
 	}
 
 	/**
-	 * @return
+	 * Summe aller Gene 
+	 * @return die Summe
+	 * 
 	 */
 	public int sumGenes() {
 		this.sumGenes = 0;
@@ -182,6 +212,10 @@ public class Tier implements TierInterface {
 		posY = Helper.mirror(height, Welt.getHeight());
 	}
 	
+	/**
+	 * Bewegt das Tier in die jeweilige Blickrichtung
+	 * 
+	 */
 	public void move() {
 		switch (dir) {
 		case 0:
@@ -197,7 +231,6 @@ public class Tier implements TierInterface {
 			move(posX + 1, posY);
 			break;
 		case 4:
-			System.out.println("Woot!");
 			move(posX - 1, posY + 1);
 			break;
 		case 5:
@@ -214,6 +247,10 @@ public class Tier implements TierInterface {
 		}
 	}
 	
+	/**
+	 * Reduziert Energie des Tieres
+	 * @param energy  Höhe der zu reduzierenden Energie
+	 */
 	public void energyDecay(int energy) {
 		this.energy -= energy;
 	}

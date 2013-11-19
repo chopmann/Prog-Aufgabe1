@@ -2,6 +2,10 @@ package de.proglabor.aufgabe2;
 
 import java.util.Random;
 
+/**
+ * @author id261708
+ *
+ */
 public final class Helper {
 	/**
 	 * http://stackoverflow.com/questions/363681/generating-random-numbers-in-a-
@@ -13,6 +17,8 @@ public final class Helper {
 	 *            Minimim value
 	 * @param max
 	 *            Maximim value. Must be greater than min.
+	 * @param rand
+	 *            Random Generator.
 	 * @return Integer between min and max, inclusive.
 	 * @see java.util.Random#nextInt(int)
 	 */
@@ -24,6 +30,12 @@ public final class Helper {
 		return randomNum;
 	}
 	
+	/**
+	 * spiegelt die Welt,sodass das Tier über den Rand laufen kann.
+	 * @param position 
+	 * @param length Rand Maximum Koordinate
+	 * @return einen Wert, der in der Welt liegt.
+	 */
 	public static int mirror(int position, int length) {
 		if (position < 0) {
 			// Wenn links der Rand erreicht ist, springe nach ganz rechts
@@ -39,6 +51,12 @@ public final class Helper {
 		}
 	}
 	
+	/**
+	 * Parameterbereiniger
+	 * @param eingabe 
+	 * @param n Intervall
+	 * @return bereinigter Parameter im Intervall
+	 */
 	public static int cleaner(int eingabe, int n) {
 		
 		int result = eingabe;

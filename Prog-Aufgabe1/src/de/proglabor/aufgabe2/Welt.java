@@ -28,12 +28,21 @@ public class Welt {
 	private int initialEnergy = 0;
 	private int reproductionEnergy = 0;
 	
+	/**
+	 * zählt die geborenen Tiere
+	 */
 	public static int bornCount = 0;
+	/**
+	 * zählt die gestorbenen Tiere
+	 */
 	public static int deadCount = 0;
 
 	/**
-	 * @param width
-	 * @param height
+	 * Konstruktor
+	 * @param width Breite der Welt
+	 * @param height Höhe der Welt
+	 * @param widthJungle Breite des Jungels
+	 * @param heightJungle Höhe des Jungels
 	 */
 	public Welt(int width, int height, int widthJungle, int heightJungle) {
 		this.width = width;
@@ -68,6 +77,10 @@ public class Welt {
 
 	// Plant Stuff
 	
+	/**
+	 * fügt eine Pflanze hinzu
+	 * @param pflanze Pflanze
+	 */
 	public void addPlant(Pflanze pflanze) {
 		Pflanze key = pflanze;
 		Integer value = plantContainer.get(key);
@@ -81,8 +94,8 @@ public class Welt {
 	/**
 	 * Add a Plant at the Coordinates
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x x-Koordinate
+	 * @param y y-Koordinate
 	 */
 	public void addPlant(int x, int y) {
 		Pflanze key = new Pflanze(x, y);
@@ -93,7 +106,6 @@ public class Welt {
 	 * Removes a Plant at the Given X,Y Coordinates.
 	 * @param x Coordinate
 	 * @param y Coordinate
-	 * @return The Energy of the Plant removed or if no plant was found 0.
 	 */
 	public void removePlant(int x, int y) {
 		int count = countPlants(x, y);
@@ -115,6 +127,10 @@ public class Welt {
 		addPlant(x, y);
 
 	}
+	/**
+	 * fügt eine Pflanze an eine beliebige Stelle in den Jungel
+	 * 
+	 */
 	public void randomAddPlantJungle() {
 		Random rand = new Random();
 		int x = Helper.randInt(jungleLimitX1, jungleLimitX2 - 1, rand);
@@ -163,14 +179,16 @@ public class Welt {
 	/**
 	 * Add an Animal at a Random Location inside the World
 	 * 
-	 * @param x
-	 * @param y
+	 * @param tier Tier
 	 */
 
 	public void addAnimal(Tier tier) {
 		animalContainer.add(tier);
 	}
 
+	/**
+	 * fügt ein tier an eine beliebige Stelle hinzu 
+	 */
 	public void randomAddAnimal() {
 		Random rand = new Random();
 		int x = Helper.randInt(0, width - 1, rand);
@@ -179,6 +197,10 @@ public class Welt {
 		addAnimal(tier);
 
 	}
+	/**
+	 * bewegt ein Tier in der Welt
+	 * @param milka ein tier
+	 */
 	public void moveAnimal(Tier milka) {
 		
 		int whereIsTheCow = animalContainer.indexOf(milka);
@@ -200,6 +222,10 @@ public class Welt {
 	public void setReproductionEnergy(int reproductionEnergy) {
 		this.reproductionEnergy = reproductionEnergy;
 	}
+	/**
+	 * führt alle Aktionen eines Tiers aus
+	 * @param tier Tier
+	 */
 	public void animalAction(Tier tier) {
 		//eat
 		if (countPlants(tier.getX(), tier.getY()) >= 1) {
@@ -210,14 +236,10 @@ public class Welt {
 		//reproduce
 		if (tier.energy >= reproductionEnergy) {
 			Tier baby = tier.reproduce();
-			int x = baby.getX();
-			int y = baby.getY();
 			animalContainer.add(baby);
 			bornCount++;
 		}
 		//Move
-		int x = tier.getX();
-		int y = tier.getY();
 		tier.move();
 		tier.energyDecay(4);
 		if (tier.getEnergy() == 0) {
@@ -230,6 +252,12 @@ public class Welt {
 		
 	}
 
+	/**
+	 * zählt die Tiere an einer bestimmten Stelle
+	 * @param x x-Koordinate
+	 * @param y y-Koordinate
+	 * @return Anzahl der Tiere
+	 */
 	public int countAnimals(int x, int y) {	
 		int counter = 0;
 		for (Tier tier : animalContainer) {
@@ -239,6 +267,10 @@ public class Welt {
 		}
 		return counter;
 	}
+	/**
+	 * Gesamt Tieranzahl
+	 * @return gesamt anzahl der Tiere
+	 */
 	public int totalAnimals() {
 		return animalContainer.size();
 	}
@@ -263,10 +295,18 @@ public class Welt {
 		jungleLimitY2 = (height + heightJungle) / 2;
 	}
 
+	/**
+	 * Breite 
+	 * @return breite der Welt
+	 */
 	public static int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Höhe
+	 * @return höhe der Welt 
+	 */
 	public static int getHeight() {
 		return height;
 	}
@@ -299,6 +339,10 @@ public class Welt {
 		return jungleLimitY2;
 	}
 
+	/**
+	 * initialisiert den Tiercontainer
+	 * 
+	 */
 	public void initAnimalContainer() {
 		this.animalContainer = new LinkedList<Tier>();
 		
