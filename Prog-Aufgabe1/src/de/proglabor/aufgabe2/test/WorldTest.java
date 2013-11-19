@@ -40,9 +40,9 @@ public class WorldTest {
 
 	@Parameters
 	public static Collection<Object[]> createTestParams() {
-		return Arrays.asList(new Object[][] { { 40, 30, 10, 10, 15, 10 },
-				{ 40, 27, 10, 10, 15, 8 }, { 40, 30, 11, 10, 14, 10 },
-				{ 40, 30, 10, 11, 15, 9 }, { 40, 30, 11, 11, 14, 9 } });
+		return Arrays.asList(new Object[][] {{40, 30, 10, 10, 15, 10 },
+				{40, 27, 10, 10, 15, 8 }, {40, 30, 11, 10, 14, 10 },
+				{40, 30, 10, 11, 15, 9 }, {40, 30, 11, 11, 14, 9 }});
 	}
 	@Before
 	public void resetWorld() {
@@ -108,7 +108,7 @@ public class WorldTest {
 		dieWelt.randomAddAnimal();
 		dieWelt.randomAddAnimal();
 		dieWelt.randomAddAnimal();
-		assertEquals("Total Animals",5, dieWelt.totalAnimals());
+		assertEquals("Total Animals", 5 , dieWelt.totalAnimals());
 	}
 	
 	@Test
@@ -119,6 +119,6 @@ public class WorldTest {
 		dieWelt.addAnimal(tier);
 		dieWelt.addAnimal(tier);
 		dieWelt.addAnimal(tier);
-		assertEquals("Total Animals",5, dieWelt.totalAnimals());
+		assertEquals("Total Animals", 5 , dieWelt.totalAnimals());
 	}
 }

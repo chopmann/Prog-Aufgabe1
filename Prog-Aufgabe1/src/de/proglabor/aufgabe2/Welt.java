@@ -117,8 +117,8 @@ public class Welt {
 	}
 	public void randomAddPlantJungle() {
 		Random rand = new Random();
-		int x = Helper.randInt(jungleLimitX1, jungleLimitX2-1, rand);
-		int y = Helper.randInt(jungleLimitY1, jungleLimitY2-1, rand);
+		int x = Helper.randInt(jungleLimitX1, jungleLimitX2 - 1, rand);
+		int y = Helper.randInt(jungleLimitY1, jungleLimitY2 - 1, rand);
 		addPlant(x, y);
 
 	}

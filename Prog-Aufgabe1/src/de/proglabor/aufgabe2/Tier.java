@@ -6,13 +6,15 @@ import java.util.Random;
  * @author sirmonkey
  * 
  */
-public class Tier implements TierInterface{
+public class Tier implements TierInterface {
+	final static int MAXX_GENE = 10;
 	int posX;
 	int posY;
 	int energy;
 	int dir;
 	int[] genes;
 	int sumGenes;
+	
 
 	public Tier(int energy, int posX, int posY) {
 		this.posX = posX;
@@ -34,7 +36,7 @@ public class Tier implements TierInterface{
 		genes = new int[8];
 		Random rand = new Random();
 		for (int i = 0; i < genes.length; i++) {
-			genes[i] = Helper.randInt(1, 10, rand);
+			genes[i] = Helper.randInt(1, MAXX_GENE, rand);
 		}
 		sumGenes();
 	}
@@ -155,8 +157,8 @@ public class Tier implements TierInterface{
 		} else {
 			for (int i = 1; i < genes.length; i++) {
 				lowerBound = upperBound;
-				upperBound+= genes[i];
-				if( lowerBound < value && value <= upperBound) {
+				upperBound += genes[i];
+				if ( lowerBound < value && value <= upperBound) {
 					turn(i);
 				}
 			}
@@ -206,6 +208,8 @@ public class Tier implements TierInterface{
 			break;
 		case 7:
 			move(posX - 1, posY);
+			break;
+		default:
 			break;
 		}
 	}
