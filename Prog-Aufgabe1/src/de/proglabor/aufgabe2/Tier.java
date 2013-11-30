@@ -103,9 +103,9 @@ public class Tier implements TierInterface {
 	}
 
 	/**
-	 * verändert ein Gen des Tiers 
+	 * verï¿½ndert ein Gen des Tiers 
 	 * @param gene Position des Gens
-	 * @param mutation Art der Veränderung
+	 * @param mutation Art der Verï¿½nderung
 	 */
 	public void mutate(int gene, int mutation) {
 		gene = Helper.cleaner(gene, 8);
@@ -206,6 +206,11 @@ public class Tier implements TierInterface {
 		return sumGenes;
 	}
 
+	public void setPos(int x, int y) {
+		posX = x;
+		posY = y;
+	}
+	
 	@Override
 	public void move(int height , int  width) {
 		posX = Helper.mirror(width, Welt.getWidth());
@@ -249,10 +254,12 @@ public class Tier implements TierInterface {
 	
 	/**
 	 * Reduziert Energie des Tieres
-	 * @param energy  Höhe der zu reduzierenden Energie
+	 * @param energy  Hï¿½he der zu reduzierenden Energie
 	 */
 	public void energyDecay(int energy) {
 		this.energy -= energy;
 	}
+
+
 
 }
