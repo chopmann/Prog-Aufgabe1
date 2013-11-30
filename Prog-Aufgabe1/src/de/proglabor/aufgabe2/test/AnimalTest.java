@@ -35,37 +35,38 @@ public class AnimalTest {
 		assertEquals(dollyGenes[3] + 1, dolly4.getGenes()[3]);
 	}
 	@Test
-	public void testMove() {
-		
-		//NW
+	public void testMoveNorthWest() {
 		dolly.setDir(0);
-		dolly.setPos(0, HEIGHT - 1);
+		dolly.setPos(0, HEIGHT - 1, HEIGHT, WIDTH);
 		dolly.move(HEIGHT, WIDTH);
 		assertEquals(WIDTH - 1, dolly.getX());
 		assertEquals(0, dolly.getY());
-		
-		//SW
-		dolly.setDir(6);
-		dolly.setPos(0,0);
-		dolly.move(HEIGHT,WIDTH);
-		assertEquals(WIDTH - 1, dolly.getX());
-		assertEquals(HEIGHT - 1, dolly.getY());
-		
-		//NE
-		dolly.setDir(2);
-		dolly.setPos(WIDTH - 1,HEIGHT - 1);
-		dolly.move(HEIGHT, WIDTH);
-		assertEquals(0, dolly.getX());
-		assertEquals(0, dolly.getY());
-		
-		//SE
-		dolly.setDir(4);
-		dolly.setPos(WIDTH - 1, 0);
-		dolly.move(HEIGHT,WIDTH);
-		assertEquals(0, dolly.getX());
-		assertEquals(HEIGHT - 1, dolly.getY());
-		
-
 	}
-
+	
+	@Test
+	public void testMoveSouthWest() {
+		dolly.setDir(6);
+		dolly.setPos(0, 0, HEIGHT, WIDTH);
+		dolly.move(HEIGHT,WIDTH);
+		assertEquals(WIDTH - 1, dolly.getX());
+		assertEquals(HEIGHT - 1, dolly.getY());
+	}
+	
+	@Test
+	public void testMoveNorthEast() {
+		dolly.setDir(2);
+		dolly.setPos(WIDTH - 1,HEIGHT - 1, HEIGHT, WIDTH);
+		dolly.move(HEIGHT, WIDTH);
+		assertEquals(0, dolly.getX());
+		assertEquals(0, dolly.getY());
+	}
+	
+	@Test
+	public void testMoveSouthEast() {
+		dolly.setDir(4);
+		dolly.setPos(WIDTH - 1, 0, HEIGHT, WIDTH);
+		dolly.move(HEIGHT,WIDTH);
+		assertEquals(0, dolly.getX());
+		assertEquals(HEIGHT - 1, dolly.getY());
+	}
 }

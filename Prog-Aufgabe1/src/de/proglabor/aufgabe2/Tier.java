@@ -206,48 +206,40 @@ public class Tier implements TierInterface {
 		return sumGenes;
 	}
 
-	public void setPos(int x, int y) {
-		posX = x;
-		posY = y;
+	public void setPos(int x, int y, int height , int width) {
+		posX = Helper.mirror(x, width - Helper.ARRAY_OFFSET);
+		posY = Helper.mirror(y, height - Helper.ARRAY_OFFSET);
 	}
 	
 	@Override
 	public void move(int height , int  width) {
-		posX = Helper.mirror(width, Welt.getWidth());
-		posY = Helper.mirror(height, Welt.getHeight());
-	}
-	
-	/**
-	 * Bewegt das Tier in die jeweilige Blickrichtung
-	 * 
-	 */
-	public void move() {
 		switch (dir) {
-		case 0:
-			move(posX - 1, posY + 1);
+		case 0: //NW
+			setPos(posX - 1, posY + 1, height, width);
 			break;
-		case 1:
-			move(posX, posY + 1);
+		case 1: //N
+			setPos(posX, posY + 1, height, width);
 			break;
-		case 2:
-			move(posX + 1, posY + 1);
+		case 2: //NE
+			setPos(posX + 1, posY + 1, height, width);
 			break;
-		case 3:
-			move(posX + 1, posY);
+		case 3: //E
+			setPos(posX + 1, posY, height, width);
 			break;
-		case 4:
-			move(posX - 1, posY + 1);
+		case 4: //SE
+			setPos(posX + 1, posY - 1, height, width);
 			break;
-		case 5:
-			move(posX, posY - 1);
+		case 5: //S
+			setPos(posX, posY - 1, height, width);
 			break;
-		case 6:
-			move(posX - 1, posY - 1);
+		case 6: //SW
+			setPos(posX - 1, posY - 1, height, width);
 			break;
-		case 7:
+		case 7: //W
 			move(posX - 1, posY);
 			break;
-		default:
+		default: //DONT MOVE
+			move(posX, posY);
 			break;
 		}
 	}
