@@ -214,32 +214,32 @@ public class Tier implements TierInterface {
 	@Override
 	public void move(int height , int  width) {
 		switch (dir) {
-		case 0: //NW
-			setPos(posX - 1, posY + 1, height, width);
+		case 0: //NE
+			setPos(posX -1, posY -1, height, width);
 			break;
 		case 1: //N
-			setPos(posX, posY + 1, height, width);
-			break;
-		case 2: //NE
-			setPos(posX + 1, posY + 1, height, width);
-			break;
-		case 3: //E
-			setPos(posX + 1, posY, height, width);
-			break;
-		case 4: //SE
-			setPos(posX + 1, posY - 1, height, width);
-			break;
-		case 5: //S
 			setPos(posX, posY - 1, height, width);
 			break;
-		case 6: //SW
-			setPos(posX - 1, posY - 1, height, width);
+		case 2: //NW
+			setPos(posX + 1, posY - 1, height, width);
 			break;
-		case 7: //W
-			move(posX - 1, posY);
+		case 3: //W
+			setPos(posX + 1, posY, height, width);
+			break;
+		case 4: //SW
+			setPos(posX + 1, posY + 1, height, width);
+			break;
+		case 5: //S
+			setPos(posX, posY + 1, height, width);
+			break;
+		case 6: //SE
+			setPos(posX - 1, posY + 1, height, width);
+			break;
+		case 7: //E
+			setPos(posX - 1, posY, height, width);
 			break;
 		default: //DONT MOVE
-			move(posX, posY);
+			setPos(posX , posY,  height, width);
 			break;
 		}
 	}
