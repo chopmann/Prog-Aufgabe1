@@ -12,8 +12,8 @@ import java.util.TreeMap;
  */
 public class Welt {
 
-	private static int width = 0;
-	private static int height = 0;
+	private int width = 0;
+	private int height = 0;
 	private TreeMap<Pflanze, Integer> plantContainer;
 	private int plantEnergy = 0;
 
@@ -29,20 +29,20 @@ public class Welt {
 	private int reproductionEnergy = 0;
 	
 	/**
-	 * zählt die geborenen Tiere
+	 * zï¿½hlt die geborenen Tiere
 	 */
 	public static int bornCount = 0;
 	/**
-	 * zählt die gestorbenen Tiere
+	 * zï¿½hlt die gestorbenen Tiere
 	 */
 	public static int deadCount = 0;
 
 	/**
 	 * Konstruktor
 	 * @param width Breite der Welt
-	 * @param height Höhe der Welt
+	 * @param height Hï¿½he der Welt
 	 * @param widthJungle Breite des Jungels
-	 * @param heightJungle Höhe des Jungels
+	 * @param heightJungle Hï¿½he des Jungels
 	 */
 	public Welt(int width, int height, int widthJungle, int heightJungle) {
 		this.width = width;
@@ -78,7 +78,7 @@ public class Welt {
 	// Plant Stuff
 	
 	/**
-	 * fügt eine Pflanze hinzu
+	 * fï¿½gt eine Pflanze hinzu
 	 * @param pflanze Pflanze
 	 */
 	public void addPlant(Pflanze pflanze) {
@@ -128,7 +128,7 @@ public class Welt {
 
 	}
 	/**
-	 * fügt eine Pflanze an eine beliebige Stelle in den Jungel
+	 * fï¿½gt eine Pflanze an eine beliebige Stelle in den Jungel
 	 * 
 	 */
 	public void randomAddPlantJungle() {
@@ -187,7 +187,7 @@ public class Welt {
 	}
 
 	/**
-	 * fügt ein tier an eine beliebige Stelle hinzu 
+	 * fï¿½gt ein tier an eine beliebige Stelle hinzu 
 	 */
 	public void randomAddAnimal() {
 		Random rand = new Random();
@@ -204,7 +204,7 @@ public class Welt {
 	public void moveAnimal(Tier milka) {
 		
 		int whereIsTheCow = animalContainer.indexOf(milka);
-		animalContainer.get(whereIsTheCow).move();
+		animalContainer.get(whereIsTheCow).move(height, width);
 		
 	}
 
@@ -223,7 +223,7 @@ public class Welt {
 		this.reproductionEnergy = reproductionEnergy;
 	}
 	/**
-	 * führt alle Aktionen eines Tiers aus
+	 * fï¿½hrt alle Aktionen eines Tiers aus
 	 * @param tier Tier
 	 */
 	public void animalAction(Tier tier) {
@@ -240,7 +240,7 @@ public class Welt {
 			bornCount++;
 		}
 		//Move
-		tier.move();
+		tier.move(height, width);
 		tier.energyDecay(4);
 		if (tier.getEnergy() == 0) {
 			animalContainer.remove(tier);
@@ -253,7 +253,7 @@ public class Welt {
 	}
 
 	/**
-	 * zählt die Tiere an einer bestimmten Stelle
+	 * zï¿½hlt die Tiere an einer bestimmten Stelle
 	 * @param x x-Koordinate
 	 * @param y y-Koordinate
 	 * @return Anzahl der Tiere
@@ -299,15 +299,15 @@ public class Welt {
 	 * Breite 
 	 * @return breite der Welt
 	 */
-	public static int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
 	/**
-	 * Höhe
-	 * @return höhe der Welt 
+	 * Hï¿½he
+	 * @return hï¿½he der Welt 
 	 */
-	public static int getHeight() {
+	public int getHeight() {
 		return height;
 	}
 	

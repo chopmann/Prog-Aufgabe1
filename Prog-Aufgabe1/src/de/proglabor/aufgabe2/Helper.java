@@ -7,6 +7,8 @@ import java.util.Random;
  *
  */
 public final class Helper {
+	public static final int ARRAY_OFFSET = 1;
+	
 	/**
 	 * http://stackoverflow.com/questions/363681/generating-random-numbers-in-a-
 	 * range-with-java Returns a psuedo-random number between min and max,
@@ -31,23 +33,18 @@ public final class Helper {
 	}
 	
 	/**
-	 * spiegelt die Welt,sodass das Tier über den Rand laufen kann.
+	 * spiegelt die Welt,sodass das Tier ï¿½ber den Rand laufen kann.
 	 * @param position 
-	 * @param length Rand Maximum Koordinate
+	 * @param maxPositionValue Rand Maximum Koordinate
 	 * @return einen Wert, der in der Welt liegt.
 	 */
-	public static int mirror(int position, int length) {
-		if (position < 0) {
-			// Wenn links der Rand erreicht ist, springe nach ganz rechts
-			int tmp = length  + position;
-			return tmp;
-		} else if (position > length) {
-			// Wenn rechts der Rand erreicht ist, springe nach ganz links
-			int tmp = position  - length;
-			return tmp;
-		} else {
-			// Unveraenderte Position
+	public static int mirror(int position, int maxPositionValue) {
+		if (0 <= position && position <= maxPositionValue) {
 			return position;
+		} else if (position < 0) {
+			return maxPositionValue + position + ARRAY_OFFSET;
+		} else {
+			return position - maxPositionValue - ARRAY_OFFSET;
 		}
 	}
 	

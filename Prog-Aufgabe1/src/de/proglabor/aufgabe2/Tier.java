@@ -103,9 +103,9 @@ public class Tier implements TierInterface {
 	}
 
 	/**
-	 * verändert ein Gen des Tiers 
+	 * verï¿½ndert ein Gen des Tiers 
 	 * @param gene Position des Gens
-	 * @param mutation Art der Veränderung
+	 * @param mutation Art der Verï¿½nderung
 	 */
 	public void mutate(int gene, int mutation) {
 		gene = Helper.cleaner(gene, 8);
@@ -206,53 +206,52 @@ public class Tier implements TierInterface {
 		return sumGenes;
 	}
 
-	@Override
-	public void move(int height , int  width) {
-		posX = Helper.mirror(width, Welt.getWidth());
-		posY = Helper.mirror(height, Welt.getHeight());
+	public void setPos(int x, int y, int height , int width) {
+		posX = Helper.mirror(x, width - Helper.ARRAY_OFFSET);
+		posY = Helper.mirror(y, height - Helper.ARRAY_OFFSET);
 	}
 	
-	/**
-	 * Bewegt das Tier in die jeweilige Blickrichtung
-	 * 
-	 */
-	public void move() {
+	@Override
+	public void move(int height , int  width) {
 		switch (dir) {
-		case 0:
-			move(posX - 1, posY + 1);
+		case 0: //NE
+			setPos(posX -1, posY -1, height, width);
 			break;
-		case 1:
-			move(posX, posY + 1);
+		case 1: //N
+			setPos(posX, posY - 1, height, width);
 			break;
-		case 2:
-			move(posX + 1, posY + 1);
+		case 2: //NW
+			setPos(posX + 1, posY - 1, height, width);
 			break;
-		case 3:
-			move(posX + 1, posY);
+		case 3: //W
+			setPos(posX + 1, posY, height, width);
 			break;
-		case 4:
-			move(posX - 1, posY + 1);
+		case 4: //SW
+			setPos(posX + 1, posY + 1, height, width);
 			break;
-		case 5:
-			move(posX, posY - 1);
+		case 5: //S
+			setPos(posX, posY + 1, height, width);
 			break;
-		case 6:
-			move(posX - 1, posY - 1);
+		case 6: //SE
+			setPos(posX - 1, posY + 1, height, width);
 			break;
-		case 7:
-			move(posX - 1, posY);
+		case 7: //E
+			setPos(posX - 1, posY, height, width);
 			break;
-		default:
+		default: //DONT MOVE
+			setPos(posX , posY,  height, width);
 			break;
 		}
 	}
 	
 	/**
 	 * Reduziert Energie des Tieres
-	 * @param energy  Höhe der zu reduzierenden Energie
+	 * @param energy  Hï¿½he der zu reduzierenden Energie
 	 */
 	public void energyDecay(int energy) {
 		this.energy -= energy;
 	}
+
+
 
 }
