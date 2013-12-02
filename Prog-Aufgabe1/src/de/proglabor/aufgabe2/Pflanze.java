@@ -54,9 +54,9 @@ public class Pflanze implements Comparable<Pflanze> {
 	 */
 	@Override
 	public int compareTo(Pflanze anderePflanze) {
-		if (this.x == anderePflanze.x) {
+		if (this.x == anderePflanze.x && this.y == anderePflanze.y) {
 			return 0;
-		} else if (this.x < anderePflanze.x) {
+		} else if (this.x < anderePflanze.x ) {
 			return -1;
 		} else {
 			return 1;
