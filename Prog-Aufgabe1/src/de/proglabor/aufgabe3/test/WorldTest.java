@@ -18,6 +18,13 @@ import de.proglabor.aufgabe3.Welt;
 @RunWith(Parameterized.class)
 public class WorldTest {
 
+	private static final int WIDTH = 40;
+	private static final int HEIGHT = 30;
+	private static final int WIDTH_JUNGLE = 10;
+	private static final int HEIGHT_JUNGLE = 10;
+	private static final int PLANT_ENERGY = 80;
+	private static final int INITIAL_ENERGY = 200;
+	private static final int REPRODUCTION_ENERGY = 200;
 	Welt dieWelt;
 	int widthJungle;
 	int heightJungle;
@@ -31,15 +38,23 @@ public class WorldTest {
 		this.heightJungle = heightJungle;
 		this.expectedX1 = expectedX1;
 		this.expectedY1 = expectedY1;
-		dieWelt = new Welt(width, height, widthJungle, heightJungle);
+		dieWelt = new Welt(width, height, widthJungle, heightJungle,
+				PLANT_ENERGY, INITIAL_ENERGY, REPRODUCTION_ENERGY);
 	}
 
 	@Parameters
 	public static Collection<Object[]> createTestParams() {
-		return Arrays.asList(new Object[][] {{40, 30, 10, 10, 15, 10 },
-				{40, 27, 10, 10, 15, 8 }, {40, 30, 11, 10, 14, 10 },
-				{40, 30, 10, 11, 15, 9 }, {40, 30, 11, 11, 14, 9 }});
+		return Arrays
+				.asList(new Object[][] {
+						{ WIDTH, HEIGHT, WIDTH_JUNGLE, HEIGHT_JUNGLE, 15, 10 },
+						{ WIDTH, HEIGHT - 3, WIDTH_JUNGLE, WIDTH_JUNGLE, 15, 8 },
+						{ WIDTH, HEIGHT, WIDTH_JUNGLE + 1, HEIGHT_JUNGLE, 14,
+								10 },
+						{ WIDTH, HEIGHT, WIDTH_JUNGLE, HEIGHT_JUNGLE + 1, 15, 9 },
+						{ WIDTH, HEIGHT, WIDTH_JUNGLE + 1, HEIGHT_JUNGLE + 1,
+								14, 9 } });
 	}
+
 	@Before
 	public void resetWorld() {
 		dieWelt.initAnimalContainer();
@@ -60,10 +75,11 @@ public class WorldTest {
 		dieWelt.addPlant(15, 20);
 		dieWelt.addPlant(20, 15);
 		dieWelt.addPlant(20, 15);
-		assertEquals(0, dieWelt.countPlants(0, 0));
-		assertEquals(1, dieWelt.countPlants(15, 20));
-		assertEquals(2, dieWelt.countPlants(20, 15));
+		assertEquals(0, dieWelt.totalPlantsAt(0, 0));
+		assertEquals(1, dieWelt.totalPlantsAt(15, 20));
+		assertEquals(2, dieWelt.totalPlantsAt(20, 15));
 	}
+
 	@Test
 	public void testRemovePlant() {
 		dieWelt.addPlant(15, 20);
@@ -71,9 +87,9 @@ public class WorldTest {
 		dieWelt.addPlant(20, 15);
 		dieWelt.addPlant(20, 15);
 		dieWelt.removePlant(20, 15);
-		assertEquals(0, dieWelt.countPlants(0, 0));
-		assertEquals(1, dieWelt.countPlants(15, 20));
-		assertEquals(2, dieWelt.countPlants(20, 15));
+		assertEquals(0, dieWelt.totalPlantsAt(0, 0));
+		assertEquals(1, dieWelt.totalPlantsAt(15, 20));
+		assertEquals(2, dieWelt.totalPlantsAt(20, 15));
 	}
 
 	@Test
@@ -86,16 +102,17 @@ public class WorldTest {
 		dieWelt.randomAddPlant();
 		assertEquals(5, dieWelt.totalPlants());
 	}
-	
+
 	@Test
 	public void testAddAnimal() {
-		Tier tier = new Tier(100, 15, 20);
+		Tier tier = new Tier(15, 20, 100);
 		dieWelt.addAnimal(tier);
-		LinkedList<Tier> container = dieWelt.getAnimalContainer();
-		assertEquals(0 , dieWelt.countAnimals(0, 0));
-		assertNotNull(dieWelt.countAnimals(15, 20));
+		LinkedList<Tier> container = dieWelt.getContainerAnimals();
+		assertEquals(0, dieWelt.totalAnimalsAt(0, 0));
+		assertNotNull(dieWelt.totalAnimalsAt(15, 20));
 		assertEquals(1, container.size());
 	}
+
 	@Test
 	public void testAddAnimalsSpread() {
 		dieWelt.randomAddAnimal();
@@ -103,17 +120,17 @@ public class WorldTest {
 		dieWelt.randomAddAnimal();
 		dieWelt.randomAddAnimal();
 		dieWelt.randomAddAnimal();
-		assertEquals("Total Animals", 5 , dieWelt.totalAnimals());
+		assertEquals("Total Animals", 5, dieWelt.totalAnimals());
 	}
-	
+
 	@Test
 	public void testAddAnimalSpot() {
-		Tier tier = new Tier(100, 15, 20);
+		Tier tier = new Tier(15, 20, 100);
 		dieWelt.addAnimal(tier);
 		dieWelt.addAnimal(tier);
 		dieWelt.addAnimal(tier);
 		dieWelt.addAnimal(tier);
 		dieWelt.addAnimal(tier);
-		assertEquals("Total Animals", 5 , dieWelt.totalAnimals());
+		assertEquals("Total Animals", 5, dieWelt.totalAnimals());
 	}
 }

@@ -40,8 +40,8 @@ public interface TierInterface {
 	
 	/**
 	 * bewegt das Tier
-	 * @param height y-Koordinate
-	 * @param width x-Koordinate
+	 * @param height der Welt
+	 * @param width der Welt
 	 */
 	public void move (int height, int width);
 	
@@ -52,10 +52,11 @@ public interface TierInterface {
 	public void eat (int plantEnergy);
 	
 	/**
-	 * Fortpflanzung des tiers
-	 * @param randomGene Gen
-	 * @param randomMutation Ver�nderung 
-	 * @return Baby
+	 * Vermehrung der Tiere
+	 * 
+	 * @param randomGene Gene der Verändert wird
+	 * @param randomMutation Mutationstyp
+	 * @return a new Born Animal with mutated Genes
 	 */
 	public TierInterface reproduce(int randomGene, int randomMutation);
 	

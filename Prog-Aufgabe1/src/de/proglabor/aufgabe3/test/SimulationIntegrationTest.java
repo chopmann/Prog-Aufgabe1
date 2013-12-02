@@ -22,7 +22,7 @@ public class SimulationIntegrationTest {
 	@Test
 	public void simulateThree() {
 		SimCollections simulation = new SimCollections(MAXIMUM_WORLD_X, MAXIMUM_WORLD_Y, JUNGLE_WIDTH, JUNGLE_HEIGHT, PLANT_ENERGY, INITIAL_ENERGY, REPRODUCTION_ENERGY);
-		Tier dolly = new Tier(INITIAL_ENERGY, MAXIMUM_WORLD_X-1, MAXIMUM_WORLD_Y-1);
+		Tier dolly = new Tier( MAXIMUM_WORLD_X-1, MAXIMUM_WORLD_Y-1, INITIAL_ENERGY);
 		simulation.setTier(dolly);
 		
 		/*
@@ -55,7 +55,7 @@ public class SimulationIntegrationTest {
 		 * All Animals should be dead
 		 */
 		SimCollections simulation = new SimCollections(MAXIMUM_WORLD_X, MAXIMUM_WORLD_Y, JUNGLE_WIDTH, JUNGLE_HEIGHT, PLANT_ENERGY_DEAD, INITIAL_ENERGY, REPRODUCTION_ENERGY);
-		Tier dolly = new Tier(INITIAL_ENERGY, MAXIMUM_WORLD_X-1, MAXIMUM_WORLD_Y-1);
+		Tier dolly = new Tier(MAXIMUM_WORLD_X-1, MAXIMUM_WORLD_Y-1, INITIAL_ENERGY);
 		simulation.setTier(dolly);
 		for (int i = 0; i < INITIAL_ENERGY; i++) {
 			simulation.day();

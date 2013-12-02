@@ -9,19 +9,22 @@ import de.proglabor.aufgabe3.Tier;
 import de.proglabor.aufgabe3.Welt;
 
 public class AnimalTest {
-	Tier dolly = new Tier(10, 1, 1);
+	Tier dolly = new Tier(1, 1, 10);
 	int[] dollyGenes = {1, 2, 3, 4, 5, 6, 7, 8};
-	final int WIDTH = 40;
-	final int HEIGHT = 30;
-	final int MUTATION_MINUS = 0;
-	final int MUTATION_NONE = 1;
-	final int MUTATION_PLUS = 2;
+	private static final int WIDTH = 40;
+	private static final int HEIGHT = 30;
+	private static final int PLANT_ENERGY = 80;
+	private static final int INITIAL_ENERGY = 200;
+	private static final int MUTATION_MINUS = 0;
+	private static final int MUTATION_NONE = 1;
+	private static final int MUTATION_PLUS = 2;
+	private static final int REPRODUCTION_ENERGY = 200;
 	Welt dieWelt;
 	
 	@Before
 	public void setUp() {
 		dolly.setGenes(dollyGenes);
-		dieWelt = new Welt(WIDTH, HEIGHT, 10, 10);
+		dieWelt = new Welt(WIDTH, HEIGHT, 10, 10, PLANT_ENERGY, INITIAL_ENERGY, REPRODUCTION_ENERGY);
 		
 	}
 
@@ -36,7 +39,7 @@ public class AnimalTest {
 	}
 	@Test
 	public void testMoveNorthEast() {
-		dolly.setDir(0);
+		dolly.turn(0);
 		dolly.setPos(0, 0, HEIGHT, WIDTH);
 		dolly.move(HEIGHT, WIDTH);
 		assertEquals(WIDTH - 1, dolly.getX());
@@ -45,7 +48,7 @@ public class AnimalTest {
 	
 	@Test
 	public void testMoveSouthEast() {
-		dolly.setDir(6);
+		dolly.turn(6);
 		dolly.setPos(0, HEIGHT -1, HEIGHT, WIDTH);
 		dolly.move(HEIGHT, WIDTH);
 		assertEquals(WIDTH - 1, dolly.getX());
@@ -54,7 +57,7 @@ public class AnimalTest {
 	
 	@Test
 	public void testMoveNorthWest() {
-		dolly.setDir(2);
+		dolly.turn(2);
 		dolly.setPos(WIDTH - 1, 0, HEIGHT, WIDTH);
 		dolly.move(HEIGHT, WIDTH);
 		assertEquals(0, dolly.getX());
@@ -63,7 +66,7 @@ public class AnimalTest {
 	
 	@Test
 	public void testMoveSouthWest() {
-		dolly.setDir(4);
+		dolly.turn(4);
 		dolly.setPos(WIDTH - 1, HEIGHT - 1, HEIGHT, WIDTH);
 		dolly.move(HEIGHT,WIDTH);
 		assertEquals(0, dolly.getX());
