@@ -22,12 +22,12 @@ public class SimCollections implements SimCollectionsInterface {
 	/**
 	 * Konstruktor
 	 * @param width Weltbreite
-	 * @param height Welthöhe
+	 * @param height Welthï¿½he
 	 * @param widthJungle Jungelbreite
-	 * @param heightJungle Jungelhöhe
+	 * @param heightJungle Jungelhï¿½he
 	 * @param plantEnergy Pflanzenenergie
 	 * @param initialEnergy Anfangsenergie der Tiere
-	 * @param reproductionEnergy Grenze der Überschreitung, damit sich die Tiere vermehren 
+	 * @param reproductionEnergy Grenze der ï¿½berschreitung, damit sich die Tiere vermehren 
 	 */
 	public SimCollections(int width, int height, int widthJungle,
 			int heightJungle, int plantEnergy, int initialEnergy,
@@ -87,7 +87,7 @@ public class SimCollections implements SimCollectionsInterface {
 	public void day() {
 
 		dieWelt.randomAddPlant();
-		// dieWelt.randomAddPlantJungle();
+		dieWelt.randomAddPlantJungle();
 		LinkedList<Tier> tmp = (LinkedList<Tier>) dieWelt.getAnimalContainer()
 				.clone();
 		for (Tier tier : tmp) {
@@ -103,5 +103,24 @@ public class SimCollections implements SimCollectionsInterface {
 	public TreeMap<Pflanze, Integer> getPflanzen() {
 		return dieWelt.getPlantContainer();
 	}
+	
+	public int planted() {
+		return dieWelt.getPlanted();
+	}
+	
+	public int born() {
+		return dieWelt.getBornCount();
+	}
+	
+	public int eaten() {
+		return dieWelt.getEaten();
+	}
+	
+	public int killed() {
+		return dieWelt.getDeadCount();
+	}
+
+
+
 
 }

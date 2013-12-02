@@ -31,12 +31,20 @@ public class Welt {
 	/**
 	 * z�hlt die geborenen Tiere
 	 */
-	public static int bornCount = 0;
+	private  int bornCount = 0;
 	/**
 	 * z�hlt die gestorbenen Tiere
 	 */
-	public static int deadCount = 0;
+	private  int deadCount = 0;
 
+	/**
+	 * z�hlt die gepflanzte Pflanzen
+	 */
+	private  int planted = 0;
+	/**
+	 * z�hlt die gegessen Pflanzen
+	 */
+	private  int eaten = 0;
 	/**
 	 * Konstruktor
 	 * @param width Breite der Welt
@@ -51,6 +59,7 @@ public class Welt {
 		this.heightJungle = heightJungle;
 		this.plantContainer = new TreeMap<Pflanze, Integer>();
 		this.animalContainer = new LinkedList<Tier>();
+		setJungleLimits();
 	}
 
 	/**
@@ -82,6 +91,7 @@ public class Welt {
 	 * @param pflanze Pflanze
 	 */
 	public void addPlant(Pflanze pflanze) {
+		planted++;
 		Pflanze key = pflanze;
 		Integer value = plantContainer.get(key);
 		if (plantContainer.get(key) == null) {
@@ -113,7 +123,7 @@ public class Welt {
 			Pflanze key = new Pflanze(x, y);
 			count--;
 			plantContainer.put(key, count);
-			System.out.println("Remove Plant!");
+			eaten++;
 		}
 	}
 
@@ -183,7 +193,13 @@ public class Welt {
 	 */
 
 	public void addAnimal(Tier tier) {
+		bornCount++;
 		animalContainer.add(tier);
+	}
+	
+	public void removeAnimal(Tier tier) {
+		animalContainer.remove(tier);
+		deadCount++;
 	}
 
 	/**
@@ -241,10 +257,9 @@ public class Welt {
 		}
 		//Move
 		tier.move(height, width);
-		tier.energyDecay(4);
+		tier.energyDecay(1);
 		if (tier.getEnergy() == 0) {
-			animalContainer.remove(tier);
-			deadCount++;
+			removeAnimal(tier);
 		} else {
 			moveAnimal(tier);
 		}
@@ -288,7 +303,7 @@ public class Welt {
 	/**
 	 * Welcome to the Jungle we have funny Games.
 	 */
-	public void setJungleLimits() {
+	private void setJungleLimits() {
 		jungleLimitX1 = (width - widthJungle) / 2;
 		jungleLimitX2 = (width + widthJungle) / 2;
 		jungleLimitY1 = (height - heightJungle) / 2;
@@ -346,6 +361,35 @@ public class Welt {
 	public void initAnimalContainer() {
 		this.animalContainer = new LinkedList<Tier>();
 		
+	}
+
+	/**
+	 * @return the planted
+	 */
+	public int getPlanted() {
+		return planted;
+	}
+
+
+	/**
+	 * @return the bornCount
+	 */
+	public int getBornCount() {
+		return bornCount;
+	}
+
+	/**
+	 * @return the deadCount
+	 */
+	public int getDeadCount() {
+		return deadCount;
+	}
+
+	/**
+	 * @return the eaten Plants
+	 */
+	public int getEaten() {
+		return eaten;
 	}
 
 }

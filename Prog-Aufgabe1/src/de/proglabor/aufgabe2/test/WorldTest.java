@@ -46,7 +46,6 @@ public class WorldTest {
 
 	@Test
 	public void testSetJungleLimits() {
-		dieWelt.setJungleLimits();
 		assertEquals("getJungleLimitY1", expectedY1, dieWelt.getJungleLimitY1());
 		assertEquals("getJungleLimitY2", expectedY1 + heightJungle,
 				dieWelt.getJungleLimitY2());
