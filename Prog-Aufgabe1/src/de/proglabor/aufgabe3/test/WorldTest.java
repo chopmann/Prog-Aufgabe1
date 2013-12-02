@@ -1,18 +1,19 @@
-package de.proglabor.aufgabe2.test;
+package de.proglabor.aufgabe3.test;
 
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import de.proglabor.aufgabe2.Tier;
-import de.proglabor.aufgabe2.Welt;
+import de.proglabor.aufgabe3.Tier;
+import de.proglabor.aufgabe3.Welt;
 
 @RunWith(Parameterized.class)
 public class WorldTest {

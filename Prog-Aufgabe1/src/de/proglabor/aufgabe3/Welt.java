@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe2;
+package de.proglabor.aufgabe3;
 
 import java.util.LinkedList;
 import java.util.Map;

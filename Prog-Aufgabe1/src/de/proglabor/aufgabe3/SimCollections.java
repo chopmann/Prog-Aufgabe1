@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe2;
+package de.proglabor.aufgabe3;
 
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -54,7 +54,7 @@ public class SimCollections implements SimCollectionsInterface {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#setTier(de.proglabor.aufgabe2.Tier)
+	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#setTier(de.proglabor.aufgabe3.Tier)
 	 */
 	@Override
 	public void setTier(Tier tier) {
@@ -63,7 +63,7 @@ public class SimCollections implements SimCollectionsInterface {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#setPflanze(de.proglabor.aufgabe2.Pflanze)
+	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#setPflanze(de.proglabor.aufgabe3.Pflanze)
 	 */
 	@Override
 	public void setPflanze(Pflanze pflanze) {
@@ -72,7 +72,7 @@ public class SimCollections implements SimCollectionsInterface {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#getTiere()
+	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#getTiere()
 	 */
 	@Override
 	public LinkedList<Tier> getTiere() {
@@ -80,7 +80,7 @@ public class SimCollections implements SimCollectionsInterface {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#day()
+	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#day()
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -97,7 +97,7 @@ public class SimCollections implements SimCollectionsInterface {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.proglabor.aufgabe2.SimCollectionsInterface#getPflanzen()
+	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#getPflanzen()
 	 */
 	@Override
 	public TreeMap<Pflanze, Integer> getPflanzen() {

@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe2.test;
+package de.proglabor.aufgabe3.test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -6,9 +6,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.proglabor.aufgabe2.SimCollections;
-import de.proglabor.aufgabe2.Tier;
-import de.proglabor.aufgabe2.TierInterface;
+import de.proglabor.aufgabe3.SimCollections;
+import de.proglabor.aufgabe3.Tier;
+import de.proglabor.aufgabe3.TierInterface;
 
 /**
  * Tests for the second practical work.

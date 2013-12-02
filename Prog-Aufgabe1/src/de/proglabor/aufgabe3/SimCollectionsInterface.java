@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe2;
+package de.proglabor.aufgabe3;
 
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -10,13 +10,13 @@ import java.util.TreeMap;
 public interface SimCollectionsInterface {
 	
 	/**
-	 * fügt ein Tier hinzu
+	 * fï¿½gt ein Tier hinzu
 	 * @param tier 
 	 */
 	public void setTier(Tier tier);
 	
 	/**
-	 * fügt eine Pflanze hinzu
+	 * fï¿½gt eine Pflanze hinzu
 	 * @param pflanze 
 	 */
 	public void setPflanze(Pflanze pflanze);

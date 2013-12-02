@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe2;
+package de.proglabor.aufgabe3;
 
 /**
  * @author id261708
@@ -33,7 +33,7 @@ public interface TierInterface {
 	public int getY();
 	
 	/**
-	 * dreht das Tier in eine zufällige Blickrichtung
+	 * dreht das Tier in eine zufï¿½llige Blickrichtung
 	 * @param randomDirection Blickrichtung
 	 */
 	public void turn(int randomDirection);
@@ -46,7 +46,7 @@ public interface TierInterface {
 	public void move (int height, int width);
 	
 	/**
-	 * fügt Energie hinzu
+	 * fï¿½gt Energie hinzu
 	 * @param plantEnergy Futterenergie
 	 */
 	public void eat (int plantEnergy);
@@ -54,13 +54,13 @@ public interface TierInterface {
 	/**
 	 * Fortpflanzung des tiers
 	 * @param randomGene Gen
-	 * @param randomMutation Veränderung 
+	 * @param randomMutation Verï¿½nderung 
 	 * @return Baby
 	 */
 	public TierInterface reproduce(int randomGene, int randomMutation);
 	
 	/**
-	 * gibt eine String repräsentation des Tiers aus
+	 * gibt eine String reprï¿½sentation des Tiers aus
 	 * @return Tier als String
 	 */
 	public String toString();
