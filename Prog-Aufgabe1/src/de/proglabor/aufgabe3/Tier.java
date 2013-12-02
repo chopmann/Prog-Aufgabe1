@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe1;
+package de.proglabor.aufgabe3;
 
 import java.util.Random;
 
@@ -6,14 +6,22 @@ import java.util.Random;
  * @author sirmonkey
  * 
  */
-public class Tier implements TierInterface{
+public class Tier implements TierInterface {
+	static final int MAXX_GENE = 10;
 	int posX;
 	int posY;
 	int energy;
 	int dir;
 	int[] genes;
 	int sumGenes;
+	
 
+	/**
+	 * Konstruktor
+	 * @param energy Anfangsenergie des Tieres
+	 * @param posX x-Koordinate
+	 * @param posY y-Koorinate
+	 */
 	public Tier(int energy, int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
@@ -22,15 +30,39 @@ public class Tier implements TierInterface{
 		initGenes();
 	}
 
+	/**
+	 * Konstruktor
+	 * @param posX 
+	 * @param posY 
+	 * @param animalStartEnergy Anfangsenergie des Tieres
+	 * @param dir Blickrichtung
+	 * @param genes Gene 
+	 */
+	public Tier(int posX, int posY, int animalStartEnergy, int dir, int[] genes) {
+		this.posX = posX;
+		this.posY = posY;
+		this.energy = animalStartEnergy;
+		this.dir = dir;
+		this.genes = genes;
+	}
+
+	/**
+	 * setzt die Anfangsgene mit Random Werten
+	 * 
+	 */
 	public void initGenes() {
 		genes = new int[8];
 		Random rand = new Random();
 		for (int i = 0; i < genes.length; i++) {
-			genes[i] = Helper.randInt(1, 10, rand);
+			genes[i] = Helper.randInt(1, MAXX_GENE, rand);
 		}
 		sumGenes();
 	}
 
+	/**
+	 * setzt Gene
+	 * @param genes Gene
+	 */
 	public void setGenes(int[] genes) {
 		this.genes = genes;
 		sumGenes();
@@ -45,8 +77,9 @@ public class Tier implements TierInterface{
 	}
 
 	/**
-	 * @param randomGene
-	 * @param randomMutation
+	 * Vermehrung der Tiere
+	 * @param randomGene 
+	 * @param randomMutation 
 	 * @return a new Born Animal with mutated Genes
 	 */
 	@Override
@@ -55,6 +88,7 @@ public class Tier implements TierInterface{
 		int[] newBornGenes = this.genes.clone();
 		newBorn.setGenes(newBornGenes);
 		newBorn.mutate(randomGene, randomMutation);
+		this.energy = (this.energy % 2) + ( this.energy / 2 );
 		return newBorn;
 	}
 	
@@ -69,13 +103,31 @@ public class Tier implements TierInterface{
 	}
 
 	/**
-	 * @param gene
-	 * @param mutation
+	 * ver�ndert ein Gen des Tiers 
+	 * @param gene Position des Gens
+	 * @param mutation Art der Ver�nderung
 	 */
 	public void mutate(int gene, int mutation) {
+		gene = Helper.cleaner(gene, 8);
+		switch (Helper.cleaner(mutation, 2)) {
+		
+		case 0:
+			mutation = -1;
+			break;
+		case 1: 
+			mutation = 0;
+			break;
+		case 2:
+			mutation = 1;
+			break;
+		default:
+			mutation = 0;
+			break;
+		}
+		
 		int mutatedGene = genes[gene] + mutation;
 		if (mutatedGene <= 0) {
-			genes[gene] = 0;
+			genes[gene] = 1;
 		} else {
 			genes[gene] = mutatedGene;
 		}
@@ -83,6 +135,10 @@ public class Tier implements TierInterface{
 	}
 
 	
+	/**
+	 * setzt die Blickrichtung des Tieres
+	 * @param dir Blickrichtung
+	 */
 	public void setDir(int dir) {
 		this.dir = dir;
 	}
@@ -112,7 +168,7 @@ public class Tier implements TierInterface{
 	 */
 	@Override
 	public void turn(int randomDirection) {
-		dir = randomDirection;
+		dir = Helper.cleaner(randomDirection, 8);
 	}
 	
 	/**
@@ -129,8 +185,8 @@ public class Tier implements TierInterface{
 		} else {
 			for (int i = 1; i < genes.length; i++) {
 				lowerBound = upperBound;
-				upperBound+= genes[i];
-				if( lowerBound < value && value <= upperBound) {
+				upperBound += genes[i];
+				if ( lowerBound < value && value <= upperBound) {
 					turn(i);
 				}
 			}
@@ -138,7 +194,9 @@ public class Tier implements TierInterface{
 	}
 
 	/**
-	 * @return
+	 * Summe aller Gene 
+	 * @return die Summe
+	 * 
 	 */
 	public int sumGenes() {
 		this.sumGenes = 0;
@@ -148,42 +206,52 @@ public class Tier implements TierInterface{
 		return sumGenes;
 	}
 
-	@Override
-	public void move(int width , int  height) {
-		posX = Helper.mirror(width, Welt.getWidth());
-		posY = Helper.mirror(height, Welt.getHeight());
+	public void setPos(int x, int y, int height , int width) {
+		posX = Helper.mirror(x, width - Helper.ARRAY_OFFSET);
+		posY = Helper.mirror(y, height - Helper.ARRAY_OFFSET);
 	}
 	
-	public void move() {
+	@Override
+	public void move(int height , int  width) {
 		switch (dir) {
-		case 0:
-			move(posX - 1, posY + 1);
+		case 0: //NE
+			setPos(posX -1, posY -1, height, width);
 			break;
-		case 1:
-			move(posX, posY + 1);
+		case 1: //N
+			setPos(posX, posY - 1, height, width);
 			break;
-		case 2:
-			move(posX + 1, posY + 1);
+		case 2: //NW
+			setPos(posX + 1, posY - 1, height, width);
 			break;
-		case 3:
-			move(posX + 1, posY);
+		case 3: //W
+			setPos(posX + 1, posY, height, width);
 			break;
-		case 4:
-			move(posX - 1, posY + 1);
-		case 5:
-			move(posX, posY - 1);
+		case 4: //SW
+			setPos(posX + 1, posY + 1, height, width);
 			break;
-		case 6:
-			move(posX - 1, posY - 1);
+		case 5: //S
+			setPos(posX, posY + 1, height, width);
 			break;
-		case 7:
-			move(posX - 1, posY);
+		case 6: //SE
+			setPos(posX - 1, posY + 1, height, width);
+			break;
+		case 7: //E
+			setPos(posX - 1, posY, height, width);
+			break;
+		default: //DONT MOVE
+			setPos(posX , posY,  height, width);
 			break;
 		}
 	}
 	
+	/**
+	 * Reduziert Energie des Tieres
+	 * @param energy  H�he der zu reduzierenden Energie
+	 */
 	public void energyDecay(int energy) {
 		this.energy -= energy;
 	}
+
+
 
 }
