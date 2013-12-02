@@ -2,6 +2,7 @@ package de.proglabor.aufgabe3;
 
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Random;
 import java.util.TreeMap;
 
@@ -9,8 +10,9 @@ import java.util.TreeMap;
  * @author sirmonkey
  * 
  */
-public class Welt {
+public class Welt extends Observable {
 
+	private boolean empty;
 	private int width = 0;
 	private int height = 0;
 	private TreeMap<Pflanze, Integer> plantContainer;
@@ -45,6 +47,10 @@ public class Welt {
 	 */
 	private int eaten = 0;
 
+	public Welt() {
+		this.empty = true;
+	}
+
 	/**
 	 * Konstruktor
 	 * 
@@ -65,8 +71,33 @@ public class Welt {
 	 */
 	public Welt(int width, int height, int widthJungle, int heightJungle,
 			int plantEnergy, int initialEnergy, int reproductionEnergy) {
-		this.height = height;
+		initAll(width, height, widthJungle, heightJungle, plantEnergy,
+				initialEnergy, reproductionEnergy);
+	}
+
+	/**
+	 * Initializer
+	 * 
+	 * @param height
+	 *            H�he der Welt
+	 * @param width
+	 *            Breite der Welt
+	 * @param widthJungle
+	 *            Breite des Jungels
+	 * @param heightJungle
+	 *            H�he des Jungels
+	 * @param plantEnergy
+	 *            How much Energy Plants provide
+	 * @param initialEnergy
+	 *            of the Animals
+	 * @param reproductionEnergy
+	 *            Reproduction Threshold
+	 */
+	public void initAll(int width, int height, int widthJungle,
+			int heightJungle, int plantEnergy, int initialEnergy,
+			int reproductionEnergy) {
 		this.width = width;
+		this.height = height;
 		this.widthJungle = widthJungle;
 		this.heightJungle = heightJungle;
 		initJungleLimits();
@@ -75,7 +106,7 @@ public class Welt {
 		this.initialEnergy = initialEnergy;
 		this.reproductionEnergy = reproductionEnergy;
 		initAnimalContainer();
-
+		this.empty = false;
 	}
 
 	/**
@@ -344,6 +375,21 @@ public class Welt {
 			}
 		}
 		return counter;
+	}
+
+	/**
+	 * @return the empty
+	 */
+	public boolean isEmpty() {
+		return empty;
+	}
+
+	/**
+	 * @param empty
+	 *            the empty to set
+	 */
+	public void setEmpty(boolean empty) {
+		this.empty = empty;
 	}
 
 	/**
