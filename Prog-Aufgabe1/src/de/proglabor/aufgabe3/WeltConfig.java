@@ -1,5 +1,0 @@
-package de.proglabor.aufgabe3;
-
-public enum WeltConfig {
-	WIDHT,	HEIGHT, JUNGLE_WIDTH, JUNGLE_HEIGHT, PLANTENERGY, INITIALTENERGY, REPRODUCTIONENERGY
-}
