@@ -3,9 +3,14 @@ package de.proglabor.aufgabe3.gui;
 
 import de.proglabor.aufgabe3.config.WeltConfig;
 
+
+
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class SidePanel extends JPanel {
 	public SidePanel() {
@@ -32,11 +37,20 @@ public class SidePanel extends JPanel {
 		this.add(p);
 		
 		JButton start = new JButton("START");
-		start.setBounds(50, 60, 80, 30);
+		JButton reset = new JButton("RESET");
+//		start.setSize(100, 32);
+		try {
+			Image startImg = ImageIO.read(getClass().getResource("/resources/simulate.png"));			
+			ImageIcon startIcon = new ImageIcon(startImg.getScaledInstance(32, 32, Image.SCALE_FAST));
+			start.setIcon(startIcon);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		this.add(start);
 		
-		JButton reset = new JButton("RESET");
-		start.setBounds(50, 60, 80, 30);
+
+//		start.setBounds(50, 60, 80, 30);
 		this.add(reset);
 	
 	}
