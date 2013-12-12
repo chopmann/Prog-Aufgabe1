@@ -3,7 +3,7 @@ package de.proglabor.aufgabe3.controllers;
 import java.util.HashMap;
 import java.util.Observer;
 
-import de.proglabor.aufgabe3.WeltConfig;
+import de.proglabor.aufgabe3.config.WeltConfig;
 import de.proglabor.aufgabe3.gui.SimulationViewer;
 
 public interface SimControlerInterface {

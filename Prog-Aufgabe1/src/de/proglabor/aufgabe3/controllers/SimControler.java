@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Observer;
 
 import de.proglabor.aufgabe3.Welt;
-import de.proglabor.aufgabe3.WeltConfig;
+import de.proglabor.aufgabe3.config.WeltConfig;
 import de.proglabor.aufgabe3.gui.SimulationViewer;
 
 public class SimControler implements SimControlerInterface{
