@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class SidePanel extends JPanel implements ActionListener {
+public class SidePanel extends JPanel implements ActionListener{
 	JButton start = new JButton("START");
 	JButton clear = new JButton("CLEAR");
 	HashMap<WeltConfig, JTextField> form = new HashMap<WeltConfig, JTextField>();

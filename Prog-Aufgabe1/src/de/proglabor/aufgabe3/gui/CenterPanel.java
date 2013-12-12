@@ -4,24 +4,31 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
-public class CenterPanel extends JPanel {
+public class CenterPanel extends JPanel implements Observer {
+	
+	Display display = new Display();
+	JPanel staticsPanel = new JPanel();
+	JLabel animalsAlive = new JLabel("0");
+	JLabel plantsAlive = new JLabel("0");
+	JLabel animalsDead = new JLabel("0");
+	JLabel plantsPlanted = new JLabel("0");
+	JLabel plantsEaten = new JLabel("0");
+	
 	public CenterPanel() {
 		setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
 		setLayout(new BorderLayout());
@@ -29,19 +36,18 @@ public class CenterPanel extends JPanel {
 
 		// Simulation Statics
 
-		JPanel staticsPanel = new JPanel();
+		
 		staticsPanel.setBorder(new BevelBorder(BevelBorder.RAISED));
 		staticsPanel.setPreferredSize(new Dimension(this.getWidth(), 32));
 		staticsPanel.setLayout(new BoxLayout(staticsPanel, BoxLayout.X_AXIS));
 
 		Border empty = BorderFactory.createEmptyBorder(0, 0, 0, 10);
 
-		JLabel animalsAlive = new JLabel("0");
+		
 		animalsAlive.setHorizontalAlignment(SwingConstants.LEFT);
 		animalsAlive.setBorder(empty);
 		animalsAlive.setToolTipText("Current Animal Count");
 
-		JLabel plantsAlive = new JLabel("0");
 		plantsAlive.setHorizontalAlignment(SwingConstants.LEFT);
 		plantsAlive.setBorder(empty);
 		plantsAlive.setToolTipText("Current Plant Count");
@@ -51,7 +57,7 @@ public class CenterPanel extends JPanel {
 		animalsBorn.setBorder(empty);
 		animalsBorn.setToolTipText("Animals Borned");
 
-		JLabel animalsDead = new JLabel("0");
+		
 		animalsDead.setHorizontalAlignment(SwingConstants.LEFT);
 		animalsDead.setBorder(empty);
 		animalsDead.setToolTipText("Animal Deaths");
@@ -61,7 +67,7 @@ public class CenterPanel extends JPanel {
 		plantsPlanted.setBorder(empty);
 		plantsPlanted.setToolTipText("Plants planted");
 
-		JLabel plantsEaten = new JLabel("0");
+		
 		plantsEaten.setHorizontalAlignment(SwingConstants.LEFT);
 		plantsEaten.setBorder(empty);
 		plantsEaten.setToolTipText("Plants eaten");
@@ -118,11 +124,8 @@ public class CenterPanel extends JPanel {
 
 		this.add(staticsPanel, BorderLayout.NORTH);
 
-		JLabel holder = new JLabel("DIE WELT: COMING SOON");
-		holder.setBackground(Color.orange);
-		holder.setOpaque(true);
-		holder.setHorizontalAlignment(SwingConstants.CENTER);
-		this.add(holder, BorderLayout.CENTER);
+		this.add(display, BorderLayout.CENTER);
+		
 
 		// Status Bar
 		JPanel statusPanel = new JPanel();
@@ -134,6 +137,12 @@ public class CenterPanel extends JPanel {
 		statusPanel.add(statusLabel);
 		this.add(statusPanel, BorderLayout.SOUTH);
 
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		display.repaint();
+		
 	}
 
 }
