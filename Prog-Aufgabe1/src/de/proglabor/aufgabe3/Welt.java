@@ -114,6 +114,8 @@ public class Welt extends Observable {
 	 * 
 	 */
 	public void initPlantContainer() {
+		planted = 0;
+		eaten = 0;
 		this.plantContainer = new TreeMap<Pflanze, Integer>();
 	}
 
@@ -122,6 +124,8 @@ public class Welt extends Observable {
 	 * 
 	 */
 	public void initAnimalContainer() {
+		bornCount = 0;
+		deadCount = 0;
 		this.animalContainer = new LinkedList<Tier>();
 
 	}

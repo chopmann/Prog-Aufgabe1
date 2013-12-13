@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Point;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,15 +20,21 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
-public class CenterPanel extends JPanel implements Observer {
+import de.proglabor.aufgabe3.controllers.Controller;
+
+public class CenterPanel extends JPanel {
 	
 	Display display = new Display();
 	JPanel staticsPanel = new JPanel();
+	
 	JLabel animalsAlive = new JLabel("0");
 	JLabel plantsAlive = new JLabel("0");
 	JLabel animalsDead = new JLabel("0");
 	JLabel plantsPlanted = new JLabel("0");
 	JLabel plantsEaten = new JLabel("0");
+	JLabel animalsBorn = new JLabel("0");
+	
+	Controller controller;
 	
 	public CenterPanel() {
 		setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
@@ -52,7 +59,7 @@ public class CenterPanel extends JPanel implements Observer {
 		plantsAlive.setBorder(empty);
 		plantsAlive.setToolTipText("Current Plant Count");
 
-		JLabel animalsBorn = new JLabel("0");
+	
 		animalsBorn.setHorizontalAlignment(SwingConstants.LEFT);
 		animalsBorn.setBorder(empty);
 		animalsBorn.setToolTipText("Animals Borned");
@@ -62,7 +69,7 @@ public class CenterPanel extends JPanel implements Observer {
 		animalsDead.setBorder(empty);
 		animalsDead.setToolTipText("Animal Deaths");
 
-		JLabel plantsPlanted = new JLabel("0");
+
 		plantsPlanted.setHorizontalAlignment(SwingConstants.LEFT);
 		plantsPlanted.setBorder(empty);
 		plantsPlanted.setToolTipText("Plants planted");
@@ -139,10 +146,19 @@ public class CenterPanel extends JPanel implements Observer {
 
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Controller controller) {
+		animalsAlive.setText(controller.animals());
+		plantsAlive.setText(controller.plants());
+		animalsBorn.setText(controller.born());
+		animalsDead.setText(controller.deaths());
+		plantsPlanted.setText(controller.planted());
+		plantsEaten.setText(controller.eaten());
+		display.setShowHelp(false);
+//		display.clear();
+		display.setMaxAnimal(controller.animals());
+		display.fillCellAnimals(controller.animalPosAndCount());
 		display.repaint();
-		
+
 	}
 
 }

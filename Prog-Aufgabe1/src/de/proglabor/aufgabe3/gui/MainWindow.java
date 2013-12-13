@@ -1,33 +1,37 @@
 package de.proglabor.aufgabe3.gui;
 
 import java.awt.BorderLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-public class MainWindow extends JFrame{
+import de.proglabor.aufgabe3.Welt;
+import de.proglabor.aufgabe3.controllers.Controller;
+
+public class MainWindow extends JFrame implements SimView{
 	
+	SidePanel sidePanel;
+	CenterPanel centerPanel;
 	public MainWindow() {
 		setTitle("Simple Simulation");
 		setSize(1366, 768);
 		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		SidePanel sidePanel = new SidePanel();
+		sidePanel = new SidePanel();
 		add(sidePanel, BorderLayout.WEST);
 		
-		CenterPanel centerPanel = new CenterPanel();
+		centerPanel = new CenterPanel();
 		add(centerPanel, BorderLayout.CENTER);
 	}
-	   public static void main(String[] args) {
-	        
-	        SwingUtilities.invokeLater(new Runnable() {
-	            @Override
-	            public void run() {
-	                MainWindow ex = new MainWindow();
-	                ex.setVisible(true);
-	            }
-	        });
-	    }
-
+	@Override
+	public void update(Controller controller) {
+		centerPanel.update(controller);
+	}	
+	@Override
+    public void addController(Controller controller){
+        sidePanel.addController(controller);
+    }
 }

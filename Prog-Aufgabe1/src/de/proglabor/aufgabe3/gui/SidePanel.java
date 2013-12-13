@@ -1,6 +1,7 @@
 package de.proglabor.aufgabe3.gui;
 
 import de.proglabor.aufgabe3.config.WeltConfig;
+import de.proglabor.aufgabe3.controllers.Controller;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class SidePanel extends JPanel implements ActionListener{
 	JButton start = new JButton("START");
 	JButton clear = new JButton("CLEAR");
 	HashMap<WeltConfig, JTextField> form = new HashMap<WeltConfig, JTextField>();
+	Controller controller;
 	WeltConfig[] labels = WeltConfig.values();
 
 	public SidePanel() {
@@ -53,29 +55,43 @@ public class SidePanel extends JPanel implements ActionListener{
 			e.printStackTrace();
 		}
 
-		start.addActionListener(this);
-		this.add(start);
 
+		this.add(start);
+		start.addActionListener(this);
 		clear.addActionListener(this);
+		clear.setEnabled(false);
 		this.add(clear);
 
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == start) {
+			HashMap<WeltConfig, Integer> parameters = new HashMap<WeltConfig, Integer>();
 			for (int i = 0; i < labels.length; i++) {
 				String text = form.get(labels[i]).getText();
 				System.out.println(labels[i].toString() + " :" + text);
-				//TODO Wire Up with controller
+				parameters.put(labels[i], Integer.parseInt(text));
+
 			}
+			
+			controller.neu(parameters);
+			clear.setEnabled(true);
 		}
 
 		if (e.getSource() == clear) {
-			for (int i = 0; i < labels.length; i++) {
-				form.get(labels[i]).setText("");
-			}
+			controller.clear();
 		}
 
 	}
+
+	public void addController(Controller controller) {
+		this.controller = controller;
+		
+	}
+
+
+
+
 }
