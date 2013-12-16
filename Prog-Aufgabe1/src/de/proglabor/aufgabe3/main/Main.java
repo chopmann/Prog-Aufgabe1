@@ -9,16 +9,16 @@ import de.proglabor.aufgabe3.gui.MainWindow;
 public class Main {
 
 	public static void main(String[] args) {
+		
+    	Welt model 	= new Welt();
+    	Controller controler = new Controller(model);
         
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-            	Welt model 	= new Welt();
-            	MainWindow view = new MainWindow();
-            	Controller controller = new Controller(model, view);
-                view.setVisible(true);
-            }
-        });
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        });
 	}
 
 }

@@ -1,6 +1,7 @@
 package de.proglabor.aufgabe3.gui;
 
 import de.proglabor.aufgabe3.config.WeltConfig;
+import de.proglabor.aufgabe3.controllers.ControlerInterface;
 import de.proglabor.aufgabe3.controllers.Controller;
 
 import javax.imageio.ImageIO;
@@ -12,11 +13,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class SidePanel extends JPanel implements ActionListener{
+public class SidePanel extends JPanel implements SimView,ActionListener{
 	JButton start = new JButton("START");
 	JButton clear = new JButton("CLEAR");
 	HashMap<WeltConfig, JTextField> form = new HashMap<WeltConfig, JTextField>();
-	Controller controller;
+	ControlerInterface controller;
 	WeltConfig[] labels = WeltConfig.values();
 
 	public SidePanel() {
@@ -72,8 +73,12 @@ public class SidePanel extends JPanel implements ActionListener{
 			for (int i = 0; i < labels.length; i++) {
 				String text = form.get(labels[i]).getText();
 				System.out.println(labels[i].toString() + " :" + text);
-				parameters.put(labels[i], Integer.parseInt(text));
-
+				try {
+					parameters.put(labels[i], Integer.parseInt(text));
+				} catch (Exception e2) {
+					// TODO: TELL STATUSBAR SOMETHING WENT WRONG
+					System.out.println("WTF Something Missing or wrong input");
+				}
 			}
 			
 			controller.neu(parameters);
@@ -85,12 +90,12 @@ public class SidePanel extends JPanel implements ActionListener{
 
 	}
 
-	public void addController(Controller controller) {
-		this.controller = controller;
+
+	@Override
+	public void addController(ControlerInterface controler) {
+		this.controller = controler;
 		
 	}
-
-
 
 
 }

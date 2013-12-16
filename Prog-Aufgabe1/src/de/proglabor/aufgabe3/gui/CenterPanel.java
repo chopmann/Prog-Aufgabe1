@@ -20,19 +20,21 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
+import de.proglabor.aufgabe3.Welt;
 import de.proglabor.aufgabe3.controllers.Controller;
 
 public class CenterPanel extends JPanel {
 	
 	Display display = new Display();
 	JPanel staticsPanel = new JPanel();
+	String clearText = "0";
 	
-	JLabel animalsAlive = new JLabel("0");
-	JLabel plantsAlive = new JLabel("0");
-	JLabel animalsDead = new JLabel("0");
-	JLabel plantsPlanted = new JLabel("0");
-	JLabel plantsEaten = new JLabel("0");
-	JLabel animalsBorn = new JLabel("0");
+	JLabel animalsAlive = new JLabel(clearText);
+	JLabel plantsAlive = new JLabel(clearText);
+	JLabel animalsDead = new JLabel(clearText);
+	JLabel plantsPlanted = new JLabel(clearText);
+	JLabel plantsEaten = new JLabel(clearText);
+	JLabel animalsBorn = new JLabel(clearText);
 	JLabel statusLabel = new JLabel("");
 	
 	Controller controller;
@@ -148,20 +150,32 @@ public class CenterPanel extends JPanel {
 	}
 
 	public void update(Controller controller) {
-		statusLabel.setText(controller.getStatus().toString());
-		animalsAlive.setText(controller.animals());
-		plantsAlive.setText(controller.plants());
-		animalsBorn.setText(controller.born());
-		animalsDead.setText(controller.deaths());
-		plantsPlanted.setText(controller.planted());
-		plantsEaten.setText(controller.eaten());
-		display.setShowHelp(false);
-//		display.clear();
-		display.setMaxAnimal(controller.animals());
-		display.fillCellAnimals(controller.animalPosAndCount());
-		display.fillCellPlants(controller.plantsPosAndCount());
-		display.repaint();
+
 
 	}
+
+	public void updateDisplay(Welt model) {
+//		statusLabel.setText(model.);
+		animalsAlive.setText(model.totalAnimals()+"");
+		plantsAlive.setText(model.totalPlants()+"");
+		animalsBorn.setText(model.getBornCount()+"");
+		animalsDead.setText(model.getDeadCount()+"");
+		plantsPlanted.setText(model.getPlantedCount()+"");
+		plantsEaten.setText(model.getEatenCount()+"");
+		display.refresh(model);	
+	}
+
+	public void clear() {
+
+		animalsAlive.setText(clearText);
+		plantsAlive.setText(clearText);
+		animalsBorn.setText(clearText);
+		animalsDead.setText(clearText);
+		plantsPlanted.setText(clearText);
+		plantsEaten.setText(clearText);
+		display.clear();
+	}
+
+
 
 }

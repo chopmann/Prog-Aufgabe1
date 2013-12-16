@@ -10,6 +10,10 @@ import java.util.TreeMap;
  * @author sirmonkey
  * 
  */
+/**
+ * @author id261708
+ * 
+ */
 public class Welt extends Observable {
 
 	private boolean empty;
@@ -96,17 +100,62 @@ public class Welt extends Observable {
 	public void initAll(int width, int height, int widthJungle,
 			int heightJungle, int plantEnergy, int initialEnergy,
 			int reproductionEnergy) {
-		this.width = width;
-		this.height = height;
-		this.widthJungle = widthJungle;
-		this.heightJungle = heightJungle;
-		initJungleLimits();
-		this.plantEnergy = plantEnergy;
-		initPlantContainer();
-		this.initialEnergy = initialEnergy;
-		this.reproductionEnergy = reproductionEnergy;
-		initAnimalContainer();
-		this.empty = false;
+		if (width <= 0) {
+			throw new IllegalArgumentException("Width must be >= 1");
+		} else {
+			this.width = width;
+			if (height <= 0) {
+				throw new IllegalArgumentException("Height must be >= 1");
+			} else {
+				this.height = height;
+				if (widthJungle <= 0) {
+					throw new IllegalArgumentException(
+							"Jungle Width must be >= 1");
+				} else {
+					if (widthJungle > width) {
+						throw new IllegalArgumentException(
+								"Jungle Width must be <= Width");
+					} else {
+						this.widthJungle = widthJungle;
+						if (heightJungle < 0) {
+							throw new IllegalArgumentException(
+									"Jungle Height must be > 0");
+						} else {
+							if (heightJungle > height) {
+								throw new IllegalArgumentException(
+										"Jungle Height must be <= Height");
+							} else {
+								this.heightJungle = heightJungle;
+								initJungleLimits();
+								if (plantEnergy < 0) {
+									throw new IllegalArgumentException(
+											"PlantEnergy must be >= 0");
+								} else {
+									this.plantEnergy = plantEnergy;
+									initPlantContainer();
+									if (initialEnergy < 1) {
+										throw new IllegalArgumentException(
+												"InitialEnergy must be >= 1");
+									} else {
+										this.initialEnergy = initialEnergy;
+										if (reproductionEnergy < 1) {
+											throw new IllegalArgumentException(
+													"InitialEnergy must be >= 1");
+										} else {
+
+											this.reproductionEnergy = reproductionEnergy;
+											initAnimalContainer();
+											this.empty = false;
+										}
+									}
+								}
+							}
+
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -194,8 +243,11 @@ public class Welt extends Observable {
 	 */
 	public void removePlant(int x, int y) {
 		int count = totalPlantsAt(x, y);
-		if (count > 0) {
-			Pflanze key = new Pflanze(x, y);
+		Pflanze key = new Pflanze(x, y);
+		if (count == 1) {
+			plantContainer.remove(key);
+			eaten++;
+		} else if(count > 1) {
 			count--;
 			plantContainer.put(key, count);
 			eaten++;
@@ -283,7 +335,6 @@ public class Welt extends Observable {
 			addAnimal(baby);
 		}
 		// Move
-		tier.move(height, width);
 		tier.energyDecay(1);
 		if (tier.getEnergy() == 0) {
 			removeAnimal(tier);
@@ -291,6 +342,35 @@ public class Welt extends Observable {
 			moveAnimal(tier);
 		}
 
+	}
+
+	/**
+	 * A Day in the Simulation
+	 */
+	public void day() {
+		this.randomAddPlant();
+		this.randomAddPlantJungle();
+		@SuppressWarnings("unchecked")
+		LinkedList<Tier> tmp = (LinkedList<Tier>) animalContainer.clone();
+		for (Tier tier : tmp) {
+			this.animalAction(tier);
+		}
+		setChanged();
+		notifyObservers();
+
+	}
+
+	public void runSim(int days) {
+		// Monkey-Patch
+		Tier weronika = new Tier(getWidth() / 2, getHeight() / 2,
+				getInitialEnergy());
+		this.addAnimal(weronika);
+		setChanged();
+		notifyObservers();
+		System.out.println("Got called from Controler!");
+		for (int i = 0; i < days; i++) {
+			day();
+		}
 	}
 
 	/**

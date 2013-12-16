@@ -12,43 +12,44 @@ import de.proglabor.aufgabe3.Tier;
 import de.proglabor.aufgabe3.Welt;
 import de.proglabor.aufgabe3.config.StatusCode;
 import de.proglabor.aufgabe3.config.WeltConfig;
+import de.proglabor.aufgabe3.gui.MainWindow;
 import de.proglabor.aufgabe3.gui.SimView;
 
-public class Controller {
+public class Controller implements ControlerInterface {
 
 	private Welt model;
-	private SimView view;
+	private MainWindow view;
 	private StatusCode status;
 
-	public Controller(Welt model, SimView view) {
+	public Controller(Welt model) {
 		this.model = model;
-		this.view = view;
-		this.view.addController(this);
+		this.view = new MainWindow(model, this);
+		view.createView();
 		this.status = StatusCode.OK;
 	}
 
-	public void simulate(int days) {
-		status = StatusCode.SIMULATING;
-		view.update(this);
-		for (int i = 0; i < days; i++) {
-			day();
-			view.update(this);
-		}
-		status = StatusCode.DONE;
-		view.update(this);
+//	public void simulate(int days) {
+//		status = StatusCode.SIMULATING;
+//		view.update(this);
+//		for (int i = 0; i < days; i++) {
+//			day();
+//			view.update(this);
+//		}
+//		status = StatusCode.DONE;
+//		view.update(this);
+//
+//	}
 
-	}
-
-	public void day() {
-		model.randomAddPlant();
-		model.randomAddPlantJungle();
-		@SuppressWarnings("unchecked")
-		LinkedList<Tier> tmp = (LinkedList<Tier>) model.getContainerAnimals()
-				.clone();
-		for (Tier tier : tmp) {
-			model.animalAction(tier);
-		}
-	}
+//	public void day() {
+//		model.randomAddPlant();
+//		model.randomAddPlantJungle();
+//		@SuppressWarnings("unchecked")
+//		LinkedList<Tier> tmp = (LinkedList<Tier>) model.getContainerAnimals()
+//				.clone();
+//		for (Tier tier : tmp) {
+//			model.animalAction(tier);
+//		}
+//	}
 
 	public String born() {
 		return Integer.toString( model.getBornCount());
@@ -102,28 +103,36 @@ public class Controller {
 		
 	}
 	public void neu(HashMap<WeltConfig, Integer> parameters) {
-		int days = parameters.get(WeltConfig.DAYS);
-		int width = parameters.get(WeltConfig.WIDHT);
-		int height = parameters.get(WeltConfig.WIDHT);
-		int widthJungle = parameters.get(WeltConfig.JUNGLE_WIDTH);
-		int heightJungle = parameters.get(WeltConfig.JUNGLE_HEIGHT);
-		int plantEnergy = parameters.get(WeltConfig.PLANTENERGY);
-		int initialEnergy = parameters.get(WeltConfig.INITIALTENERGY);
-		int reproductionEnergy = parameters.get(WeltConfig.REPRODUCTIONENERGY);
-		model.initAll(width, height, widthJungle, heightJungle, plantEnergy,
-				initialEnergy, reproductionEnergy);
+		try {
+			int days = parameters.get(WeltConfig.DAYS);
+			int width = parameters.get(WeltConfig.WIDHT);
+			int height = parameters.get(WeltConfig.HEIGHT);
+			int widthJungle = parameters.get(WeltConfig.JUNGLE_WIDTH);
+			int heightJungle = parameters.get(WeltConfig.JUNGLE_HEIGHT);
+			int plantEnergy = parameters.get(WeltConfig.PLANTENERGY);
+			int initialEnergy = parameters.get(WeltConfig.INITIALTENERGY);
+			int reproductionEnergy = parameters.get(WeltConfig.REPRODUCTIONENERGY);
+			model.initAll(width, height, widthJungle, heightJungle, plantEnergy,
+					initialEnergy, reproductionEnergy);
+			model.runSim(days);
+		} catch (Exception e) {
+			// TODO: handle the fucking exception
+			System.out.println("BROKEN: " + e.getMessage());
+		}
 		
-		Tier weronika = new Tier( width / 2,
-				height / 2, initialEnergy);
 
-		model.addAnimal(weronika);
-		simulate(days);
+		
+//		Tier weronika = new Tier( width / 2,
+//				height / 2, initialEnergy);
+//
+//		model.addAnimal(weronika);
+//		simulate(days);
 	}
 
 	public void clear() {
 		model.initAnimalContainer();
 		model.initPlantContainer();
-		view.update(this);
+		view.clearDisplay();
 	}
 	
 	public StatusCode getStatus() {
