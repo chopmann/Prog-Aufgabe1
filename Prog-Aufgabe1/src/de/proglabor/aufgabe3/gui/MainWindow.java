@@ -59,4 +59,8 @@ public class MainWindow extends JFrame implements Observer{
 		centerPanel.clear();
 		
 	}
+	public void setStatus(String message) {
+		centerPanel.setStatus(message);
+	}
+
 }

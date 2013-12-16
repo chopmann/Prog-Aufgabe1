@@ -9,5 +9,7 @@ public interface ControlerInterface {
 	void neu(HashMap<WeltConfig, Integer> parameters);
 
 	void clear();
+	
+	void setStatus(String message);
 
 }

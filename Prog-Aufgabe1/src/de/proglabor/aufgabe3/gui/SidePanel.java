@@ -69,20 +69,23 @@ public class SidePanel extends JPanel implements SimView,ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == start) {
+			boolean ok = true;
 			HashMap<WeltConfig, Integer> parameters = new HashMap<WeltConfig, Integer>();
-			for (int i = 0; i < labels.length; i++) {
-				String text = form.get(labels[i]).getText();
-				System.out.println(labels[i].toString() + " :" + text);
-				try {
+			try {
+				for (int i = 0; i < labels.length; i++) {
+					String text = form.get(labels[i]).getText();
+					System.out.println(labels[i].toString() + " :" + text);
 					parameters.put(labels[i], Integer.parseInt(text));
-				} catch (Exception e2) {
-					// TODO: TELL STATUSBAR SOMETHING WENT WRONG
-					System.out.println("WTF Something Missing or wrong input");
 				}
+			} catch (Exception e2) {
+				System.out.println("WTF Something Missing or wrong input");
+				ok = false;
+				controller.setStatus("WTF Something Missing or wrong input");
 			}
-			
-			controller.neu(parameters);
-			clear.setEnabled(true);
+			if (ok == true) {
+				controller.neu(parameters);
+				clear.setEnabled(true);
+			}
 		}
 		if (e.getSource() == clear) {
 			controller.clear();

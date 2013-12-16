@@ -176,6 +176,10 @@ public class CenterPanel extends JPanel {
 		display.clear();
 	}
 
+	public void setStatus(String msg) {
+		this.statusLabel.setText(msg);	
+	}
+
 
 
 }

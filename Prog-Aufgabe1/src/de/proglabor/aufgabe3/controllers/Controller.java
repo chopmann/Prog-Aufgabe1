@@ -92,16 +92,6 @@ public class Controller implements ControlerInterface {
 		
 	}
 	
-	public HashMap<Point, Integer> plantsPosAndCount() {
-		HashMap<Point, Integer> values = new HashMap<Point, Integer>();
-		TreeMap<Pflanze, Integer> tmp = model.getContainerPlants();
-		for (Entry<Pflanze, Integer> entry : tmp.entrySet()) {
-			Point key = new Point(entry.getKey().getX(), entry.getKey().getY());
-			values.put(key, entry.getValue());
-		}
-		return values;
-		
-	}
 	public void neu(HashMap<WeltConfig, Integer> parameters) {
 		try {
 			int days = parameters.get(WeltConfig.DAYS);
@@ -114,10 +104,12 @@ public class Controller implements ControlerInterface {
 			int reproductionEnergy = parameters.get(WeltConfig.REPRODUCTIONENERGY);
 			model.initAll(width, height, widthJungle, heightJungle, plantEnergy,
 					initialEnergy, reproductionEnergy);
+			view.setStatus("RUNNING");
 			model.runSim(days);
+			view.setStatus("DONE");
 		} catch (Exception e) {
 			// TODO: handle the fucking exception
-			System.out.println("BROKEN: " + e.getMessage());
+			view.setStatus(e.getMessage());
 		}
 		
 
@@ -137,6 +129,11 @@ public class Controller implements ControlerInterface {
 	
 	public StatusCode getStatus() {
 		return status;
+	}
+
+	@Override
+	public void setStatus(String message) {
+		view.setStatus(message);
 	}
 	
 	

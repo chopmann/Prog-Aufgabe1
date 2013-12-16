@@ -360,7 +360,7 @@ public class Welt extends Observable {
 
 	}
 
-	public void runSim(int days) {
+	public void runSim(int days) throws Exception {
 		// Monkey-Patch
 		Tier weronika = new Tier(getWidth() / 2, getHeight() / 2,
 				getInitialEnergy());
@@ -369,6 +369,10 @@ public class Welt extends Observable {
 		notifyObservers();
 		System.out.println("Got called from Controler!");
 		for (int i = 0; i < days; i++) {
+			if (bornCount == deadCount) {
+				System.out.println("Breaking");
+				throw new Exception("Aborting Simulation after: " + i + " day(s) -->"+" all Animals are dead!");
+			}
 			day();
 		}
 	}
