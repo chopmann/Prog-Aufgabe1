@@ -33,6 +33,7 @@ public class CenterPanel extends JPanel {
 	JLabel plantsPlanted = new JLabel("0");
 	JLabel plantsEaten = new JLabel("0");
 	JLabel animalsBorn = new JLabel("0");
+	JLabel statusLabel = new JLabel("");
 	
 	Controller controller;
 	
@@ -139,7 +140,7 @@ public class CenterPanel extends JPanel {
 		statusPanel.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		statusPanel.setPreferredSize(new Dimension(this.getWidth(), 16));
 		statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.X_AXIS));
-		JLabel statusLabel = new JLabel("status");
+		
 		statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		statusPanel.add(statusLabel);
 		this.add(statusPanel, BorderLayout.SOUTH);
@@ -147,6 +148,7 @@ public class CenterPanel extends JPanel {
 	}
 
 	public void update(Controller controller) {
+		statusLabel.setText(controller.getStatus().toString());
 		animalsAlive.setText(controller.animals());
 		plantsAlive.setText(controller.plants());
 		animalsBorn.setText(controller.born());
@@ -157,6 +159,7 @@ public class CenterPanel extends JPanel {
 //		display.clear();
 		display.setMaxAnimal(controller.animals());
 		display.fillCellAnimals(controller.animalPosAndCount());
+		display.fillCellPlants(controller.plantsPosAndCount());
 		display.repaint();
 
 	}

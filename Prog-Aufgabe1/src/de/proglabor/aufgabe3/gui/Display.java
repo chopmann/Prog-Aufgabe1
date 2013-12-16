@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +19,7 @@ import de.proglabor.aufgabe3.config.WeltColor;
 public class Display extends JPanel{
 
     private HashMap<Point, Integer> fillCellsAnimals;
+    private HashMap<Point, Integer> fillCellsPlants;
     private boolean showHelp = true;
 	private float maxAnimal;
 
@@ -48,19 +50,25 @@ public class Display extends JPanel{
         int width = this.getPreferredSize().width ;
         int height = this.getPreferredSize().height ;
 
+        for (Point key : fillCellsPlants.keySet()) {
+        	float plant = 1.0f;
+        	 int cellX = 10 + (key.x * 20);
+             int cellY = 10 + (key.y * 20);
+         	g.setColor(WeltColor.PLANT);
+         	g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, plant));
+             g.fillRect(cellX, cellY, 10, 20);
+		}
         
         for (Point key : fillCellsAnimals.keySet()) {
             int cellX = 10 + (key.x * 20);
             int cellY = 10 + (key.y * 20);
-            float plant = 1.0f;
-            float animal = ((float) fillCellsAnimals.get(key)) / maxAnimal;
-            System.out.println(animal);
-//        	g.setColor(WeltColor.PLANT);
-//        	g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, plant));
-//            g.fillRect(cellX, cellY, 10, 20);
+            
+//            float animal = ((float) fillCellsAnimals.get(key)) / maxAnimal;
+//            System.out.println(animal);
+
             g.setColor(WeltColor.ANIMAL);
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, animal+0.5f));
-            g.fillRect(cellX , cellY, 20, 20);
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+            g.fillRect(cellX + 10 , cellY, 10, 20);
         }
         
         //Draw grid
@@ -93,12 +101,16 @@ public class Display extends JPanel{
 
 	public void fillCellAnimals(HashMap<Point, Integer> animalPosAndCount) {
 		this.fillCellsAnimals = animalPosAndCount;
+		
+	}
 	
+	public void fillCellPlants(HashMap<Point, Integer> plantPosAndCount) {
+		this.fillCellsPlants = plantPosAndCount;
 		
 	}
 
 	public void setMaxAnimal(String animals) {
 		maxAnimal = Float.parseFloat(animals);	
-		System.out.println(maxAnimal);
+//		System.out.println(maxAnimal);
 	}
 }

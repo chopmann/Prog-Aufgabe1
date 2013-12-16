@@ -79,7 +79,6 @@ public class SidePanel extends JPanel implements ActionListener{
 			controller.neu(parameters);
 			clear.setEnabled(true);
 		}
-
 		if (e.getSource() == clear) {
 			controller.clear();
 		}

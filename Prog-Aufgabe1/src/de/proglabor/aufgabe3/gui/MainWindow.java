@@ -34,4 +34,16 @@ public class MainWindow extends JFrame implements SimView{
     public void addController(Controller controller){
         sidePanel.addController(controller);
     }
+	/**
+	 * @return the sidePanel
+	 */
+	public SidePanel getSidePanel() {
+		return sidePanel;
+	}
+	/**
+	 * @return the centerPanel
+	 */
+	public CenterPanel getCenterPanel() {
+		return centerPanel;
+	}
 }
