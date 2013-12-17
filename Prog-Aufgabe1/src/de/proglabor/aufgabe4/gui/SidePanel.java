@@ -1,7 +1,7 @@
 package de.proglabor.aufgabe4.gui;
 
 import de.proglabor.aufgabe4.config.WeltConfig;
-import de.proglabor.aufgabe4.controllers.ControlerInterface;
+import de.proglabor.aufgabe4.controllers.ControllerInterface;
 import de.proglabor.aufgabe4.helper.SpringUtilities;
 
 import javax.imageio.ImageIO;
@@ -37,7 +37,7 @@ public class SidePanel extends JPanel implements ActionListener {
 	private JButton start = new JButton("START");
 	private JButton clear = new JButton("CLEAR");
 	private HashMap<WeltConfig, JTextField> form = new HashMap<WeltConfig, JTextField>();
-	private ControlerInterface controller;
+	private ControllerInterface controller;
 	private WeltConfig[] labels = WeltConfig.values();
 
 	/**
@@ -116,10 +116,10 @@ public class SidePanel extends JPanel implements ActionListener {
 
 	/**
 	 * 
-	 * @param controler 
+	 * @param control 
 	 */
-	public void addController(ControlerInterface controler) {
-		this.controller = controler;
+	public void addController(ControllerInterface control) {
+		this.controller = control;
 
 	}
 

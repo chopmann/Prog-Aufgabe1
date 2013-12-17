@@ -8,7 +8,7 @@ import de.proglabor.aufgabe4.config.WeltConfig;
  * @author id261708
  *
  */
-public interface ControlerInterface {
+public interface ControllerInterface {
 
 	/**
 	 * Something

@@ -12,7 +12,7 @@ import de.proglabor.aufgabe4.gui.MainWindow;
  * @author id261708
  *
  */
-public class Controller implements ControlerInterface {
+public class Controller implements ControllerInterface {
 
 	private Welt model;
 	private MainWindow view;

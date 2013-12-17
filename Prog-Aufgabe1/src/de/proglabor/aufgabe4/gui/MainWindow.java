@@ -6,7 +6,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 
 import de.proglabor.aufgabe4.Welt;
-import de.proglabor.aufgabe4.controllers.ControlerInterface;
+import de.proglabor.aufgabe4.controllers.ControllerInterface;
 
 /**
  * @author id261708
@@ -22,15 +22,15 @@ public class MainWindow extends JFrame implements Observer {
 	SidePanel sidePanel;
 	CenterPanel centerPanel;
 	private Welt model;
-	private ControlerInterface controler;
+	private ControllerInterface controller;
 	
 	/** 
 	 * @param model 
-	 * @param controler 
+	 * @param controller 
 	 */
-	public MainWindow(Welt model, ControlerInterface controler) {
+	public MainWindow(Welt model, ControllerInterface controler) {
         this.model = model;
-        this.controler = controler;
+        this.controller = controler;
         model.addObserver(this);
 	}
 	/**
@@ -61,7 +61,7 @@ public class MainWindow extends JFrame implements Observer {
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		sidePanel = new SidePanel();
-		sidePanel.addController(controler);
+		sidePanel.addController(controller);
 		add(sidePanel, BorderLayout.WEST);
 		
 		centerPanel = new CenterPanel();
