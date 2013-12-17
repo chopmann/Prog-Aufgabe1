@@ -106,9 +106,8 @@ public class CenterPanel extends JPanel {
 	 */
 	public void loadImg() {
 		try {
-			System.out.println(new File("").getAbsolutePath());
 			Image cowImg = ImageIO.read(getClass().getResource(
-					"../resources/cow.png"));
+					"/resources/cow.png"));
 			ImageIcon cowIcon = new ImageIcon(cowImg.getScaledInstance(
 					ICON_RESOLUTION, ICON_RESOLUTION, Image.SCALE_FAST));
 			animalsAlive.setIcon(cowIcon);
