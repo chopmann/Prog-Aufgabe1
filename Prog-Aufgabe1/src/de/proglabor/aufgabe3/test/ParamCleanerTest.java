@@ -12,7 +12,6 @@ public class ParamCleanerTest {
 	public void testCleaner() {
 		int maxAllowedValued = 7;
 		int cleanValue = 4;
-		int dirtyValue = -1;
 		assertEquals(cleanValue, Helper.cleaner(cleanValue, maxAllowedValued));
 		assertEquals(maxAllowedValued, Helper.cleaner(maxAllowedValued, maxAllowedValued));
 	}

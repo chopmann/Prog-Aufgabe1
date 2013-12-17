@@ -7,6 +7,9 @@ import java.util.Random;
  *
  */
 public final class Helper {
+	/**
+	 *  
+	 */
 	public static final int ARRAY_OFFSET = 1;
 	
 	/**

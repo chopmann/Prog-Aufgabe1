@@ -2,6 +2,7 @@ package de.proglabor.aufgabe3;
 
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Random;
 import java.util.TreeMap;
 
@@ -9,8 +10,13 @@ import java.util.TreeMap;
  * @author sirmonkey
  * 
  */
-public class Welt {
+/**
+ * @author id261708
+ * 
+ */
+public class Welt extends Observable {
 
+	private boolean empty;
 	private int width = 0;
 	private int height = 0;
 	private TreeMap<Pflanze, Integer> plantContainer;
@@ -46,36 +52,104 @@ public class Welt {
 	private int eaten = 0;
 
 	/**
-	 * Konstruktor
-	 * 
-	 * @param height
-	 *            H�he der Welt
-	 * @param width
-	 *            Breite der Welt
-	 * @param widthJungle
-	 *            Breite des Jungels
-	 * @param heightJungle
-	 *            H�he des Jungels
-	 * @param plantEnergy
-	 *            How much Energy Plants provide
-	 * @param initialEnergy
-	 *            of the Animals
-	 * @param reproductionEnergy
-	 *            Reproduction Threshold
+	 *  Something
+	 */
+	public Welt() {
+		this.empty = true;
+	}
+
+	/**
+	 * @param width 
+	 * @param height 
+	 * @param widthJungle 
+	 * @param heightJungle 
+	 * @param plantEnergy 
+	 * @param initialEnergy 
+	 * @param reproductionEnergy 
 	 */
 	public Welt(int width, int height, int widthJungle, int heightJungle,
 			int plantEnergy, int initialEnergy, int reproductionEnergy) {
-		this.height = height;
-		this.width = width;
-		this.widthJungle = widthJungle;
-		this.heightJungle = heightJungle;
-		initJungleLimits();
-		this.plantEnergy = plantEnergy;
-		initPlantContainer();
-		this.initialEnergy = initialEnergy;
-		this.reproductionEnergy = reproductionEnergy;
-		initAnimalContainer();
+		initAll(width, height, widthJungle, heightJungle, plantEnergy,
+				initialEnergy, reproductionEnergy);
+	}
 
+	/**
+	 * Initializer
+	 * 
+	 * @param heightWorld
+	 *            H�he der Welt
+	 * @param widthWorld
+	 *            Breite der Welt
+	 * @param widthJ
+	 *            Breite des Jungels
+	 * @param heightJ
+	 *            H�he des Jungels
+	 * @param pEnergy
+	 *            How much Energy Plants provide
+	 * @param iEnergy
+	 *            of the Animals
+	 * @param rEnergy
+	 *            Reproduction Threshold
+	 */
+	public void initAll(int widthWorld, int heightWorld, int widthJ,
+			int heightJ, int pEnergy, int iEnergy,
+			int rEnergy) {
+		if (widthWorld <= 0) {
+			throw new IllegalArgumentException("Width must be >= 1");
+		} else {
+			this.width = widthWorld;
+			if (heightWorld <= 0) {
+				throw new IllegalArgumentException("Height must be >= 1");
+			} else {
+				this.height = heightWorld;
+				if (widthJ <= 0) {
+					throw new IllegalArgumentException(
+							"Jungle Width must be >= 1");
+				} else {
+					if (widthJ > widthWorld) {
+						throw new IllegalArgumentException(
+								"Jungle Width must be <= Width");
+					} else {
+						this.widthJungle = widthJ;
+						if (heightJ < 0) {
+							throw new IllegalArgumentException(
+									"Jungle Height must be > 0");
+						} else {
+							if (heightJ > heightWorld) {
+								throw new IllegalArgumentException(
+										"Jungle Height must be <= Height");
+							} else {
+								this.heightJungle = heightJ;
+								initJungleLimits();
+								if (pEnergy < 0) {
+									throw new IllegalArgumentException(
+											"PlantEnergy must be >= 0");
+								} else {
+									this.plantEnergy = pEnergy;
+									initPlantContainer();
+									if (iEnergy < 1) {
+										throw new IllegalArgumentException(
+												"InitialEnergy must be >= 1");
+									} else {
+										this.initialEnergy = iEnergy;
+										if (rEnergy < 1) {
+											throw new IllegalArgumentException(
+													"InitialEnergy must be >= 1");
+										} else {
+
+											this.reproductionEnergy = rEnergy;
+											initAnimalContainer();
+											this.empty = false;
+										}
+									}
+								}
+							}
+
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -83,6 +157,8 @@ public class Welt {
 	 * 
 	 */
 	public void initPlantContainer() {
+		planted = 0;
+		eaten = 0;
 		this.plantContainer = new TreeMap<Pflanze, Integer>();
 	}
 
@@ -91,6 +167,8 @@ public class Welt {
 	 * 
 	 */
 	public void initAnimalContainer() {
+		bornCount = 0;
+		deadCount = 0;
 		this.animalContainer = new LinkedList<Tier>();
 
 	}
@@ -159,8 +237,11 @@ public class Welt {
 	 */
 	public void removePlant(int x, int y) {
 		int count = totalPlantsAt(x, y);
-		if (count > 0) {
-			Pflanze key = new Pflanze(x, y);
+		Pflanze key = new Pflanze(x, y);
+		if (count == 1) {
+			plantContainer.remove(key);
+			eaten++;
+		} else if (count > 1) {
 			count--;
 			plantContainer.put(key, count);
 			eaten++;
@@ -248,7 +329,6 @@ public class Welt {
 			addAnimal(baby);
 		}
 		// Move
-		tier.move(height, width);
 		tier.energyDecay(1);
 		if (tier.getEnergy() == 0) {
 			removeAnimal(tier);
@@ -256,6 +336,43 @@ public class Welt {
 			moveAnimal(tier);
 		}
 
+	}
+
+	/**
+	 * A Day in the Simulation
+	 */
+	public void day() {
+		this.randomAddPlant();
+		this.randomAddPlantJungle();
+		@SuppressWarnings("unchecked")
+		LinkedList<Tier> tmp = (LinkedList<Tier>) animalContainer.clone();
+		for (Tier tier : tmp) {
+			this.animalAction(tier);
+		}
+		setChanged();
+		notifyObservers();
+
+	}
+
+	/**
+	 * Runs the SIM
+	 * @param days to run
+	 * @throws Exception If all Animals are dead
+	 */
+	public void runSim(int days) throws Exception {
+		// Monkey-Patch
+		Tier weronika = new Tier(getWidth() / 2, getHeight() / 2,
+				getInitialEnergy());
+		this.addAnimal(weronika);
+		setChanged();
+		notifyObservers();
+		System.out.println("Got called from Controler!");
+		for (int i = 0; i < days; i++) {
+			if (bornCount == deadCount) {
+				throw new Exception("Aborting Simulation after: " + i + " day(s) -->" + "all Animals are dead");
+			}
+			day();
+		}
 	}
 
 	/**
@@ -344,6 +461,21 @@ public class Welt {
 			}
 		}
 		return counter;
+	}
+
+	/**
+	 * @return the empty
+	 */
+	public boolean isEmpty() {
+		return empty;
+	}
+
+	/**
+	 * @param empty
+	 *            the empty to set
+	 */
+	public void setEmpty(boolean empty) {
+		this.empty = empty;
 	}
 
 	/**
