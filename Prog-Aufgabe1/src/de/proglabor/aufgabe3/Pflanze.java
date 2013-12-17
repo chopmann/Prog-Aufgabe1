@@ -27,26 +27,10 @@ public class Pflanze implements Comparable<Pflanze> {
 	}
 
 	/**
-	 * setzt x-Koordinate
-	 * @param x 
-	 */
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	/**
 	 * @return y-Koordinate
 	 */
 	public int getY() {
 		return y;
-	}
-
-	/**
-	 * setzt y-Koordinate
-	 * @param y 
-	 */
-	public void setY(int y) {
-		this.y = y;
 	}
 
 	/* (non-Javadoc)

@@ -32,10 +32,7 @@ public class SimCollections implements SimCollectionsInterface {
 	public SimCollections(int width, int height, int widthJungle,
 			int heightJungle, int plantEnergy, int initialEnergy,
 			int reproductionEnergy) {
-		dieWelt = new Welt(width, height, widthJungle, heightJungle);
-		dieWelt.setPlantEnergy(plantEnergy);
-		dieWelt.setInitialEnergy(initialEnergy);
-		dieWelt.setReproductionEnergy(reproductionEnergy);
+		dieWelt = new Welt(width, height, widthJungle, heightJungle, plantEnergy, initialEnergy, reproductionEnergy);
 	}
 
 	/**
@@ -47,8 +44,8 @@ public class SimCollections implements SimCollectionsInterface {
 
 		// Monkey-Patch
 
-		Tier weronika = new Tier(INITIAL_ENERGY, MAXIMUM_WORLD_X / 2,
-				MAXIMUM_WORLD_Y / 2);
+		Tier weronika = new Tier( MAXIMUM_WORLD_X / 2,
+				MAXIMUM_WORLD_Y / 2, INITIAL_ENERGY);
 
 		dieWelt.addAnimal(weronika);
 	}
@@ -76,7 +73,7 @@ public class SimCollections implements SimCollectionsInterface {
 	 */
 	@Override
 	public LinkedList<Tier> getTiere() {
-		return dieWelt.getAnimalContainer();
+		return dieWelt.getContainerAnimals();
 	}
 
 	/* (non-Javadoc)
@@ -88,7 +85,7 @@ public class SimCollections implements SimCollectionsInterface {
 
 		dieWelt.randomAddPlant();
 		dieWelt.randomAddPlantJungle();
-		LinkedList<Tier> tmp = (LinkedList<Tier>) dieWelt.getAnimalContainer()
+		LinkedList<Tier> tmp = (LinkedList<Tier>) dieWelt.getContainerAnimals()
 				.clone();
 		for (Tier tier : tmp) {
 			dieWelt.animalAction(tier);
@@ -101,21 +98,33 @@ public class SimCollections implements SimCollectionsInterface {
 	 */
 	@Override
 	public TreeMap<Pflanze, Integer> getPflanzen() {
-		return dieWelt.getPlantContainer();
+		return dieWelt.getContainerPlants();
 	}
 	
+	/**
+	 * @return Planted
+	 */
 	public int planted() {
-		return dieWelt.getPlanted();
+		return dieWelt.getPlantedCount();
 	}
 	
+	/**
+	 * @return  BornCount
+	 */
 	public int born() {
 		return dieWelt.getBornCount();
 	}
 	
+	/**
+	 * @return  EatenCount
+	 */
 	public int eaten() {
-		return dieWelt.getEaten();
+		return dieWelt.getEatenCount();
 	}
 	
+	/**
+	 * @return deadCount
+	 */
 	public int killed() {
 		return dieWelt.getDeadCount();
 	}
