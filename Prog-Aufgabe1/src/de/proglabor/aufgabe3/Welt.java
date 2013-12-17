@@ -51,27 +51,21 @@ public class Welt extends Observable {
 	 */
 	private int eaten = 0;
 
+	/**
+	 *  Something
+	 */
 	public Welt() {
 		this.empty = true;
 	}
 
 	/**
-	 * Konstruktor
-	 * 
-	 * @param height
-	 *            H�he der Welt
-	 * @param width
-	 *            Breite der Welt
-	 * @param widthJungle
-	 *            Breite des Jungels
-	 * @param heightJungle
-	 *            H�he des Jungels
-	 * @param plantEnergy
-	 *            How much Energy Plants provide
-	 * @param initialEnergy
-	 *            of the Animals
-	 * @param reproductionEnergy
-	 *            Reproduction Threshold
+	 * @param width 
+	 * @param height 
+	 * @param widthJungle 
+	 * @param heightJungle 
+	 * @param plantEnergy 
+	 * @param initialEnergy 
+	 * @param reproductionEnergy 
 	 */
 	public Welt(int width, int height, int widthJungle, int heightJungle,
 			int plantEnergy, int initialEnergy, int reproductionEnergy) {
@@ -82,68 +76,68 @@ public class Welt extends Observable {
 	/**
 	 * Initializer
 	 * 
-	 * @param height
+	 * @param heightWorld
 	 *            H�he der Welt
-	 * @param width
+	 * @param widthWorld
 	 *            Breite der Welt
-	 * @param widthJungle
+	 * @param widthJ
 	 *            Breite des Jungels
-	 * @param heightJungle
+	 * @param heightJ
 	 *            H�he des Jungels
-	 * @param plantEnergy
+	 * @param pEnergy
 	 *            How much Energy Plants provide
-	 * @param initialEnergy
+	 * @param iEnergy
 	 *            of the Animals
-	 * @param reproductionEnergy
+	 * @param rEnergy
 	 *            Reproduction Threshold
 	 */
-	public void initAll(int width, int height, int widthJungle,
-			int heightJungle, int plantEnergy, int initialEnergy,
-			int reproductionEnergy) {
-		if (width <= 0) {
+	public void initAll(int widthWorld, int heightWorld, int widthJ,
+			int heightJ, int pEnergy, int iEnergy,
+			int rEnergy) {
+		if (widthWorld <= 0) {
 			throw new IllegalArgumentException("Width must be >= 1");
 		} else {
-			this.width = width;
-			if (height <= 0) {
+			this.width = widthWorld;
+			if (heightWorld <= 0) {
 				throw new IllegalArgumentException("Height must be >= 1");
 			} else {
-				this.height = height;
-				if (widthJungle <= 0) {
+				this.height = heightWorld;
+				if (widthJ <= 0) {
 					throw new IllegalArgumentException(
 							"Jungle Width must be >= 1");
 				} else {
-					if (widthJungle > width) {
+					if (widthJ > widthWorld) {
 						throw new IllegalArgumentException(
 								"Jungle Width must be <= Width");
 					} else {
-						this.widthJungle = widthJungle;
-						if (heightJungle < 0) {
+						this.widthJungle = widthJ;
+						if (heightJ < 0) {
 							throw new IllegalArgumentException(
 									"Jungle Height must be > 0");
 						} else {
-							if (heightJungle > height) {
+							if (heightJ > heightWorld) {
 								throw new IllegalArgumentException(
 										"Jungle Height must be <= Height");
 							} else {
-								this.heightJungle = heightJungle;
+								this.heightJungle = heightJ;
 								initJungleLimits();
-								if (plantEnergy < 0) {
+								if (pEnergy < 0) {
 									throw new IllegalArgumentException(
 											"PlantEnergy must be >= 0");
 								} else {
-									this.plantEnergy = plantEnergy;
+									this.plantEnergy = pEnergy;
 									initPlantContainer();
-									if (initialEnergy < 1) {
+									if (iEnergy < 1) {
 										throw new IllegalArgumentException(
 												"InitialEnergy must be >= 1");
 									} else {
-										this.initialEnergy = initialEnergy;
-										if (reproductionEnergy < 1) {
+										this.initialEnergy = iEnergy;
+										if (rEnergy < 1) {
 											throw new IllegalArgumentException(
 													"InitialEnergy must be >= 1");
 										} else {
 
-											this.reproductionEnergy = reproductionEnergy;
+											this.reproductionEnergy = rEnergy;
 											initAnimalContainer();
 											this.empty = false;
 										}
@@ -247,7 +241,7 @@ public class Welt extends Observable {
 		if (count == 1) {
 			plantContainer.remove(key);
 			eaten++;
-		} else if(count > 1) {
+		} else if (count > 1) {
 			count--;
 			plantContainer.put(key, count);
 			eaten++;
@@ -360,6 +354,11 @@ public class Welt extends Observable {
 
 	}
 
+	/**
+	 * Runs the SIM
+	 * @param days to run
+	 * @throws Exception If all Animals are dead
+	 */
 	public void runSim(int days) throws Exception {
 		// Monkey-Patch
 		Tier weronika = new Tier(getWidth() / 2, getHeight() / 2,
@@ -370,8 +369,7 @@ public class Welt extends Observable {
 		System.out.println("Got called from Controler!");
 		for (int i = 0; i < days; i++) {
 			if (bornCount == deadCount) {
-				System.out.println("Breaking");
-				throw new Exception("Aborting Simulation after: " + i + " day(s) -->"+" all Animals are dead!");
+				throw new Exception("Aborting Simulation after: " + i + " day(s) -->" + "all Animals are dead");
 			}
 			day();
 		}

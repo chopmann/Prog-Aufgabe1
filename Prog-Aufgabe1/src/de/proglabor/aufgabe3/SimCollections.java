@@ -101,18 +101,30 @@ public class SimCollections implements SimCollectionsInterface {
 		return dieWelt.getContainerPlants();
 	}
 	
+	/**
+	 * @return Planted
+	 */
 	public int planted() {
 		return dieWelt.getPlantedCount();
 	}
 	
+	/**
+	 * @return  BornCount
+	 */
 	public int born() {
 		return dieWelt.getBornCount();
 	}
 	
+	/**
+	 * @return  EatenCount
+	 */
 	public int eaten() {
 		return dieWelt.getEatenCount();
 	}
 	
+	/**
+	 * @return deadCount
+	 */
 	public int killed() {
 		return dieWelt.getDeadCount();
 	}

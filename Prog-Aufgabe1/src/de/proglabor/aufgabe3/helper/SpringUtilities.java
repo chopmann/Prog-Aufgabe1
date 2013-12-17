@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe3.gui;
+package de.proglabor.aufgabe3.helper;
 /*
  * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
  *

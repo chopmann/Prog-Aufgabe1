@@ -78,14 +78,14 @@ public class Tier implements TierInterface {
 	}
 
 	/**
-	 * @param x Koordinate
-	 * @param y Koordinate
-	 * @param height der Welt
-	 * @param width der Welt
+	 * @param xPos Koordinate
+	 * @param yPos Koordinate
+	 * @param heightWorld der Welt
+	 * @param widthWorld der Welt
 	 */
-	public void setPos(int x, int y, int height, int width) {
-		this.x = Helper.mirror(x, width - Helper.ARRAY_OFFSET);
-		this.y = Helper.mirror(y, height - Helper.ARRAY_OFFSET);
+	public void setPos(int xPos, int yPos, int heightWorld, int widthWorld) {
+		this.x = Helper.mirror(xPos, widthWorld - Helper.ARRAY_OFFSET);
+		this.y = Helper.mirror(yPos, heightWorld - Helper.ARRAY_OFFSET);
 	}
 
 	@Override
@@ -137,11 +137,11 @@ public class Tier implements TierInterface {
 	/**
 	 * Reduziert Energie des Tieres
 	 * 
-	 * @param energy
+	 * @param energyDecay
 	 *            H�he der zu reduzierenden Energie
 	 */
-	public void energyDecay(int energy) {
-		this.energy -= energy;
+	public void energyDecay(int energyDecay) {
+		this.energy -= energyDecay;
 	}
 
 	/*

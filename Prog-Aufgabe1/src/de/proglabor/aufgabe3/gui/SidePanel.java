@@ -2,35 +2,58 @@ package de.proglabor.aufgabe3.gui;
 
 import de.proglabor.aufgabe3.config.WeltConfig;
 import de.proglabor.aufgabe3.controllers.ControlerInterface;
-import de.proglabor.aufgabe3.controllers.Controller;
+import de.proglabor.aufgabe3.helper.SpringUtilities;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class SidePanel extends JPanel implements SimView,ActionListener{
-	JButton start = new JButton("START");
-	JButton clear = new JButton("CLEAR");
-	HashMap<WeltConfig, JTextField> form = new HashMap<WeltConfig, JTextField>();
-	ControlerInterface controller;
-	WeltConfig[] labels = WeltConfig.values();
+/**
+ * @author id261708
+ * 
+ */
+public class SidePanel extends JPanel implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -957482444761875896L;
+	private static final int FIELD_LENGTH = 10;
+	private static final int PANEL_WIDTH = 273;
+	private static final int PANEL_HEIGHT = 768;
+	private static final int ICON_RESOLUTION = 32;
+	private JButton start = new JButton("START");
+	private JButton clear = new JButton("CLEAR");
+	private HashMap<WeltConfig, JTextField> form = new HashMap<WeltConfig, JTextField>();
+	private ControlerInterface controller;
+	private WeltConfig[] labels = WeltConfig.values();
 
+	/**
+	 *  
+	 */
 	public SidePanel() {
 		setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
 		setLayout(new FlowLayout());
-		setPreferredSize(new Dimension(273, 768));
+		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
 		JPanel p = new JPanel(new SpringLayout());
 
 		for (int i = 0; i < labels.length; i++) {
 			JLabel l = new JLabel(labels[i].toString(), JLabel.TRAILING);
 			p.add(l);
-			JTextField textField = new JTextField(10);
+			JTextField textField = new JTextField(FIELD_LENGTH);
 			l.setLabelFor(textField);
 			p.add(textField);
 			form.put(labels[i], textField);
@@ -44,18 +67,17 @@ public class SidePanel extends JPanel implements SimView,ActionListener{
 		try {
 			Image startImg = ImageIO.read(getClass().getResource(
 					"/resources/simulate.png"));
-			ImageIcon startIcon = new ImageIcon(startImg.getScaledInstance(32,
-					32, Image.SCALE_FAST));
+			ImageIcon startIcon = new ImageIcon(startImg.getScaledInstance(
+					ICON_RESOLUTION, ICON_RESOLUTION, Image.SCALE_FAST));
 			start.setIcon(startIcon);
 			Image resetImg = ImageIO.read(getClass().getResource(
 					"/resources/reset.png"));
-			ImageIcon resetIcon = new ImageIcon(resetImg.getScaledInstance(32,
-					32, Image.SCALE_FAST));
+			ImageIcon resetIcon = new ImageIcon(resetImg.getScaledInstance(
+					ICON_RESOLUTION, ICON_RESOLUTION, Image.SCALE_FAST));
 			clear.setIcon(resetIcon);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 
 		this.add(start);
 		start.addActionListener(this);
@@ -64,7 +86,6 @@ public class SidePanel extends JPanel implements SimView,ActionListener{
 		this.add(clear);
 
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -82,7 +103,7 @@ public class SidePanel extends JPanel implements SimView,ActionListener{
 				ok = false;
 				controller.setStatus("WTF Something Missing or wrong input");
 			}
-			if (ok == true) {
+			if (ok) {
 				controller.neu(parameters);
 				clear.setEnabled(true);
 			}
@@ -93,12 +114,13 @@ public class SidePanel extends JPanel implements SimView,ActionListener{
 
 	}
 
-
-	@Override
+	/**
+	 * 
+	 * @param controler 
+	 */
 	public void addController(ControlerInterface controler) {
 		this.controller = controler;
-		
-	}
 
+	}
 
 }

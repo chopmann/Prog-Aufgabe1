@@ -3,20 +3,30 @@ package de.proglabor.aufgabe3.gui;
 import java.awt.BorderLayout;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-
 import de.proglabor.aufgabe3.Welt;
 import de.proglabor.aufgabe3.controllers.ControlerInterface;
-import de.proglabor.aufgabe3.controllers.Controller;
 
-public class MainWindow extends JFrame implements Observer{
-	
+/**
+ * @author id261708
+ *
+ */
+public class MainWindow extends JFrame implements Observer {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4154113192447898434L;
+	private static final int WINDOW_WIDTH = 1366;
+	private static final int WINDOW_LENGHT = 768;
 	SidePanel sidePanel;
 	CenterPanel centerPanel;
 	private Welt model;
 	private ControlerInterface controler;
+	
+	/** 
+	 * @param model 
+	 * @param controler 
+	 */
 	public MainWindow(Welt model, ControlerInterface controler) {
         this.model = model;
         this.controler = controler;
@@ -40,9 +50,12 @@ public class MainWindow extends JFrame implements Observer{
 		centerPanel.updateDisplay(model);
 		
 	}
+	/**
+	 *  
+	 */
 	public void createView() {     
 		setTitle("Simple Simulation");
-		setSize(1366, 768);
+		setSize(WINDOW_WIDTH, WINDOW_LENGHT);
 		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -55,10 +68,16 @@ public class MainWindow extends JFrame implements Observer{
 		this.setVisible(true);
 		
 	}
+	/**
+	 *  
+	 */
 	public void clearDisplay() {
 		centerPanel.clear();
 		
 	}
+	/** 
+	 * @param message 
+	 */
 	public void setStatus(String message) {
 		centerPanel.setStatus(message);
 	}
