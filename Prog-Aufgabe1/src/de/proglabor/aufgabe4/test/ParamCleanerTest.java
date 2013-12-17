@@ -1,10 +1,10 @@
-package de.proglabor.aufgabe3.test;
+package de.proglabor.aufgabe4.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.proglabor.aufgabe3.Helper;
+import de.proglabor.aufgabe4.Helper;
 
 public class ParamCleanerTest {
 

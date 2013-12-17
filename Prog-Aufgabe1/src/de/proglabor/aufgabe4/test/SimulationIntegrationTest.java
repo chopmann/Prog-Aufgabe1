@@ -1,11 +1,11 @@
-package de.proglabor.aufgabe3.test;
+package de.proglabor.aufgabe4.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.proglabor.aufgabe3.SimCollections;
-import de.proglabor.aufgabe3.Tier;
+import de.proglabor.aufgabe4.SimCollections;
+import de.proglabor.aufgabe4.Tier;
 
 public class SimulationIntegrationTest {
 	

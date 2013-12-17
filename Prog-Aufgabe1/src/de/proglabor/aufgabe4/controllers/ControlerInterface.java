@@ -1,8 +1,8 @@
-package de.proglabor.aufgabe3.controllers;
+package de.proglabor.aufgabe4.controllers;
 
 import java.util.HashMap;
 
-import de.proglabor.aufgabe3.config.WeltConfig;
+import de.proglabor.aufgabe4.config.WeltConfig;
 
 /**
  * @author id261708

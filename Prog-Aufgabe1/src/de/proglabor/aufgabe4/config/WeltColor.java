@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe3.config;
+package de.proglabor.aufgabe4.config;
 
 import java.awt.Color;
 

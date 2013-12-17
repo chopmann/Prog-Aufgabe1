@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe3;
+package de.proglabor.aufgabe4;
 
 /**
  * @author SirMonkey

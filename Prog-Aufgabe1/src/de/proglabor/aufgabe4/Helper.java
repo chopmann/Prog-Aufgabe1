@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe3;
+package de.proglabor.aufgabe4;
 
 import java.util.Random;
 

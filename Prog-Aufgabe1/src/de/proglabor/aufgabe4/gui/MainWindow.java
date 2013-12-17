@@ -1,11 +1,12 @@
-package de.proglabor.aufgabe3.gui;
+package de.proglabor.aufgabe4.gui;
 
 import java.awt.BorderLayout;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
-import de.proglabor.aufgabe3.Welt;
-import de.proglabor.aufgabe3.controllers.ControlerInterface;
+
+import de.proglabor.aufgabe4.Welt;
+import de.proglabor.aufgabe4.controllers.ControlerInterface;
 
 /**
  * @author id261708

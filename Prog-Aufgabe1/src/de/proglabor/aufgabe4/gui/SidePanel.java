@@ -1,8 +1,8 @@
-package de.proglabor.aufgabe3.gui;
+package de.proglabor.aufgabe4.gui;
 
-import de.proglabor.aufgabe3.config.WeltConfig;
-import de.proglabor.aufgabe3.controllers.ControlerInterface;
-import de.proglabor.aufgabe3.helper.SpringUtilities;
+import de.proglabor.aufgabe4.config.WeltConfig;
+import de.proglabor.aufgabe4.controllers.ControlerInterface;
+import de.proglabor.aufgabe4.helper.SpringUtilities;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;

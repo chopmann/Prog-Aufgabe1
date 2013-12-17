@@ -1,7 +1,7 @@
-package de.proglabor.aufgabe3.main;
+package de.proglabor.aufgabe4.main;
 
-import de.proglabor.aufgabe3.Welt;
-import de.proglabor.aufgabe3.controllers.Controller;
+import de.proglabor.aufgabe4.Welt;
+import de.proglabor.aufgabe4.controllers.Controller;
 
 /**
  * @author id261708

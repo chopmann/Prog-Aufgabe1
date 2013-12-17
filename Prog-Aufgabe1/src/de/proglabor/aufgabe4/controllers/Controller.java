@@ -1,11 +1,11 @@
-package de.proglabor.aufgabe3.controllers;
+package de.proglabor.aufgabe4.controllers;
 
 import java.util.HashMap;
 
-import de.proglabor.aufgabe3.Welt;
-import de.proglabor.aufgabe3.config.StatusCode;
-import de.proglabor.aufgabe3.config.WeltConfig;
-import de.proglabor.aufgabe3.gui.MainWindow;
+import de.proglabor.aufgabe4.Welt;
+import de.proglabor.aufgabe4.config.StatusCode;
+import de.proglabor.aufgabe4.config.WeltConfig;
+import de.proglabor.aufgabe4.gui.MainWindow;
 
 
 /**

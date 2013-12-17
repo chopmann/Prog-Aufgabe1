@@ -1,15 +1,16 @@
-package de.proglabor.aufgabe3.gui;
+package de.proglabor.aufgabe4.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Map.Entry;
 import javax.swing.JPanel;
-import de.proglabor.aufgabe3.Pflanze;
-import de.proglabor.aufgabe3.Tier;
-import de.proglabor.aufgabe3.Welt;
-import de.proglabor.aufgabe3.config.DisplayMode;
-import de.proglabor.aufgabe3.config.WeltColor;
+
+import de.proglabor.aufgabe4.Pflanze;
+import de.proglabor.aufgabe4.Tier;
+import de.proglabor.aufgabe4.Welt;
+import de.proglabor.aufgabe4.config.DisplayMode;
+import de.proglabor.aufgabe4.config.WeltColor;
 
 /**
  * @author id261708

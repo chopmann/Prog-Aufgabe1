@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe3.gui;
+package de.proglabor.aufgabe4.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,8 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
-import de.proglabor.aufgabe3.Welt;
-import de.proglabor.aufgabe3.controllers.Controller;
+import de.proglabor.aufgabe4.Welt;
+import de.proglabor.aufgabe4.controllers.Controller;
 
 /**
  * @author id261708
