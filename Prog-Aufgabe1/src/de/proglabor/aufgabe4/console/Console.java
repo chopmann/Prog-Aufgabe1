@@ -37,27 +37,21 @@ public class Console {
 			case "-help":
 				//Break the Loop
 				showHelp = true;
-				//Display Help
-				System.out.println("DISPLAY HELP");
+				printHelp();
 				break;
 			case "-pflanze":
 				reportPlants = true;
-				System.out.println("Plants");
 				break;
 			case "-tiere":
-				System.out.println("Tiere");
 				reportTiere = true;
 				break;
 			case "-bewegung":
-				System.out.println("Bewegung");
 				reportBewegung = true;
 				break;
 			case "-reproduce":
-				System.out.println("Reproduce");
 				reportReproduce = true;
 				break;
 			case "-simulation":
-				System.out.println("Simulation");
 				displayGUI = true;
 				break;
 			case "-simcount":
@@ -67,29 +61,24 @@ public class Console {
 					if (value >= 1) {
 						daysToSim = value;
 						indexOfSimcount = i + 1;
-						System.out.println("Days to Sim: " + value);
 					} else {
-						System.out.println("Wrong Value dude!");
-						throw new WrongValueException();
+						throw new WrongValueException("-simcount must be a postive Integer greater than 0 an it was: " + value);
 					}
-				} catch (Exception e) {
-					// Send to log
-					System.out.println("Something went wrong: " + e.getMessage());
-					throw new WrongValueException();
+				} catch (ArrayIndexOutOfBoundsException e) {
+						throw new WrongValueException("-simcount --> days missing");
 				}
 				break;
 			default:
 				if (indexOfSimcount != i ) {
-					System.out.println("Stop Smonking!--> " + args[i]);
-					throw new UnknownKeywordException();
+					throw new UnknownKeywordException("Unknown Keyword " + args[i]);
 				} else {
 					break;
 				}
 
 			}
-		}
+		} // Prolly not getting called...
 		if (!simCountPresent && !showHelp) {
-			throw new UnknownKeywordException();
+			throw new UnknownKeywordException("No parameters use -help to display Usage");
 		}
 	}
 	
@@ -136,5 +125,20 @@ public class Console {
 	 */
 	public Integer getSimulationCount() {
 		return daysToSim;
+	}
+	
+	private void printHelp() {
+		String msg = "Simple Simulation \n"
+				+ "Parameters \n"
+				+ "-help Print this Message \n"
+				+ "-simcount [days] How many [days] are going to be simulated \n"
+				+ "[days] Must be a postive Integer greater than 1 \n"
+				+ "<<OPTIONAL>> \n"
+				+ "-pflanze Generate a PflanzenReport \n"
+				+ "-tiere Gerate a TiereReport \n"
+				+ "-bewegung Geneate a Bewegung Report \n"
+				+ "-reproduce Generate a Reproduce Report \n"
+				+ "-simulation Display GUI";
+		System.out.println(msg);
 	}
 }
