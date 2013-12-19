@@ -1,6 +1,6 @@
 package de.proglabor.aufgabe4.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +36,9 @@ public class AnimalTest {
 		assertEquals(dollyGenes[1] - 1, dolly2.getGenes()[1]);
 		assertEquals(dollyGenes[2], dolly3.getGenes()[2]);
 		assertEquals(dollyGenes[3] + 1, dolly4.getGenes()[3]);
+		assertEquals("Reproduce counter", 3,  dolly.getReproduceCounter());
+		assertEquals("Dolly ID", 1,  dolly.getID());
+		assertEquals("Dolly4 ID", 4,  dolly4.getID());
 	}
 	@Test
 	public void testMoveNorthEast() {
@@ -71,5 +74,12 @@ public class AnimalTest {
 		dolly.move(HEIGHT,WIDTH);
 		assertEquals(0, dolly.getX());
 		assertEquals(0, dolly.getY());
+	}
+	
+	@Test
+	public void testDistance() {
+		dolly.setPos(3, 4, HEIGHT, WIDTH);
+		//Dolly Startet at X = 1 and Y = 1 and moved to X = 3 Y= 4
+		assertEquals(5, dolly.getDistanceToStart());
 	}
 }

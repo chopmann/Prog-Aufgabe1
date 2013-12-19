@@ -90,17 +90,27 @@ public class WorldTest {
 		assertEquals(0, dieWelt.totalPlantsAt(0, 0));
 		assertEquals(1, dieWelt.totalPlantsAt(15, 20));
 		assertEquals(2, dieWelt.totalPlantsAt(20, 15));
+		assertEquals(3, dieWelt.totalPlants());
 	}
 
 	@Test
 	public void testTotalPlants() {
-		// Add 5 Plants
+		// Add 5 Plants 
 		dieWelt.randomAddPlant();
 		dieWelt.randomAddPlant();
 		dieWelt.randomAddPlant();
 		dieWelt.randomAddPlant();
 		dieWelt.randomAddPlant();
 		assertEquals(5, dieWelt.totalPlants());
+	}
+	
+	@Test
+	public void testTotalPlantsJungle() {
+		// Add 3 Plants to the Jungle
+		dieWelt.randomAddPlantJungle();
+		dieWelt.randomAddPlantJungle();
+		dieWelt.randomAddPlantJungle();
+		assertEquals(3, dieWelt.totalPlantsJungle());
 	}
 
 	@Test
@@ -132,5 +142,20 @@ public class WorldTest {
 		dieWelt.addAnimal(tier);
 		dieWelt.addAnimal(tier);
 		assertEquals("Total Animals", 5, dieWelt.totalAnimals());
+	}
+	
+	@Test
+	public void testTotalAnimalsJungle() {
+		Tier tier = new Tier(WIDTH / 2, HEIGHT / 2, 100);
+		Tier tier2 = new Tier(1, 1, 100);
+		dieWelt.addAnimal(tier);
+		dieWelt.addAnimal(tier);
+		dieWelt.addAnimal(tier);
+		dieWelt.addAnimal(tier);
+		dieWelt.addAnimal(tier);
+		dieWelt.addAnimal(tier2);
+		dieWelt.addAnimal(tier2);
+		assertEquals("Total Animals", 7, dieWelt.totalAnimals());
+		assertEquals("Total Animals Jungle", 5, dieWelt.totalAnimalsJungle());
 	}
 }

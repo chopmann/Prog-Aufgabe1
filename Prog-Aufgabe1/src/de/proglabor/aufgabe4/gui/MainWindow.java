@@ -28,9 +28,9 @@ public class MainWindow extends JFrame implements Observer {
 	 * @param model 
 	 * @param controller 
 	 */
-	public MainWindow(Welt model, ControllerInterface controler) {
+	public MainWindow(Welt model, ControllerInterface controller) {
         this.model = model;
-        this.controller = controler;
+        this.controller = controller;
         model.addObserver(this);
 	}
 	/**
@@ -47,7 +47,6 @@ public class MainWindow extends JFrame implements Observer {
 	}
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		System.out.println("Wooot! Wiring Working");
 		centerPanel.updateDisplay(model);
 		
 	}

@@ -1,10 +1,16 @@
 package de.proglabor.aufgabe4;
 
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Random;
 import java.util.TreeMap;
+
+import de.proglabor.aufgabe4.main.Main;
+import de.proglabor.aufgabe4.report.ReportBewegung;
+import de.proglabor.aufgabe4.report.ReportPflanze;
+import de.proglabor.aufgabe4.report.ReportTiere;
 
 /**
  * @author sirmonkey
@@ -15,6 +21,14 @@ import java.util.TreeMap;
  * 
  */
 public class Welt extends Observable {
+	
+	private static final int MAXIMUM_WORLD_X = 40;
+	private static final int MAXIMUM_WORLD_Y = 30;
+	private static final int JUNGLE_WIDTH = 10;
+	private static final int JUNGLE_HEIGHT = 10;
+	private static final int PLANT_ENERGY = 80;
+	private static final int INITIAL_ENERGY = 1000;
+	private static final int REPRODUCTION_ENERGY = 200;
 
 	private boolean empty;
 	private int width = 0;
@@ -32,6 +46,13 @@ public class Welt extends Observable {
 	private LinkedList<Tier> animalContainer;
 	private int initialEnergy = 0;
 	private int reproductionEnergy = 0;
+	
+	private int maxPlants = 0;
+	private int maxAnimals = 0;
+	private boolean reportPlants = false;
+	private boolean reportTiere = false;
+	private boolean reportBewegung = false;
+	private boolean reportReproduce = false;
 
 	/**
 	 * z�hlt die geborenen Tiere
@@ -55,7 +76,8 @@ public class Welt extends Observable {
 	 *  Something
 	 */
 	public Welt() {
-		this.empty = true;
+		this(MAXIMUM_WORLD_X, MAXIMUM_WORLD_Y, JUNGLE_WIDTH, JUNGLE_HEIGHT,
+				PLANT_ENERGY, INITIAL_ENERGY, REPRODUCTION_ENERGY);
 	}
 
 	/**
@@ -357,21 +379,70 @@ public class Welt extends Observable {
 	/**
 	 * Runs the SIM
 	 * @param days to run
-	 * @throws Exception If all Animals are dead
 	 */
-	public void runSim(int days) throws Exception {
+	public void runSim(int days) {
+		Main.LOGGER.info("Simulation Started");
 		// Monkey-Patch
 		Tier weronika = new Tier(getWidth() / 2, getHeight() / 2,
 				getInitialEnergy());
 		this.addAnimal(weronika);
 		setChanged();
 		notifyObservers();
-		System.out.println("Got called from Controler!");
+		ReportTiere reportT = null;
+		ReportPflanze reportPflanze = null;
+		if (this.reportTiere) {
+			reportT = new ReportTiere(days);
+			reportT.reportHeader();
+		}
+		
+		if (this.reportPlants) {
+			reportPflanze = new ReportPflanze(days);
+			reportPflanze.reportHeader();
+		}
 		for (int i = 0; i < days; i++) {
-			if (bornCount == deadCount) {
-				throw new Exception("Aborting Simulation after: " + i + " day(s) -->" + "all Animals are dead");
-			}
 			day();
+			if (this.reportTiere) {
+				int animalsWorld = totalAnimals();
+				int animalsJungle = totalAnimalsJungle();
+				Hashtable<String, Integer> reportTiereContent = new Hashtable<String, Integer>();
+				reportTiereContent.put("Tag", i + 1);
+				reportTiereContent.put("Welt", animalsWorld);
+				reportTiereContent.put("Dschungel", animalsJungle);
+				reportT.reportContent(reportTiereContent);
+				maxAnimals = Math.max(maxAnimals, animalsWorld);
+			}
+			if (this.reportPlants) {
+				int plantsWorld = totalPlants();
+				int plantsJungle = totalPlantsJungle();
+				Hashtable<String, Integer> reportPflanzeContent = new Hashtable<String, Integer>();
+				reportPflanzeContent.put("Tag", i + 1);
+				reportPflanzeContent.put("Welt", plantsWorld);
+				reportPflanzeContent.put("Dschungel", plantsJungle);
+				reportPflanze.reportContent(reportPflanzeContent);
+				maxPlants = Math.max(maxPlants, plantsWorld);
+			}
+			if (bornCount == deadCount) {
+				Main.LOGGER.info("Simulation Stoped All Animals are Dead");
+				break;
+//				throw new Exception("Aborting Simulation after: " + i + " day(s) -->" + "all Animals are dead");
+			}
+			
+		}
+		Main.LOGGER.info("Simulation Done");
+		if (this.reportTiere) {
+			reportT.reportFooter(maxAnimals);
+			reportT.reportWriter(reportT.reportOutput, "ReportTiere.csv");
+		}
+		if (this.reportPlants) {
+			reportPflanze.reportFooter(maxPlants);
+			reportPflanze.reportWriter(reportPflanze.reportOutput, "ReportPflanze.csv");
+		}
+		if (this.reportBewegung) {
+			ReportBewegung report = new ReportBewegung(days);
+			report.reportHeader();
+			report.reportContent(animalContainer);
+			report.reportFooter(animalContainer);
+			report.reportWriter(report.reportOutput, "ReportBewegung.csv");
 		}
 	}
 
@@ -410,10 +481,22 @@ public class Welt extends Observable {
 	 * @return The Total Plant Count
 	 */
 	public int totalPlants() {
+
+		return planted - eaten;
+	}
+	
+	/**
+	 * @return Total Plants in the Jungle
+	 */
+	public int totalPlantsJungle() {
 		int total = 0;
 		for (Map.Entry<Pflanze, Integer> entry : plantContainer.entrySet()) {
-			Integer value = entry.getValue();
-			total += value;
+			int cellX = entry.getKey().getX();
+			int cellY = entry.getKey().getY();
+			if (cellX >= jungleLimitX1 && cellX <= jungleLimitX2 && cellY >= jungleLimitY1 && cellY <= jungleLimitY2) {
+				Integer value = entry.getValue();
+				total += value;
+			}
 		}
 		return total;
 	}
@@ -442,6 +525,21 @@ public class Welt extends Observable {
 	 */
 	public int totalAnimals() {
 		return animalContainer.size();
+	}
+	
+	/**
+	 * @return total Animals in the Jungle
+	 */
+	public int totalAnimalsJungle() {
+		int counter = 0;
+		for (Tier tier : animalContainer) {
+			if (tier.getX() >= jungleLimitX1 && tier.getX() <= jungleLimitX2
+					&& tier.getY() >= jungleLimitY1
+					&& tier.getY() <= jungleLimitY2) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 
 	/**
@@ -564,6 +662,34 @@ public class Welt extends Observable {
 	 */
 	public int getJungleLimitY2() {
 		return jungleLimitY2;
+	}
+
+	/**
+	 * @param reportPlants the reportPlants to set
+	 */
+	public void setReportPlants(boolean reportPlants) {
+		this.reportPlants = reportPlants;
+	}
+
+	/**
+	 * @param reportTiere the reportTiere to set
+	 */
+	public void setReportTiere(boolean reportTiere) {
+		this.reportTiere = reportTiere;
+	}
+
+	/**
+	 * @param reportBewegung the reportBewegung to set
+	 */
+	public void setReportBewegung(boolean reportBewegung) {
+		this.reportBewegung = reportBewegung;
+	}
+
+	/**
+	 * @param reportReproduce the reportReproduce to set
+	 */
+	public void setReportReproduce(boolean reportReproduce) {
+		this.reportReproduce = reportReproduce;
 	}
 
 }

@@ -46,6 +46,16 @@ public interface TierInterface {
 	public void move (int height, int width);
 	
 	/**
+	 * @return Distanz zwischen Start und aktueller Position
+	 */
+	public int getDistanceToStart();
+	
+	/**
+	 * @return Zaehlt Anzahl der Schritte eines Tieres
+	 */
+	public int getSteps();
+	
+	/**
 	 * f�gt Energie hinzu
 	 * @param plantEnergy Futterenergie
 	 */
@@ -59,6 +69,11 @@ public interface TierInterface {
 	 * @return a new Born Animal with mutated Genes
 	 */
 	public TierInterface reproduce(int randomGene, int randomMutation);
+	
+	/**
+	 * @return Kumulierte Anzahl der Reproduktionen eines Tieres
+	 */
+	public int getReproduceCounter();
 	
 	/**
 	 * gibt eine String repr�sentation des Tiers aus

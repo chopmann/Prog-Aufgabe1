@@ -8,7 +8,7 @@ public enum WeltConfig {
 	/**
 	 * 
 	 */
-	DAYS("days"), WIDHT("Width"), HEIGHT("Height"), JUNGLE_WIDTH("Jungle Width"), JUNGLE_HEIGHT(
+	DAYS("Days"), WIDHT("Width"), HEIGHT("Height"), JUNGLE_WIDTH("Jungle Width"), JUNGLE_HEIGHT(
 			"Jungle Height"), /**
 			 * 
 			 */

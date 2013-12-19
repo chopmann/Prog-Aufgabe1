@@ -7,15 +7,21 @@ import java.util.Random;
  * 
  */
 public class Tier implements TierInterface {
-	static final int MAXX_GENE = 10;
-	static final int STD_DIR = 0;
-	static final int[] EMPTY_GENES = {0};
+	private static int nextID = 1;
+	private int id;
+	private static final int MAXX_GENE = 10;
+	private static final int STD_DIR = 0;
+	private static final int[] EMPTY_GENES = {0};
+	private final int startX;
+	private final int startY;
 	private int x;
 	private int y;
 	private int energy;
 	private int dir;
 	private int[] genes;
 	private int sumGenes;
+	private int reproduceCounter = 0;
+	private int stepsCounter = 0;
 
 	/**
 	 * Konstruktor
@@ -30,8 +36,11 @@ public class Tier implements TierInterface {
 	 *            Gene
 	 */
 	public Tier(int x, int y, int animalStartEnergy, int dir, int[] genes) {
+		this.id = nextID++;
 		this.x = x;
 		this.y = y;
+		this.startX = x;
+		this.startY = y;
 		this.energy = animalStartEnergy;
 		this.dir = dir;
 		this.genes = genes;
@@ -86,6 +95,13 @@ public class Tier implements TierInterface {
 	public void setPos(int xPos, int yPos, int heightWorld, int widthWorld) {
 		this.x = Helper.mirror(xPos, widthWorld - Helper.ARRAY_OFFSET);
 		this.y = Helper.mirror(yPos, heightWorld - Helper.ARRAY_OFFSET);
+	}
+	
+	/**
+	 * @return the Animal ID
+	 */
+	public int getID() {
+		return id;
 	}
 
 	@Override
@@ -178,6 +194,7 @@ public class Tier implements TierInterface {
 
 	@Override
 	public void move(int height, int width) {
+		stepsCounter++;
 		switch (dir) {
 		case 0: // NE
 			setPos(x - 1, y - 1, height, width);
@@ -207,6 +224,22 @@ public class Tier implements TierInterface {
 			setPos(x, y, height, width);
 			break;
 		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see de.proglabor.aufgabe4.TierInterface#getDistanceToStart()
+	 */
+	@Override
+	public int getDistanceToStart() {
+		return Math.abs(startX - x) + Math.abs(startY - y);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.proglabor.aufgabe4.TierInterface#getSteps()
+	 */
+	@Override
+	public int getSteps() {
+		return stepsCounter;
 	}
 
 	// Reproduction Stuff -- Animals can mutate if they reproduce.
@@ -246,6 +279,7 @@ public class Tier implements TierInterface {
 
 	@Override
 	public Tier reproduce(int randomGene, int randomMutation) {
+		reproduceCounter++;
 		Tier newBorn = new Tier(this.x, this.y, this.energy / 2);
 		int[] newBornGenes = this.genes.clone();
 		newBorn.setGenes(newBornGenes);
@@ -263,5 +297,14 @@ public class Tier implements TierInterface {
 		int randomMutation = Helper.randInt(-1, 1, rand);
 		return reproduce(randomGene, randomMutation);
 	}
+	
+	/* (non-Javadoc)
+	 * @see de.proglabor.aufgabe4.TierInterface#getReproduceCounter()
+	 */
+	public int getReproduceCounter() {
+		return reproduceCounter;
+	}
+
+
 
 }
