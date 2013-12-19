@@ -64,7 +64,7 @@ public class Console {
 					} else {
 						throw new WrongValueException("-simcount must be a postive Integer greater than 0 an it was: " + value);
 					}
-				} catch (ArrayIndexOutOfBoundsException e) {
+				} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
 						throw new WrongValueException("-simcount --> days missing");
 				}
 				break;

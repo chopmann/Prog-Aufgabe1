@@ -19,7 +19,6 @@ public class ReportTiere extends Report {
 		reportOutput.add("Anzahl Durchläufe: " + this.days);
 		reportOutput.add("");
 		reportOutput.add("Tag	Welt	Dschungel");
-
 	}
 
 	@Override
