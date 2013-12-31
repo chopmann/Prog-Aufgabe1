@@ -1,6 +1,6 @@
 package de.proglabor.aufgabe4.modell;
 
-import de.proglabor.aufgabe4.helper.Helper;
+import de.proglabor.aufgabe4.utils.Helper;
 import de.proglabor.aufgabe4.TierInterface;
 
 import java.util.Random;
@@ -9,7 +9,7 @@ import java.util.Random;
  * @author sirmonkey
  * 
  */
-public class Tier implements TierInterface {
+public class Animal implements TierInterface {
 	private static int nextID = 1;
 	private int id;
 	private static final int MAXX_GENE = 10;
@@ -38,7 +38,7 @@ public class Tier implements TierInterface {
 	 * @param genes
 	 *            Gene
 	 */
-	public Tier(int x, int y, int animalStartEnergy, int dir, int[] genes) {
+	public Animal(int x, int y, int animalStartEnergy, int dir, int[] genes) {
 		this.id = nextID++;
 		this.x = x;
 		this.y = y;
@@ -59,7 +59,7 @@ public class Tier implements TierInterface {
 	 * @param y
 	 *            Koorinate
 	 */
-	public Tier(int x, int y, int animalStartEnergy) {
+	public Animal(int x, int y, int animalStartEnergy) {
 		this(x, y, animalStartEnergy, STD_DIR, EMPTY_GENES);
 		initGenes();
 	}
@@ -92,8 +92,8 @@ public class Tier implements TierInterface {
 	/**
 	 * @param xPos Koordinate
 	 * @param yPos Koordinate
-	 * @param heightWorld der Welt
-	 * @param widthWorld der Welt
+	 * @param heightWorld der World
+	 * @param widthWorld der World
 	 */
 	public void setPos(int xPos, int yPos, int heightWorld, int widthWorld) {
 		this.x = Helper.mirror(xPos, widthWorld - Helper.ARRAY_OFFSET);
@@ -281,9 +281,9 @@ public class Tier implements TierInterface {
 	}
 
 	@Override
-	public Tier reproduce(int randomGene, int randomMutation) {
+	public Animal reproduce(int randomGene, int randomMutation) {
 		reproduceCounter++;
-		Tier newBorn = new Tier(this.x, this.y, this.energy / 2);
+		Animal newBorn = new Animal(this.x, this.y, this.energy / 2);
 		int[] newBornGenes = this.genes.clone();
 		newBorn.setGenes(newBornGenes);
 		newBorn.mutate(randomGene, randomMutation);
@@ -294,7 +294,7 @@ public class Tier implements TierInterface {
 	/**
 	 * @return a new Born Animal with Random mutated Genes
 	 */
-	public Tier reproduce() {
+	public Animal reproduce() {
 		Random rand = new Random();
 		int randomGene = Helper.randInt(0, 7, rand);
 		int randomMutation = Helper.randInt(-1, 1, rand);

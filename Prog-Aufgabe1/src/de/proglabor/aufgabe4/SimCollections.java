@@ -1,8 +1,8 @@
 package de.proglabor.aufgabe4;
 
-import de.proglabor.aufgabe4.modell.Pflanze;
-import de.proglabor.aufgabe4.modell.Tier;
-import de.proglabor.aufgabe4.modell.Welt;
+import de.proglabor.aufgabe4.modell.Animal;
+import de.proglabor.aufgabe4.modell.Plant;
+import de.proglabor.aufgabe4.modell.World;
 
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -21,7 +21,7 @@ public class SimCollections implements SimCollectionsInterface {
 	private static final int INITIAL_ENERGY = 1000;
 	private static final int REPRODUCTION_ENERGY = 200;
 
-	Welt dieWelt;
+	World dieWorld;
 
 	/**
 	 * Konstruktor
@@ -36,7 +36,7 @@ public class SimCollections implements SimCollectionsInterface {
 	public SimCollections(int width, int height, int widthJungle,
 			int heightJungle, int plantEnergy, int initialEnergy,
 			int reproductionEnergy) {
-		dieWelt = new Welt(width, height, widthJungle, heightJungle, plantEnergy, initialEnergy, reproductionEnergy);
+		dieWorld = new World(width, height, widthJungle, heightJungle, plantEnergy, initialEnergy, reproductionEnergy);
 	}
 
 	/**
@@ -48,27 +48,27 @@ public class SimCollections implements SimCollectionsInterface {
 
 		// Monkey-Patch
 
-		Tier weronika = new Tier( MAXIMUM_WORLD_X / 2,
+		Animal weronika = new Animal( MAXIMUM_WORLD_X / 2,
 				MAXIMUM_WORLD_Y / 2, INITIAL_ENERGY);
 
-		dieWelt.addAnimal(weronika);
+		dieWorld.addAnimal(weronika);
 	}
 
 	/* (non-Javadoc)
-	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#setTier(de.proglabor.aufgabe3.Tier)
+	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#setTier(de.proglabor.aufgabe3.Animal)
 	 */
 	@Override
-	public void setTier(Tier tier) {
-		dieWelt.addAnimal(tier);
+	public void setTier(Animal animal) {
+		dieWorld.addAnimal(animal);
 
 	}
 
 	/* (non-Javadoc)
-	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#setPflanze(de.proglabor.aufgabe3.Pflanze)
+	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#setPflanze(de.proglabor.aufgabe3.Plant)
 	 */
 	@Override
-	public void setPflanze(Pflanze pflanze) {
-		dieWelt.addPlant(pflanze);
+	public void setPflanze(Plant plant) {
+		dieWorld.addPlant(plant);
 
 	}
 
@@ -76,8 +76,8 @@ public class SimCollections implements SimCollectionsInterface {
 	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#getTiere()
 	 */
 	@Override
-	public LinkedList<Tier> getTiere() {
-		return dieWelt.getContainerAnimals();
+	public LinkedList<Animal> getTiere() {
+		return dieWorld.getContainerAnimals();
 	}
 
 	/* (non-Javadoc)
@@ -87,12 +87,12 @@ public class SimCollections implements SimCollectionsInterface {
 	@Override
 	public void day() {
 
-		dieWelt.randomAddPlant();
-		dieWelt.randomAddPlantJungle();
-		LinkedList<Tier> tmp = (LinkedList<Tier>) dieWelt.getContainerAnimals()
+		dieWorld.randomAddPlant();
+		dieWorld.randomAddPlantJungle();
+		LinkedList<Animal> tmp = (LinkedList<Animal>) dieWorld.getContainerAnimals()
 				.clone();
-		for (Tier tier : tmp) {
-			dieWelt.animalAction(tier);
+		for (Animal animal : tmp) {
+			dieWorld.animalAction(animal);
 		}
 
 	}
@@ -101,36 +101,36 @@ public class SimCollections implements SimCollectionsInterface {
 	 * @see de.proglabor.aufgabe3.SimCollectionsInterface#getPflanzen()
 	 */
 	@Override
-	public TreeMap<Pflanze, Integer> getPflanzen() {
-		return dieWelt.getContainerPlants();
+	public TreeMap<Plant, Integer> getPflanzen() {
+		return dieWorld.getContainerPlants();
 	}
 	
 	/**
 	 * @return Planted
 	 */
 	public int planted() {
-		return dieWelt.getPlantedCount();
+		return dieWorld.getPlantedCount();
 	}
 	
 	/**
 	 * @return  BornCount
 	 */
 	public int born() {
-		return dieWelt.getBornCount();
+		return dieWorld.getBornCount();
 	}
 	
 	/**
 	 * @return  EatenCount
 	 */
 	public int eaten() {
-		return dieWelt.getEatenCount();
+		return dieWorld.getEatenCount();
 	}
 	
 	/**
 	 * @return deadCount
 	 */
 	public int killed() {
-		return dieWelt.getDeadCount();
+		return dieWorld.getDeadCount();
 	}
 
 

@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
-import de.proglabor.aufgabe4.helper.Helper;
+import de.proglabor.aufgabe4.utils.Logger;
 
 /**
  * @author sirmonkey
@@ -61,7 +61,7 @@ public abstract class Report {
             File outputCSV = new File(filename);
 
             // This will output the full path where the file will be written to...
-            Helper.LOGGER.info("New Report " + outputCSV.getCanonicalPath());
+            Logger.info("New Report " + outputCSV.getCanonicalPath());
 
             writer = new BufferedWriter(new FileWriter(outputCSV));
             for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
@@ -79,7 +79,7 @@ public abstract class Report {
                 // Close the writer regardless of what happens...
                 writer.close();
             } catch (Exception e) {
-            	Helper.LOGGER.severe(e.getStackTrace().toString());
+            	Logger.severe(e.getStackTrace().toString());
             }
         }
 	}

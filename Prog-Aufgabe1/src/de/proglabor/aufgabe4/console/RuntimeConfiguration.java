@@ -7,7 +7,7 @@ import de.proglabor.aufgabe4.exceptions.WrongValueException;
  * @author SirMonkey
  *
  */
-public class ArgumentParser {
+public class RuntimeConfiguration {
 
 	private boolean reportPlants = false;
 	private boolean reportTiere = false;
@@ -19,13 +19,20 @@ public class ArgumentParser {
 	private int indexOfSimcount;
 	private boolean showHelp;
 
-	/**
-	 * Prueft die Parameter, die auf der ArgumentParser ubergeben wurden und setzt die Attribute.
+    private RuntimeConfiguration() {
+    }
+
+    public static RuntimeConfiguration getInstance() {
+        return new RuntimeConfiguration();
+    }
+
+    /**
+	 * Prueft die Parameter, die auf der RuntimeConfiguration ubergeben wurden und setzt die Attribute.
 	 * @param args Parameters to be checked and set.
 	 * @throws WrongValueException Simulation Days are Wrong.
 	 * @throws UnknownKeywordException Unknown Parameter Dude!
 	 */
-	public void parse(String[] args) throws WrongValueException, UnknownKeywordException {
+	public RuntimeConfiguration parse(String[] args) throws WrongValueException, UnknownKeywordException {
 		indexOfSimcount = -1;
 		simCountPresent = false;
 		showHelp = false;
@@ -80,29 +87,31 @@ public class ArgumentParser {
 		if (!simCountPresent && !showHelp) {
 			throw new UnknownKeywordException("No parameters use -help to display Usage");
 		}
+
+        return this;
 	}
 	
 	
 	
 
 	/**
-	 * @return Report Pflanze wird erzeugt falls true
+	 * @return Report Plant wird erzeugt falls true
 	 */
-	public boolean getReportPflanze() {
+	public boolean createPlantReport() {
 		return reportPlants;
 	}
 	
 	/**
 	 * @return Report der Tiere wird erzeugt falls true
 	 */
-	public boolean getReportTiere() {
+	public boolean createAnimalReport() {
 		return reportTiere;
 	}
 	
 	/**
 	 * @return	Report der Bewegung der Tiere wird erzeugt falls true
 	 */
-	public boolean getReportBewegung() {
+	public boolean createMovementReport() {
 		return reportBewegung;
 	}
 	
@@ -116,7 +125,7 @@ public class ArgumentParser {
 	/**
 	 * @return Die GUI wird angezeigt falls true
 	 */
-	public boolean getSimulation() {
+	public boolean showSimulation() {
 		return displayGUI;
 	}
 	

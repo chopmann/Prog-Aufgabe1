@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe4.helper;
+package de.proglabor.aufgabe4.utils;
 
 import java.util.Random;
 import java.util.logging.Logger;
@@ -10,8 +10,6 @@ import java.util.logging.Logger;
 public final class Helper {
 
 	public static final int ARRAY_OFFSET = 1;
-
-    public static final Logger LOGGER = Logger.getLogger("Simulation");
 
     /**
 	 * http://stackoverflow.com/questions/363681/generating-random-numbers-in-a-
@@ -36,10 +34,10 @@ public final class Helper {
 	}
 	
 	/**
-	 * spiegelt die Welt,sodass das Tier �ber den Rand laufen kann.
+	 * spiegelt die World,sodass das Animal �ber den Rand laufen kann.
 	 * @param position 
 	 * @param maxPositionValue Rand Maximum Koordinate
-	 * @return einen Wert, der in der Welt liegt.
+	 * @return einen Wert, der in der World liegt.
 	 */
 	public static int mirror(int position, int maxPositionValue) {
 		if (0 <= position && position <= maxPositionValue) {

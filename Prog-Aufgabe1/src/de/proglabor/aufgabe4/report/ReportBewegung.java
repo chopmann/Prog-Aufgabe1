@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 
-import de.proglabor.aufgabe4.modell.Tier;
+import de.proglabor.aufgabe4.modell.Animal;
 
 public class ReportBewegung extends Report {
 
-	private Tier forest;
+	private Animal forest;
 	private int comulatedDistance;
 
 	public ReportBewegung(int days) {
@@ -31,17 +31,17 @@ public class ReportBewegung extends Report {
 	public void reportContent(Object obj) {
 		comulatedDistance = 0;
 		@SuppressWarnings("unchecked")
-		LinkedList<Tier> animalContainer = (LinkedList<Tier>) obj;
+		LinkedList<Animal> animalContainer = (LinkedList<Animal>) obj;
 		Collections.sort(animalContainer, new AnimalComparatorSteps());
 		forest = animalContainer.getFirst();
-		for (Tier tier : animalContainer) {
-			String tmp = tier.getID() + "	" + tier.getSteps() + "	"
-					+ tier.getDistanceToStart() + "	" + tier.getEnergy();
+		for (Animal animal : animalContainer) {
+			String tmp = animal.getID() + "	" + animal.getSteps() + "	"
+					+ animal.getDistanceToStart() + "	" + animal.getEnergy();
 			reportOutput.add(tmp);
-			if (forest.getDistanceToStart() < tier.getDistanceToStart()) {
-				forest = tier;
+			if (forest.getDistanceToStart() < animal.getDistanceToStart()) {
+				forest = animal;
 			}
-			comulatedDistance += tier.getDistanceToStart();
+			comulatedDistance += animal.getDistanceToStart();
 		}
 		
 
@@ -50,15 +50,15 @@ public class ReportBewegung extends Report {
 	@Override
 	public void reportFooter(Object obj) {
 		@SuppressWarnings("unchecked")
-		LinkedList<Tier> animalContainer = (LinkedList<Tier>) obj;
+		LinkedList<Animal> animalContainer = (LinkedList<Animal>) obj;
 		if (forest == null) {
 			comulatedDistance = 0;
 			forest = animalContainer.getFirst();
-			for (Tier tier : animalContainer) {
-				if (forest.getDistanceToStart() < tier.getDistanceToStart()) {
-					forest = tier;
+			for (Animal animal : animalContainer) {
+				if (forest.getDistanceToStart() < animal.getDistanceToStart()) {
+					forest = animal;
 				}
-				comulatedDistance += tier.getDistanceToStart();
+				comulatedDistance += animal.getDistanceToStart();
 			}
 		}
 		reportOutput.add("");

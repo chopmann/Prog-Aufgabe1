@@ -5,7 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
 
-import de.proglabor.aufgabe4.modell.Welt;
+import de.proglabor.aufgabe4.modell.World;
 import de.proglabor.aufgabe4.controller.ControllerInterface;
 
 /**
@@ -21,14 +21,14 @@ public class MainWindow extends JFrame implements Observer {
 	private static final int WINDOW_LENGHT = 768;
 	SidePanel sidePanel;
 	CenterPanel centerPanel;
-	private Welt model;
+	private World model;
 	private ControllerInterface controller;
 	
 	/** 
 	 * @param model 
 	 * @param controller 
 	 */
-	public MainWindow(Welt model, ControllerInterface controller) {
+	public MainWindow(World model, ControllerInterface controller) {
         this.model = model;
         this.controller = controller;
         model.addObserver(this);

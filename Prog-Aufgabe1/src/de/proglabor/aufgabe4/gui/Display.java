@@ -6,9 +6,9 @@ import java.awt.Graphics;
 import java.util.Map.Entry;
 import javax.swing.JPanel;
 
-import de.proglabor.aufgabe4.modell.Pflanze;
-import de.proglabor.aufgabe4.modell.Tier;
-import de.proglabor.aufgabe4.modell.Welt;
+import de.proglabor.aufgabe4.modell.Animal;
+import de.proglabor.aufgabe4.modell.Plant;
+import de.proglabor.aufgabe4.modell.World;
 import de.proglabor.aufgabe4.config.DisplayMode;
 import de.proglabor.aufgabe4.config.WeltColor;
 
@@ -28,7 +28,7 @@ public class Display extends JPanel {
 	private static final int HELP_WIDTH = 60;
 	private static final int HELP_HEIGHT = 60;
 	private DisplayMode displayMode = DisplayMode.HELP;
-	private Welt model;
+	private World model;
 	private int width;
 	private int height;
 
@@ -90,16 +90,16 @@ public class Display extends JPanel {
 	}
 
 	private void drawAnimals(Graphics g) {
-		for (Tier tier : model.getContainerAnimals()) {
-			int cellX = MARGIN + tier.getX() * GRIDSIZE;
-			int cellY = MARGIN + tier.getY() * GRIDSIZE;
+		for (Animal animal : model.getContainerAnimals()) {
+			int cellX = MARGIN + animal.getX() * GRIDSIZE;
+			int cellY = MARGIN + animal.getY() * GRIDSIZE;
 			g.setColor(WeltColor.ANIMAL);
 			g.fillRect(cellX + GRIDSIZE / 2, cellY, GRIDSIZE / 2, GRIDSIZE);
 		}
 	}
 
 	private void drawPlants(Graphics g) {
-		for (Entry<Pflanze, Integer> entry : model.getContainerPlants()
+		for (Entry<Plant, Integer> entry : model.getContainerPlants()
 				.entrySet()) {
 			int cellX = MARGIN + entry.getKey().getX() * GRIDSIZE;
 			int cellY = MARGIN + entry.getKey().getY() * GRIDSIZE;
@@ -127,13 +127,13 @@ public class Display extends JPanel {
 	/**
 	 * Redraws the World
 	 * 
-	 * @param modelWelt 
+	 * @param modelWorld
 	 */
-	public void refresh(Welt modelWelt) {
+	public void refresh(World modelWorld) {
 		setDisplayMode(DisplayMode.SIMULATION);
-		this.model = modelWelt;
-		this.width = modelWelt.getWidth() * GRIDSIZE;
-		this.height = modelWelt.getHeight() * GRIDSIZE;
+		this.model = modelWorld;
+		this.width = modelWorld.getWidth() * GRIDSIZE;
+		this.height = modelWorld.getHeight() * GRIDSIZE;
 		this.repaint();
 	}
 }

@@ -2,7 +2,7 @@ package de.proglabor.aufgabe4.controller;
 
 import java.util.HashMap;
 
-import de.proglabor.aufgabe4.modell.Welt;
+import de.proglabor.aufgabe4.modell.World;
 import de.proglabor.aufgabe4.config.StatusCode;
 import de.proglabor.aufgabe4.config.WeltConfig;
 import de.proglabor.aufgabe4.gui.MainWindow;
@@ -14,14 +14,14 @@ import de.proglabor.aufgabe4.gui.MainWindow;
  */
 public class Controller implements ControllerInterface {
 
-	private Welt model;
+	private World model;
 	private MainWindow view;
 	private StatusCode status;
 
 	/**
 	 * @param model 
 	 */
-	public Controller(Welt model) {
+	public Controller(World model) {
 		this.model = model;
 		this.view = new MainWindow(model, this);
 		view.createView();
@@ -42,9 +42,8 @@ public class Controller implements ControllerInterface {
 			int plantEnergy = parameters.get(WeltConfig.PLANTENERGY);
 			int initialEnergy = parameters.get(WeltConfig.INITIALTENERGY);
 			int reproductionEnergy = parameters.get(WeltConfig.REPRODUCTIONENERGY);
-			model.initAll(width, height, widthJungle, heightJungle, plantEnergy,
-					initialEnergy, reproductionEnergy);
-			model.runSim(days);
+			model.initAll(width, height, widthJungle, heightJungle, plantEnergy, initialEnergy, reproductionEnergy);
+			model.runSim();
 		} catch (Exception e) {
 			setStatus(e.getMessage());
 		}

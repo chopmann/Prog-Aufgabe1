@@ -1,7 +1,7 @@
 package de.proglabor.aufgabe4;
 
-import de.proglabor.aufgabe4.modell.Pflanze;
-import de.proglabor.aufgabe4.modell.Tier;
+import de.proglabor.aufgabe4.modell.Animal;
+import de.proglabor.aufgabe4.modell.Plant;
 
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -13,28 +13,28 @@ import java.util.TreeMap;
 public interface SimCollectionsInterface {
 	
 	/**
-	 * f�gt ein Tier hinzu
-	 * @param tier 
+	 * f�gt ein Animal hinzu
+	 * @param animal
 	 */
-	public void setTier(Tier tier);
+	public void setTier(Animal animal);
 	
 	/**
-	 * f�gt eine Pflanze hinzu
-	 * @param pflanze 
+	 * f�gt eine Plant hinzu
+	 * @param plant
 	 */
-	public void setPflanze(Pflanze pflanze);
+	public void setPflanze(Plant plant);
 	
 	/**
 	 * holt den Tiercontainer
 	 * @return der Tiercontainer
 	 */
-	public LinkedList<Tier> getTiere();
+	public LinkedList<Animal> getTiere();
 	
 	/**
 	 * holt den Pflanzencontainer
 	 * @return Pflanzencontainer
 	 */
-	public TreeMap<Pflanze, Integer> getPflanzen();
+	public TreeMap<Plant, Integer> getPflanzen();
 	
 	/**
 	 * ein Tag in der Simulation

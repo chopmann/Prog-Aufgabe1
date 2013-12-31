@@ -2,14 +2,13 @@ package de.proglabor.aufgabe4.test;
 
 import static org.junit.Assert.assertEquals;
 
+import de.proglabor.aufgabe4.modell.Animal;
+import de.proglabor.aufgabe4.modell.World;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.proglabor.aufgabe4.modell.Tier;
-import de.proglabor.aufgabe4.modell.Welt;
-
 public class AnimalTest {
-	Tier dolly = new Tier(1, 1, 10);
+	Animal dolly = new Animal(1, 1, 10);
 	int[] dollyGenes = {1, 2, 3, 4, 5, 6, 7, 8};
 	private static final int WIDTH = 40;
 	private static final int HEIGHT = 30;
@@ -19,20 +18,20 @@ public class AnimalTest {
 	private static final int MUTATION_NONE = 1;
 	private static final int MUTATION_PLUS = 2;
 	private static final int REPRODUCTION_ENERGY = 200;
-	Welt dieWelt;
+	World dieWorld;
 	
 	@Before
 	public void setUp() {
 		dolly.setGenes(dollyGenes);
-		dieWelt = new Welt(WIDTH, HEIGHT, 10, 10, PLANT_ENERGY, INITIAL_ENERGY, REPRODUCTION_ENERGY);
+		dieWorld = new World(WIDTH, HEIGHT, 10, 10, PLANT_ENERGY, INITIAL_ENERGY, REPRODUCTION_ENERGY);
 		
 	}
 
 	@Test
 	public void testReproduceInt() {
-		Tier dolly2 = dolly.reproduce(1, MUTATION_MINUS);
-		Tier dolly3 = dolly.reproduce(2, MUTATION_NONE);
-		Tier dolly4 = dolly.reproduce(3, MUTATION_PLUS);
+		Animal dolly2 = dolly.reproduce(1, MUTATION_MINUS);
+		Animal dolly3 = dolly.reproduce(2, MUTATION_NONE);
+		Animal dolly4 = dolly.reproduce(3, MUTATION_PLUS);
 		assertEquals(dollyGenes[1] - 1, dolly2.getGenes()[1]);
 		assertEquals(dollyGenes[2], dolly3.getGenes()[2]);
 		assertEquals(dollyGenes[3] + 1, dolly4.getGenes()[3]);

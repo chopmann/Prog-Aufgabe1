@@ -33,15 +33,15 @@ public interface TierInterface {
 	public int getY();
 	
 	/**
-	 * dreht das Tier in eine zuf�llige Blickrichtung
+	 * dreht das Animal in eine zuf�llige Blickrichtung
 	 * @param randomDirection Blickrichtung
 	 */
 	public void turn(int randomDirection);
 	
 	/**
-	 * bewegt das Tier
-	 * @param height der Welt
-	 * @param width der Welt
+	 * bewegt das Animal
+	 * @param height der World
+	 * @param width der World
 	 */
 	public void move (int height, int width);
 	
@@ -77,7 +77,7 @@ public interface TierInterface {
 	
 	/**
 	 * gibt eine String repr�sentation des Tiers aus
-	 * @return Tier als String
+	 * @return Animal als String
 	 */
 	public String toString();
 

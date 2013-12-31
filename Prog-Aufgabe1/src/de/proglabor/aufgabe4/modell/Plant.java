@@ -4,7 +4,7 @@ package de.proglabor.aufgabe4.modell;
  * @author SirMonkey
  *
  */
-public class Pflanze implements Comparable<Pflanze> {
+public class Plant implements Comparable<Plant> {
 
 	private int x;
 	private int y;
@@ -14,7 +14,7 @@ public class Pflanze implements Comparable<Pflanze> {
 	 * @param x Koordinate	
 	 * @param y Koordinate
 	 */
-	public Pflanze(int x, int y) {
+	public Plant(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -37,10 +37,10 @@ public class Pflanze implements Comparable<Pflanze> {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
-	public int compareTo(Pflanze anderePflanze) {
-		if (this.x == anderePflanze.x && this.y == anderePflanze.y) {
+	public int compareTo(Plant anderePlant) {
+		if (this.x == anderePlant.x && this.y == anderePlant.y) {
 			return 0;
-		} else if (this.x < anderePflanze.x ) {
+		} else if (this.x < anderePlant.x ) {
 			return -1;
 		} else {
 			return 1;

@@ -3,11 +3,11 @@ package de.proglabor.aufgabe4.test;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import de.proglabor.aufgabe4.modell.Animal;
 import org.junit.Before;
 import org.junit.Test;
 
 import de.proglabor.aufgabe4.SimCollections;
-import de.proglabor.aufgabe4.modell.Tier;
 import de.proglabor.aufgabe4.TierInterface;
 
 /**
@@ -30,14 +30,14 @@ public class PublicAufgabe2 {
 	private static final int WEST = 3;
 	private static final int SOUTH_WEST = 4;
 	private SimCollections sim;
-	private Tier uniformGenesAnimal;
-	private Tier southWestRunningAnimal;
-	private Tier oddEnergyAnimal;
-	private Tier unUniformGenesAnimal;
+	private Animal uniformGenesAnimal;
+	private Animal southWestRunningAnimal;
+	private Animal oddEnergyAnimal;
+	private Animal unUniformGenesAnimal;
 	
 	private int getAnimalCount(int xPos, int yPos) {
 		int result = 0;
-		for (Tier curAnimal : this.sim.getTiere()) {
+		for (Animal curAnimal : this.sim.getTiere()) {
 			if (curAnimal.getX() == xPos
 					&& curAnimal.getY() == yPos) {
 				result++;
@@ -65,13 +65,13 @@ public class PublicAufgabe2 {
 		this.sim = new SimCollections();
 		int[] genes = {1, 1, 1, 1, 1, 1, 1, 1};
 		int[] unGenes = {1, UN_NORMAL_GENE, 1, 1, 1, 1, 1, 1};
-		this.uniformGenesAnimal = new Tier(MAXIMUM_WORLD_X / 2, MAXIMUM_WORLD_Y / 2, 
+		this.uniformGenesAnimal = new Animal(MAXIMUM_WORLD_X / 2, MAXIMUM_WORLD_Y / 2,
 				ANIMAL_START_ENERGY, 0, genes);
-		this.southWestRunningAnimal = new Tier(MAXIMUM_WORLD_X - 1, MAXIMUM_WORLD_Y - 1,
+		this.southWestRunningAnimal = new Animal(MAXIMUM_WORLD_X - 1, MAXIMUM_WORLD_Y - 1,
 				ANIMAL_START_ENERGY, 0, genes);
-		this.unUniformGenesAnimal = new Tier(MAXIMUM_WORLD_X / 2, MAXIMUM_WORLD_Y / 2,
+		this.unUniformGenesAnimal = new Animal(MAXIMUM_WORLD_X / 2, MAXIMUM_WORLD_Y / 2,
 				ANIMAL_START_ENERGY, 0, unGenes);
-		this.oddEnergyAnimal = new Tier(MAXIMUM_WORLD_X / 2, MAXIMUM_WORLD_Y / 2,
+		this.oddEnergyAnimal = new Animal(MAXIMUM_WORLD_X / 2, MAXIMUM_WORLD_Y / 2,
 				ANIMAL_START_ENERGY + 1, 0, unGenes);
 	}
 	
@@ -102,7 +102,7 @@ public class PublicAufgabe2 {
 	}
 	
 	/**
-	 * This test test the Tier.turn(int randomDirection) Method
+	 * This test test the Animal.turn(int randomDirection) Method
 	 * with different Values for each direction.
 	 */
 	@Test(timeout = TIMEOUT)
@@ -157,7 +157,7 @@ public class PublicAufgabe2 {
 	public void geneMutationTest() {
 		this.sim.setTier(this.uniformGenesAnimal);
 		TierInterface test = this.uniformGenesAnimal.reproduce(7, 2);
-		assertEquals("After calling Tier.reproduce(7,2) the 7th gene should " + 
+		assertEquals("After calling Animal.reproduce(7,2) the 7th gene should " +
 				"be increased", 2, test.getGenes()[7]);
 		
 		int[] expectedGenes = {1, 1, 1, 1, 1, 1, 1, 1};
@@ -194,10 +194,10 @@ public class PublicAufgabe2 {
 	@Test(timeout = TIMEOUT)
 	public void animalEnergySplit() {
 		TierInterface test = this.oddEnergyAnimal.reproduce(1, 1);
-		assertEquals("After the wirst reproduction the parent Tier.energie should be 501."
+		assertEquals("After the wirst reproduction the parent Animal.energie should be 501."
 				+ " With an odd parse energy.",
 				CEILD_HALF, this.oddEnergyAnimal.getEnergy());
-		assertEquals("After the second reproduction the child Tier.energie should be 500."
+		assertEquals("After the second reproduction the child Animal.energie should be 500."
 				+ " With an odd parse energy.",
 				FLOORED_HALF, test.getEnergy());
 	}

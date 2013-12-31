@@ -16,7 +16,7 @@ public class ReportTiereTest {
 		for (int i = 0; i < days; i++) {
 			Hashtable<String, Integer> reportTiereContent = new Hashtable<String, Integer>();
 			reportTiereContent.put("Tag", i);
-			reportTiereContent.put("Welt", i+2);
+			reportTiereContent.put("World", i+2);
 			reportTiereContent.put("Dschungel", i+4);
 			reportTiere.reportContent(reportTiereContent);
 		}

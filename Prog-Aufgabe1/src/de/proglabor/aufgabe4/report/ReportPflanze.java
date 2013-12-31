@@ -13,12 +13,12 @@ public class ReportPflanze extends Report {
 	public void reportHeader() {
 		Date currentDate = getCalendar().getTime();
 		String timestamp = String.format("Simulationsdatum: %tc", currentDate);
-		reportOutput.add("Simulation Pflanze");
+		reportOutput.add("Simulation Plant");
 		reportOutput.add("");
 		reportOutput.add(timestamp);
 		reportOutput.add("Anzahl Durchläufe: " + this.days);
 		reportOutput.add("");
-		reportOutput.add("Tag	Welt	Dschungel");
+		reportOutput.add("Tag	World	Dschungel");
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class ReportPflanze extends Report {
 		@SuppressWarnings("unchecked")
 		Hashtable<String, Integer> reportTiereContent = (Hashtable<String, Integer> ) obj;
 		int days = reportTiereContent.get("Tag");
-		int welt = reportTiereContent.get("Welt");
+		int welt = reportTiereContent.get("World");
 		int jungle = reportTiereContent.get("Dschungel");
 		String tmp = days + "	" + welt + "	" + jungle;
 		reportOutput.add(tmp);

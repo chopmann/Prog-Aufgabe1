@@ -2,7 +2,7 @@ package de.proglabor.aufgabe4.test;
 
 import static org.junit.Assert.*;
 
-import de.proglabor.aufgabe4.console.ArgumentParser;
+import de.proglabor.aufgabe4.console.RuntimeConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,12 +11,12 @@ import de.proglabor.aufgabe4.exceptions.WrongValueException;
 
 public class PublicAufgabe4 {
 
-	ArgumentParser argumentParser = null;
+	RuntimeConfiguration runtimeConfiguration = null;
 	private static final int TIMEOUT = 1000;
 	
 	@Before
 	public void setUp() throws Exception {
-		argumentParser = new ArgumentParser();
+		runtimeConfiguration = RuntimeConfiguration.getInstance();
 	}
 	
 	@Test(timeout = TIMEOUT)
@@ -30,12 +30,12 @@ public class PublicAufgabe4 {
 		args[5] = "-pflanze";
 		
 		try {
-			argumentParser.parse(args);
-			assertFalse("-pflanze", argumentParser.getReportPflanze());
-			assertFalse("-tiere", argumentParser.getReportTiere());
-			assertFalse("-bewegung", argumentParser.getReportBewegung());
-			assertFalse("-reproduce", argumentParser.getReportReproduce());
-			assertFalse("-simulation", argumentParser.getSimulation());
+			runtimeConfiguration.parse(args);
+			assertFalse("-pflanze", runtimeConfiguration.createPlantReport());
+			assertFalse("-tiere", runtimeConfiguration.createAnimalReport());
+			assertFalse("-bewegung", runtimeConfiguration.createMovementReport());
+			assertFalse("-reproduce", runtimeConfiguration.getReportReproduce());
+			assertFalse("-simulation", runtimeConfiguration.showSimulation());
 		} 
 		catch (WrongValueException | UnknownKeywordException e) {
 			fail(e.toString());
@@ -49,8 +49,8 @@ public class PublicAufgabe4 {
 		args[1] = "1";
 		args[2] = "-bewegung";
 		try {
-			argumentParser.parse(args);
-			assertTrue("-bewegung", argumentParser.getReportBewegung());
+			runtimeConfiguration.parse(args);
+			assertTrue("-bewegung", runtimeConfiguration.createMovementReport());
 		} 
 		catch (WrongValueException | UnknownKeywordException e) {
 			fail(e.toString());
@@ -64,8 +64,8 @@ public class PublicAufgabe4 {
 		args[1] = "-simcount";
 		args[2] = "1";
 		try {
-			argumentParser.parse(args);
-			assertTrue("-pflanze", argumentParser.getReportPflanze());
+			runtimeConfiguration.parse(args);
+			assertTrue("-pflanze", runtimeConfiguration.createPlantReport());
 		} 
 		catch (WrongValueException | UnknownKeywordException e) {
 			fail(e.toString());
@@ -78,7 +78,7 @@ public class PublicAufgabe4 {
 		strings[0] = "-tiere";
 		strings[1] = "-pflanze";
 		try {
-			argumentParser.parse(strings);
+			runtimeConfiguration.parse(strings);
 		}
 		catch (WrongValueException wve) {
 			fail(wve.toString());

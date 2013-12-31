@@ -2,10 +2,10 @@ package de.proglabor.aufgabe4.test;
 
 import static org.junit.Assert.*;
 
+import de.proglabor.aufgabe4.modell.Animal;
 import org.junit.Test;
 
 import de.proglabor.aufgabe4.SimCollections;
-import de.proglabor.aufgabe4.modell.Tier;
 
 public class SimulationIntegrationTest {
 	
@@ -22,7 +22,7 @@ public class SimulationIntegrationTest {
 	@Test
 	public void simulateThree() {
 		SimCollections simulation = new SimCollections(MAXIMUM_WORLD_X, MAXIMUM_WORLD_Y, JUNGLE_WIDTH, JUNGLE_HEIGHT, PLANT_ENERGY, INITIAL_ENERGY, REPRODUCTION_ENERGY);
-		Tier dolly = new Tier( MAXIMUM_WORLD_X-1, MAXIMUM_WORLD_Y-1, INITIAL_ENERGY);
+		Animal dolly = new Animal( MAXIMUM_WORLD_X-1, MAXIMUM_WORLD_Y-1, INITIAL_ENERGY);
 		simulation.setTier(dolly);
 		
 		/*
@@ -55,7 +55,7 @@ public class SimulationIntegrationTest {
 		 * All Animals should be dead
 		 */
 		SimCollections simulation = new SimCollections(MAXIMUM_WORLD_X, MAXIMUM_WORLD_Y, JUNGLE_WIDTH, JUNGLE_HEIGHT, PLANT_ENERGY_DEAD, INITIAL_ENERGY, REPRODUCTION_ENERGY);
-		Tier dolly = new Tier(MAXIMUM_WORLD_X-1, MAXIMUM_WORLD_Y-1, INITIAL_ENERGY);
+		Animal dolly = new Animal(MAXIMUM_WORLD_X-1, MAXIMUM_WORLD_Y-1, INITIAL_ENERGY);
 		simulation.setTier(dolly);
 		for (int i = 0; i < INITIAL_ENERGY; i++) {
 			simulation.day();
