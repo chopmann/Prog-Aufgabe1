@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import de.proglabor.aufgabe4.SimCollections;
-import de.proglabor.aufgabe4.Tier;
+import de.proglabor.aufgabe4.modell.Tier;
 
 public class SimulationIntegrationTest {
 	

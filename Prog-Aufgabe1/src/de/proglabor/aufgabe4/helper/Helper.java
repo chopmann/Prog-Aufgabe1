@@ -1,18 +1,19 @@
-package de.proglabor.aufgabe4;
+package de.proglabor.aufgabe4.helper;
 
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * @author id261708
  *
  */
 public final class Helper {
-	/**
-	 *  
-	 */
+
 	public static final int ARRAY_OFFSET = 1;
-	
-	/**
+
+    public static final Logger LOGGER = Logger.getLogger("Simulation");
+
+    /**
 	 * http://stackoverflow.com/questions/363681/generating-random-numbers-in-a-
 	 * range-with-java Returns a psuedo-random number between min and max,
 	 * inclusive. The difference between min and max can be at most
@@ -28,7 +29,6 @@ public final class Helper {
 	 * @see java.util.Random#nextInt(int)
 	 */
 	public static int randInt(int min, int max, Random rand) {
-
 		// nextInt is normally exclusive of the top value,
 		// so add 1 to make it inclusive
 		int randomNum = rand.nextInt((max - min) + 1) + min;

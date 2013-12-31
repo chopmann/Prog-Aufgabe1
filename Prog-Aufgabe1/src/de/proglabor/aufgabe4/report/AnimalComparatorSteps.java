@@ -2,7 +2,7 @@ package de.proglabor.aufgabe4.report;
 
 import java.util.Comparator;
 
-import de.proglabor.aufgabe4.Tier;
+import de.proglabor.aufgabe4.modell.Tier;
 
 /**
  * @author sirmonkey

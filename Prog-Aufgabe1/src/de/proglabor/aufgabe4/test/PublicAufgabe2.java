@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.proglabor.aufgabe4.SimCollections;
-import de.proglabor.aufgabe4.Tier;
+import de.proglabor.aufgabe4.modell.Tier;
 import de.proglabor.aufgabe4.TierInterface;
 
 /**
@@ -94,7 +94,7 @@ public class PublicAufgabe2 {
 	}
 	
 	/**
-	 * This test checks if the animal is in the correct start position.
+	 * This test checks if the animal is in the correct parse position.
 	 */
 	@Test(timeout = TIMEOUT)
 	public void animalInitialPosition() {
@@ -195,10 +195,10 @@ public class PublicAufgabe2 {
 	public void animalEnergySplit() {
 		TierInterface test = this.oddEnergyAnimal.reproduce(1, 1);
 		assertEquals("After the wirst reproduction the parent Tier.energie should be 501."
-				+ " With an odd start energy.",
+				+ " With an odd parse energy.",
 				CEILD_HALF, this.oddEnergyAnimal.getEnergy());
 		assertEquals("After the second reproduction the child Tier.energie should be 500."
-				+ " With an odd start energy.",
+				+ " With an odd parse energy.",
 				FLOORED_HALF, test.getEnergy());
 	}
 }

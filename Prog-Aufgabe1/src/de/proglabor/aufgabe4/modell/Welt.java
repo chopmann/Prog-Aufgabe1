@@ -1,4 +1,4 @@
-package de.proglabor.aufgabe4;
+package de.proglabor.aufgabe4.modell;
 
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Random;
 import java.util.TreeMap;
 
-import de.proglabor.aufgabe4.main.Main;
+import de.proglabor.aufgabe4.helper.Helper;
 import de.proglabor.aufgabe4.report.ReportBewegung;
 import de.proglabor.aufgabe4.report.ReportPflanze;
 import de.proglabor.aufgabe4.report.ReportTiere;
@@ -381,7 +381,7 @@ public class Welt extends Observable {
 	 * @param days to run
 	 */
 	public void runSim(int days) {
-		Main.LOGGER.info("Simulation Started");
+		Helper.LOGGER.info("Simulation Started");
 		// Monkey-Patch
 		Tier weronika = new Tier(getWidth() / 2, getHeight() / 2,
 				getInitialEnergy());
@@ -422,13 +422,13 @@ public class Welt extends Observable {
 				maxPlants = Math.max(maxPlants, plantsWorld);
 			}
 			if (bornCount == deadCount) {
-				Main.LOGGER.info("Simulation Stoped All Animals are Dead");
+				Helper.LOGGER.info("Simulation Stoped All Animals are Dead");
 				break;
 //				throw new Exception("Aborting Simulation after: " + i + " day(s) -->" + "all Animals are dead");
 			}
 			
 		}
-		Main.LOGGER.info("Simulation Done");
+		Helper.LOGGER.info("Simulation Done");
 		if (this.reportTiere) {
 			reportT.reportFooter(maxAnimals);
 			reportT.reportWriter(reportT.reportOutput, "ReportTiere.csv");

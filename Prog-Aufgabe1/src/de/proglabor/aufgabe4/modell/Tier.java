@@ -1,4 +1,7 @@
-package de.proglabor.aufgabe4;
+package de.proglabor.aufgabe4.modell;
+
+import de.proglabor.aufgabe4.helper.Helper;
+import de.proglabor.aufgabe4.TierInterface;
 
 import java.util.Random;
 

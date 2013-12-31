@@ -16,8 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
-import de.proglabor.aufgabe4.Welt;
-import de.proglabor.aufgabe4.controllers.Controller;
+import de.proglabor.aufgabe4.modell.Welt;
+import de.proglabor.aufgabe4.controller.Controller;
 
 /**
  * @author id261708
@@ -153,7 +153,7 @@ public class CenterPanel extends JPanel {
 	 * @param model 
 	 */
 	public void updateDisplay(Welt model) {
-		// statusLabel.setText(model.);
+		// statusLabel.setText(modell.);
 		animalsAlive.setText(model.totalAnimals() + "");
 		plantsAlive.setText(model.totalPlants() + "");
 		animalsBorn.setText(model.getBornCount() + "");

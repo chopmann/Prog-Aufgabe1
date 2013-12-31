@@ -2,21 +2,21 @@ package de.proglabor.aufgabe4.test;
 
 import static org.junit.Assert.*;
 
+import de.proglabor.aufgabe4.console.ArgumentParser;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.proglabor.aufgabe4.console.Console;
 import de.proglabor.aufgabe4.exceptions.UnknownKeywordException;
 import de.proglabor.aufgabe4.exceptions.WrongValueException;
 
 public class PublicAufgabe4 {
 
-	Console console = null;
+	ArgumentParser argumentParser = null;
 	private static final int TIMEOUT = 1000;
 	
 	@Before
 	public void setUp() throws Exception {
-		console = new Console();
+		argumentParser = new ArgumentParser();
 	}
 	
 	@Test(timeout = TIMEOUT)
@@ -30,12 +30,12 @@ public class PublicAufgabe4 {
 		args[5] = "-pflanze";
 		
 		try {
-			console.start(args);
-			assertFalse("-pflanze", console.getReportPflanze());
-			assertFalse("-tiere", console.getReportTiere());
-			assertFalse("-bewegung", console.getReportBewegung());
-			assertFalse("-reproduce", console.getReportReproduce());
-			assertFalse("-simulation", console.getSimulation());
+			argumentParser.parse(args);
+			assertFalse("-pflanze", argumentParser.getReportPflanze());
+			assertFalse("-tiere", argumentParser.getReportTiere());
+			assertFalse("-bewegung", argumentParser.getReportBewegung());
+			assertFalse("-reproduce", argumentParser.getReportReproduce());
+			assertFalse("-simulation", argumentParser.getSimulation());
 		} 
 		catch (WrongValueException | UnknownKeywordException e) {
 			fail(e.toString());
@@ -49,8 +49,8 @@ public class PublicAufgabe4 {
 		args[1] = "1";
 		args[2] = "-bewegung";
 		try {
-			console.start(args);
-			assertTrue("-bewegung", console.getReportBewegung());
+			argumentParser.parse(args);
+			assertTrue("-bewegung", argumentParser.getReportBewegung());
 		} 
 		catch (WrongValueException | UnknownKeywordException e) {
 			fail(e.toString());
@@ -64,8 +64,8 @@ public class PublicAufgabe4 {
 		args[1] = "-simcount";
 		args[2] = "1";
 		try {
-			console.start(args);
-			assertTrue("-pflanze", console.getReportPflanze());
+			argumentParser.parse(args);
+			assertTrue("-pflanze", argumentParser.getReportPflanze());
 		} 
 		catch (WrongValueException | UnknownKeywordException e) {
 			fail(e.toString());
@@ -78,7 +78,7 @@ public class PublicAufgabe4 {
 		strings[0] = "-tiere";
 		strings[1] = "-pflanze";
 		try {
-			console.start(strings);
+			argumentParser.parse(strings);
 		}
 		catch (WrongValueException wve) {
 			fail(wve.toString());

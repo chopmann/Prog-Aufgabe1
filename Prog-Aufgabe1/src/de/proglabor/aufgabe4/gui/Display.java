@@ -6,9 +6,9 @@ import java.awt.Graphics;
 import java.util.Map.Entry;
 import javax.swing.JPanel;
 
-import de.proglabor.aufgabe4.Pflanze;
-import de.proglabor.aufgabe4.Tier;
-import de.proglabor.aufgabe4.Welt;
+import de.proglabor.aufgabe4.modell.Pflanze;
+import de.proglabor.aufgabe4.modell.Tier;
+import de.proglabor.aufgabe4.modell.Welt;
 import de.proglabor.aufgabe4.config.DisplayMode;
 import de.proglabor.aufgabe4.config.WeltColor;
 

@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import de.proglabor.aufgabe4.Tier;
-import de.proglabor.aufgabe4.Welt;
+import de.proglabor.aufgabe4.modell.Tier;
+import de.proglabor.aufgabe4.modell.Welt;
 
 @RunWith(Parameterized.class)
 public class WorldTest {

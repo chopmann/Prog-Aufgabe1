@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 
-import de.proglabor.aufgabe4.Tier;
+import de.proglabor.aufgabe4.modell.Tier;
 
 public class ReportBewegung extends Report {
 

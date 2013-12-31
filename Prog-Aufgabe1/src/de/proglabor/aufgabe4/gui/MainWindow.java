@@ -5,8 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
 
-import de.proglabor.aufgabe4.Welt;
-import de.proglabor.aufgabe4.controllers.ControllerInterface;
+import de.proglabor.aufgabe4.modell.Welt;
+import de.proglabor.aufgabe4.controller.ControllerInterface;
 
 /**
  * @author id261708

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.proglabor.aufgabe4.Helper;
+import de.proglabor.aufgabe4.helper.Helper;
 
 public class ParamCleanerTest {
 

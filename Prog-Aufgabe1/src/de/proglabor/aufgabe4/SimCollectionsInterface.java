@@ -1,5 +1,8 @@
 package de.proglabor.aufgabe4;
 
+import de.proglabor.aufgabe4.modell.Pflanze;
+import de.proglabor.aufgabe4.modell.Tier;
+
 import java.util.LinkedList;
 import java.util.TreeMap;
 

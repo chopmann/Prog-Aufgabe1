@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.proglabor.aufgabe4.Tier;
-import de.proglabor.aufgabe4.Welt;
+import de.proglabor.aufgabe4.modell.Tier;
+import de.proglabor.aufgabe4.modell.Welt;
 
 public class AnimalTest {
 	Tier dolly = new Tier(1, 1, 10);

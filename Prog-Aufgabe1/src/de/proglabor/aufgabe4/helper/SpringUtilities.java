@@ -62,8 +62,8 @@ public class SpringUtilities {
      *
      * @param rows number of rows
      * @param cols number of columns
-     * @param initialX x location to start the grid at
-     * @param initialY y location to start the grid at
+     * @param initialX x location to parse the grid at
+     * @param initialY y location to parse the grid at
      * @param xPad x padding between cells
      * @param yPad y padding between cells
      */
@@ -116,7 +116,7 @@ public class SpringUtilities {
         for (int i = 0; i < max; i++) {
             SpringLayout.Constraints cons = layout.getConstraints(
                                                  parent.getComponent(i));
-            if (i % cols == 0) { //start of new row
+            if (i % cols == 0) { //parse of new row
                 lastRowCons = lastCons;
                 cons.setX(initialXSpring);
             } else { //x position depends on previous component
@@ -165,8 +165,8 @@ public class SpringUtilities {
      *
      * @param rows number of rows
      * @param cols number of columns
-     * @param initialX x location to start the grid at
-     * @param initialY y location to start the grid at
+     * @param initialX x location to parse the grid at
+     * @param initialY y location to parse the grid at
      * @param xPad x padding between cells
      * @param yPad y padding between cells
      */

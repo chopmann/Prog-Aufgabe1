@@ -1,7 +1,7 @@
 package de.proglabor.aufgabe4.gui;
 
 import de.proglabor.aufgabe4.config.WeltConfig;
-import de.proglabor.aufgabe4.controllers.ControllerInterface;
+import de.proglabor.aufgabe4.controller.ControllerInterface;
 import de.proglabor.aufgabe4.helper.SpringUtilities;
 
 import javax.imageio.ImageIO;
