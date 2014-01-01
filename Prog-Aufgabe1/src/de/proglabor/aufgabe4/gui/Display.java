@@ -17,9 +17,7 @@ import de.proglabor.aufgabe4.config.WeltColor;
  *
  */
 public class Display extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -7725052913976968019L;
 	private static final int GRIDSIZE = 20;
 	private static final int MARGIN = 10;

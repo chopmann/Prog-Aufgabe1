@@ -7,8 +7,8 @@ import de.proglabor.aufgabe4.modell.World;
 
 /**
  * @author Cornelio Hopmann (hopmann@gmail.com)
- *         <p/>
- *         Laboraufgabe Programmieren. WS 2013/2014 an der Ostfalia Hochschule für angewandte Wissenschaften (www.ostfalia.de)
+ *
+ * Laboraufgabe Programmieren. WS 2013/2014 an der Ostfalia Hochschule für angewandte Wissenschaften (www.ostfalia.de)
  */
 public class Simulation {
 
