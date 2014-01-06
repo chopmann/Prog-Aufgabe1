@@ -84,7 +84,7 @@ public class RuntimeConfiguration {
 
 			}
 		} // Prolly not getting called...
-		if (!simCountPresent && !showHelp) {
+		if (!displayGUI && !simCountPresent && !showHelp) {
 			throw new UnknownKeywordException("No parameters use -help to display Usage");
 		}
 
@@ -140,14 +140,14 @@ public class RuntimeConfiguration {
 		String msg = "Simple Simulation \n"
 				+ "Parameters \n"
 				+ "-help Print this Message \n"
+				+ "-simulation Display GUI (Simulation does NOT start automatically)"
+				+ "<<OPTIONAL>> \n"
 				+ "-simcount [days] How many [days] are going to be simulated \n"
 				+ "[days] Must be a postive Integer greater than 1 \n"
-				+ "<<OPTIONAL>> \n"
 				+ "-pflanze Generate a PflanzenReport \n"
 				+ "-tiere Gerate a TiereReport \n"
 				+ "-bewegung Geneate a Bewegung Report \n"
-				+ "-reproduce Generate a Reproduce Report \n"
-				+ "-simulation Display GUI";
+				+ "-reproduce Generate a Reproduce Report \n";
 		System.out.println(msg);
 	}
 }

@@ -678,10 +678,7 @@ public class World extends Observable {
         if (runtimeConfiguration.createMovementReport()) {
             setReportMovement(true);
         }
-        if (runtimeConfiguration.showSimulation()) {
-            @SuppressWarnings("unused")
-            Controller controller = new Controller(this);
-        }
+
         if(runtimeConfiguration.getSimulationCount() != -1){
             days = runtimeConfiguration.getSimulationCount();
         }
